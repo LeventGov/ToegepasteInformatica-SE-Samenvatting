@@ -1,0 +1,160 @@
+<h3>1. Basisconcepten: Hardware en Software</h3>
+<p>De werking van een computer kan metaforisch worden vergeleken met een gezinssituatie om de interactie tussen hardware en software uit te leggen:</p>
+<ul>
+    <li><strong>Hardware (Vader):</strong> De hardware voert het daadwerkelijke werk uit, maar kan slechts één taak tegelijk behandelen.</li>
+    <li><strong>Besturingssysteem (Moeder):</strong> Het besturingssysteem (OS) beheert de verzoeken van de 'kinderen' (applicaties), bepaalt de prioriteit en stuurt de hardware aan. Het neemt de beslissingen over wat het meest urgent is.</li>
+    <li><strong>Software:</strong> Dit omvat niet alleen het OS, maar ook frameworks, bibliotheken en engines (zoals game-engines of database-engines) die bovenop het OS draaien.</li>
+</ul>
+<p>Op het laagste niveau werkt de computer met <strong>enen en nullen (binair)</strong> en logische poorten (<strong>AND, OR, NOT</strong>) die wiskundige bewerkingen uitvoeren op inputsignalen.</p>
+
+<h3>2. Programmeertalen: Vertaling naar Machinecode</h3>
+<p>Omdat hardware alleen binaire code begrijpt, moeten programmeertalen vertaald worden. Er is een belangrijk onderscheid in hoe dit gebeurt:</p>
+
+<h4>Compiler (bv. C, C++)</h4>
+<p>Vertaalt het volledige programma in één keer naar machinecode voordat het wordt uitgevoerd.</p>
+<ul>
+    <li><strong>Voordeel:</strong> De uiteindelijke uitvoering is sneller.</li>
+    <li><strong>Nadeel:</strong> Het compileren en analyseren van de code duurt langer en het linken vereist meer geheugen.</li>
+</ul>
+
+<h4>Interpreter (bv. Python, Ruby)</h4>
+<p>Vertaalt en voert het programma regel voor regel (statement per statement) uit.</p>
+<ul>
+    <li><strong>Voordeel:</strong> Het analyseren van de broncode gaat sneller en het is geheugenefficiënt omdat er geen objectcode gegenereerd wordt.</li>
+    <li><strong>Nadeel:</strong> De totale uitvoeringstijd is trager.</li>
+</ul>
+<p><em>Een taal als Java zit hier tussenin (gebruikt een JVM).</em></p>
+
+<h3>3. Systeemarchitectuur en Geheugenbeheer</h3>
+<p>Elk proces dat op een computer draait, krijgt een eigen adresruimte in het geheugen toegewezen. Deze is specifiek ingedeeld:</p>
+<ul>
+    <li><strong>Stack:</strong> Gebruikt voor functie-aanroepen en lokale variabelen. Deze groeit in het geheugen van een hoog adres naar beneden.</li>
+    <li><strong>Heap:</strong> Gebruikt voor dynamisch geheugen dat tijdens runtime wordt aangevraagd (bijvoorbeeld via malloc in C). Deze groeit van een laag adres omhoog.</li>
+    <li><strong>Data Segmenten:</strong> Bevatten de variabelen. Er is een sectie voor ongeïnitialiseerde data (bss) en geïnitialiseerde data.</li>
+    <li><strong>Text/Code Segment:</strong> Hierin staat de daadwerkelijke programma-code (read-only).</li>
+</ul>
+<p>De <strong>Von Neumann-architectuur</strong> beschrijft de moderne computer met een CPU (bestaande uit een Control Unit en Arithmetic/Logic Unit), geheugen (RAM) en I/O-apparaten. Een bekend nadeel is de <em>"Von Neumann bottleneck"</em>, waarbij de snelheid beperkt wordt door de data-overdracht tussen CPU en geheugen.</p>
+
+<h4>PCB (Process Control Block)</h4>
+<p>De <strong>PCB</strong> is het "paspoort" van een proces. Het is een datastructuur in de kernel die alle informatie bevat om een proces te beheren:</p>
+<ul>
+    <li>Welke bestanden zijn open</li>
+    <li>Wat is de status van de registers</li>
+    <li>Hoeveel geheugen wordt gebruikt</li>
+    <li>Process ID en prioriteit</li>
+    <li>CPU scheduling informatie</li>
+</ul>
+<p>Zonder PCB kan de Scheduler (de planner van de CPU) zijn werk niet doen. Elke keer dat de CPU van het ene proces naar het andere schakelt (context switch), worden de gegevens van het huidige proces opgeslagen in zijn PCB en worden de gegevens van het volgende proces uit zijn PCB geladen.</p>
+
+<h3>4. Het Besturingssysteem (OS)</h3>
+<p>Het besturingssysteem heeft als doel de manager van het systeem te zijn.</p>
+
+<h4>Functies</h4>
+<p>Het is verantwoordelijk voor het opstarten (booting), geheugenbeheer, procesbeheer, databeveiliging en het aansturen van hardware (disk management).</p>
+
+<h4>Protection Rings</h4>
+<p>Om stabiliteit en veiligheid te garanderen, werkt de processor met verschillende privileges, de zogenaamde 'ringen':</p>
+<ul>
+    <li><strong>Ring 0 (Kernel Mode):</strong> De meest bevoorrechte modus. Hier draait de kernel en heeft volledige toegang tot hardware.</li>
+    <li><strong>Ring 3 (User Mode):</strong> De minst bevoorrechte modus. Hier draaien gebruikersapplicaties.</li>
+</ul>
+
+<h4>System Calls</h4>
+<p>Als een applicatie (in User Mode) toegang wil tot de hardware (bijv. een bestand openen), moet het een <strong>System Call</strong> doen. Dit schakelt de processor tijdelijk naar Kernel Mode (via een 'trap' en een mode bit die naar 0 gaat) om de taak uit te voeren, en keert daarna terug.</p>
+
+<h4>De Interne Organisatie van de Kernel: Top Half vs. Bottom Half</h4>
+<p>De kernel verdeelt zijn taken in twee delen om zowel software-verzoeken als hardware-events efficiënt te kunnen afhandelen:</p>
+
+<p><strong>Top Half (Software-kant):</strong></p>
+<ul>
+    <li>Draait wanneer een proces een <strong>System Call</strong> doet (bijvoorbeeld Word of je browser die een bestand wil openen)</li>
+    <li>Is <strong>synchroon</strong> - gebeurt op vraag van het proces</li>
+    <li>Heeft toegang tot gebruikersdata en kan 'slapen' (wachten) als dat nodig is</li>
+    <li><strong>Analogie:</strong> De baliemedewerker die jouw specifieke vraag ("Mag ik dit dossier zien?") beantwoordt</li>
+</ul>
+
+<p><strong>Bottom Half (Hardware-kant):</strong></p>
+<ul>
+    <li>Reageert op <strong>Hardware Interrupts</strong> (zoals een netwerkpakketje dat binnenkomt, een muisklik, of een toetsaanslag)</li>
+    <li>Is <strong>asynchroon</strong> - kan op elk moment gebeuren, de CPU moet direct stoppen met wat hij deed</li>
+    <li>Moet <strong>snel</strong> zijn en mag nooit wachten/slapen</li>
+    <li>Zet taken vaak in een wachtrij voor de Top Half om later af te handelen</li>
+    <li><strong>Analogie:</strong> Het brandalarm of de telefoon die gaat; je moet direct reageren, ongeacht waar je mee bezig was</li>
+</ul>
+
+<h3>5. Virtualisatie</h3>
+<p>Er zijn verschillende manieren om meerdere besturingssystemen op één stuk hardware te draaien:</p>
+
+<h4>Full Virtualization (CPU Emulatie)</h4>
+<p>De hypervisor emuleert de volledige hardware. Het gast-OS weet niet dat het virtueel draait. De hypervisor draait in Ring 0 en het gast-OS in Ring 1.</p>
+
+<h4>Paravirtualization (OS Assisted)</h4>
+<p>Het gast-OS is aangepast en 'weet' dat het gevirtualiseerd is. Het communiceert efficiënter met de hypervisor via <strong>Hypercalls</strong> (vergelijkbaar met system calls) in plaats van dat de hardware volledig geëmuleerd moet worden.</p>
+
+<h4>Containers</h4>
+<p>In tegenstelling tot virtuele machines (VM's) die elk een volledig OS en kernel hebben, delen containers de kernel van de host. Een container bevat alleen de applicatie en zijn specifieke bibliotheken/afhankelijkheden. Dit maakt ze lichter en sneller te implementeren ("microservices").</p>
+
+<h3>6. Geschiedenis (Selectief)</h3>
+<p>De evolutie van computers kent enkele belangrijke mijlpalen:</p>
+<ul>
+    <li><strong>Vroege apparaten:</strong> De Chinese telraam (abacus) en Pascal's calculator (1642) waren vroege rekenhulpmiddelen.</li>
+    <li><strong>Pioniers:</strong> Charles Babbage ontwierp in 1822 de eerste mechanische computer. Ada Lovelace schreef programma's voor Babbage's machine en wordt gezien als 's werelds eerste computerprogrammeur.</li>
+    <li><strong>Moore's Law:</strong> Een empirische wetmatigheid die stelt dat het aantal transistoren op een geïntegreerd circuit elke twee jaar verdubbelt, wat leidt tot krachtigere en goedkopere computers.</li>
+</ul>
+
+<h3>7. Unix en Linux</h3>
+
+<h4>Ontstaan</h4>
+<p>Unix werd ontwikkeld bij Bell Labs door o.a. Ken Thompson en Dennis Ritchie (die ook de programmeertaal C ontwikkelde).</p>
+
+<h4>Unix Filosofie</h4>
+<ul>
+    <li>Laat elk programma één ding heel goed doen.</li>
+    <li>De output van het ene programma is de input voor het volgende.</li>
+    <li>Gebruik tekststromen voor communicatie.</li>
+    <li>Bouw modulair en herbruikbaar ("Worse is better": eenvoud en modulariteit winnen vaak van complexe perfectie).</li>
+</ul>
+
+<h4>Monolithic Kernel vs. Microkernel Architectuur</h4>
+<p>Er zijn twee belangrijke benaderingen voor het ontwerp van een kernel:</p>
+
+<p><strong>Monolithic Kernel (bv. Linux, Windows, Unix):</strong></p>
+<ul>
+    <li><strong>Alles draait in Kernel Mode (Ring 0):</strong> Drivers, bestandsbeheer, netwerkprotocollen zitten allemaal samen in één groot blok geheugen</li>
+    <li><strong>Voordeel: Snelheid</strong> - Alles kan direct met elkaar praten via eenvoudige functie-aanroepen</li>
+    <li><strong>Nadeel: Instabiliteit</strong> - Als één driver crasht (bv. je videokaart-driver), kan het hele systeem crashen (Blue Screen of Death)</li>
+    <li>Alle kernel-componenten hebben volledige toegang tot alle hardware en geheugen</li>
+</ul>
+
+<p><strong>Microkernel (bv. Minix, QNX):</strong></p>
+<ul>
+    <li><strong>Minimaal in Kernel Mode:</strong> Alleen de absolute basis (scheduling, basis communicatie, interrupt handling) draait in Ring 0</li>
+    <li><strong>Drivers in User Mode:</strong> Bestandsbeheer en drivers draaien als aparte processen in Ring 3 (User Mode)</li>
+    <li><strong>Voordeel: Stabiliteit</strong> - Als een driver crasht, herstart je gewoon dat proces zonder dat de computer vastloopt</li>
+    <li><strong>Nadeel: Trager</strong> - Communicatie tussen onderdelen vereist veel schakelen tussen User en Kernel mode (Context Switching via Message Passing)</li>
+    <li>Beter geïsoleerd en beveiligd, maar met meer overhead</li>
+</ul>
+
+<p>Het "Worse is Better" principe uit de Unix filosofie verklaart waarom monolithic kernels (ondanks hun nadelen) zo succesvol zijn geworden: eenvoud en snelheid winnen vaak van theoretische perfectie.</p>
+
+<h4>POSIX</h4>
+<p>Omdat er veel varianten van Unix ontstonden, werd de <strong>POSIX-standaard</strong> (Portable Operating System Interface) ontwikkeld door IEEE om compatibiliteit tussen verschillende OS'en te garanderen (dezelfde API voor I/O, threads, etc.).</p>
+
+<h4>GNU/Linux</h4>
+<p>Richard Stallman startte het GNU-project voor vrije software. Linus Torvalds maakte in 1991 de eerste kernel. Samen vormen ze het GNU/Linux besturingssysteem.</p>
+
+<h3>8. Timing en Data Representatie</h3>
+
+<h4>Tijd</h4>
+<p>Computers werken met 'ticks'. Een <strong>Hardclock</strong> is een hardware-interrupt (bv. 1 miljoen keer per seconde). Een <strong>Softclock</strong> regelt zaken als time-sharing (bv. elke 200ms wisselen van proces). Tijd wordt vaak gemeten als seconden sinds de 'Epoch' (1 januari 1970).</p>
+
+<h4>Karaktersets (ASCII vs Unicode)</h4>
+<ul>
+    <li><strong>ASCII:</strong> Gebruikt 7 bits, waardoor er slechts 128 tekens (vooral Engels) beschikbaar zijn.</li>
+    <li><strong>UTF-8:</strong> De oplossing voor internationale tekens. Het is een variabele lengte-encodering.
+        <ul>
+            <li>Standaard ASCII-tekens gebruiken 1 byte (start met 0).</li>
+            <li>Andere tekens (zoals het Euro-teken €) gebruiken meerdere bytes. De eerste byte geeft aan hoeveel bytes er volgen (bv. 1110xxxx betekent 3 bytes totaal), en de vervolgbytes beginnen met 10.</li>
+        </ul>
+    </li>
+</ul>

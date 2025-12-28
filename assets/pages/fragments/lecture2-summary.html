@@ -1,0 +1,67 @@
+<h3>1. Opslag: Van Hardware naar Abstractie</h3>
+<p>De CPU praat niet direct met de harde schijf. RAM is snel, vluchtig en direct bereikbaar; Disk is traag, persistent en goedkoop. Data wordt van Disk naar RAM geladen voordat de CPU het kan gebruiken. Het bestandssysteem presenteert fysieke opslag via een boomstructuur zodat data georganiseerd en terugvindbaar is.</p>
+
+<h3>2. Partitionering</h3>
+<p>Voor gebruik krijgt een schijf een adrestabel via partitionering. Dit biedt veiligheid en flexibiliteit.</p>
+<ul>
+    <li>MBR: BIOS, max. 4 primaire partities, tot 2 TB.</li>
+    <li>GPT: UEFI, tot 128 partities, zeer grote schijven, redundante header.</li>
+</ul>
+
+<h3>3. Formatteren & Bestandssystemen</h3>
+<p>Formatteren plaatst een bestandssysteem. Journaling logt geplande wijzigingen om herstel te bieden na uitval.</p>
+<ul>
+    <li>FAT32: Universeel, 4GB limiet, geen permissies.</li>
+    <li>NTFS: Windows, journaling en encryptie.</li>
+    <li>Ext4: Linux, snel en stabiel, journaling.</li>
+    <li>ZFS: Geavanceerd, checksums en volume manager.</li>
+</ul>
+
+<h3>4. Linux Structuur & Mounting</h3>
+<p>Linux heeft één boom vanaf /. Mounting koppelt een apparaat aan een map.</p>
+<ul>
+    <li>/bin, /sbin: Programma's.</li>
+    <li>/etc: Configuratie.</li>
+    <li>/home: Gebruikersdata.</li>
+    <li>/dev: Apparaatbestanden.</li>
+    <li>/tmp: Tijdelijk.</li>
+</ul>
+
+<h3>5. Inodes en Links</h3>
+<p>Bestandsnamen bestaan niet voor de schijf; inodes bevatten metadata.</p>
+<ul>
+    <li>Hard Link: Extra naam naar hetzelfde inode; data blijft bij verwijderen origineel.</li>
+    <li>Soft Link: Padverwijzing; breekt als origineel weg is.</li>
+</ul>
+
+<h3>6. Archivering en Compressie</h3>
+<ul>
+    <li>Inpakken: tar -czvf naam.tar.gz map/</li>
+    <li>Uitpakken: tar -xzvf naam.tar.gz</li>
+</ul>
+
+<h3>7. Gebruikersbeheer</h3>
+<ul>
+    <li>UID: Root = 0; GID voor groepsrechten.</li>
+    <li>/etc/passwd: Gebruikersinfo. /etc/shadow: hashes.</li>
+    <li>Gebruik sudo voor auditing en veiligheid.</li>
+</ul>
+
+<h3>8. Permissies (UGO)</h3>
+<ul>
+    <li>Read (4), Write (2), Execute (1) per User/Group/Other.</li>
+    <li>Voorbeeld: drwxr-xr--</li>
+</ul>
+
+<h3>9. Speciale Permissies</h3>
+<ul>
+    <li>SUID: Uitvoering met rechten van eigenaar; zichtbaar als s bij user execute.</li>
+    <li>SGID: Map erft groep; s bij group execute.</li>
+    <li>Sticky Bit: Alleen eigenaar mag verwijderen in gedeelde map; t bij other execute.</li>
+</ul>
+
+<h3>10. Umask</h3>
+<p>Base File = 666, Dir = 777. Umask 022 → 755 voor mappen.</p>
+
+<h3>11. ACL</h3>
+<p>Fijnmazige rechten, herkenbaar aan +. Gebruik getfacl en setfacl.</p>

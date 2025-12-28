@@ -1,0 +1,49 @@
+<h3>1. Programma's vs. Processen</h3>
+<p>Programma: passief bestand op schijf. Proces: actief, uitvoering met huidige staat in geheugen.</p>
+<ul>
+    <li>Text: Code.</li>
+    <li>Data: Globale variabelen.</li>
+    <li>Heap: Groeit omhoog, dynamisch geheugen.</li>
+    <li>Stack: Groeit omlaag, parameters en returns.</li>
+</ul>
+
+<h3>2. PCB</h3>
+<p>Bevat processtaat, program counter, registers, geheugeninfo, accounting en I/O-status.</p>
+
+<h3>3. Processtaten</h3>
+<ul>
+    <li>New, Ready, Running, Waiting, Terminated.</li>
+    <li>Transities: Dispatch, Interrupt, I/O wait.</li>
+</ul>
+
+<h3>4. Context Switching</h3>
+<p>CPU slaat staat op in PCB A en laadt PCB B; overhead zonder nuttig werk.</p>
+
+<h3>5. Procescreatie</h3>
+<ul>
+    <li>fork(): Parent krijgt PID, Child krijgt 0.</li>
+    <li>exec(): Vervangt geheugen met nieuw programma.</li>
+    <li>wait(): Parent wacht tot child klaar.</li>
+    <li>Zombie: Geen wait() gedaan. Orphan: Parent weg, geadopteerd door init/systemd.</li>
+</ul>
+
+<h3>6. Threads</h3>
+<p>Delen Code/Data/Bestanden; eigen Stack en Registers. Voordelen: responsiviteit en schaalbaarheid. Risico: race conditions.</p>
+
+<h3>7. Bootproces</h3>
+<ul>
+    <li>Firmware (BIOS/UEFI): POST, zoekt bootdevice.</li>
+    <li>Bootloader: MBR → GRUB laadt kernel in RAM.</li>
+    <li>Kernel: Laadt initrd, start PID 1.</li>
+    <li>Init (systemd): Start services en login.</li>
+</ul>
+
+<h3>8. SystemD & Daemons</h3>
+<ul>
+    <li>Daemon: Achtergrondprocessen (sshd, systemd).</li>
+    <li>systemctl: start/stop/restart/enable.</li>
+    <li>Service files: [Unit], [Service], [Install]. Targets: multi-user, graphical.</li>
+</ul>
+
+<h3>9. Gebruikersservices</h3>
+<p>Locatie: ~/.config/systemd/user/. Gebruik systemctl --user voor status en beheer.</p>
