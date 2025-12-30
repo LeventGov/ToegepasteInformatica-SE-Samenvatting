@@ -56,7 +56,7 @@
                             <span class="lecture-icon">📕</span>
                             <div>
                                 <h3>Lecture 1: General Concepts Introduction</h3>
-                                <p>Hardware, Software, Programmeertalen, Systeemarchitectuur</p>
+                                <p>Van bits en CPU-geheugenlayout tot OS-rollen, system calls, rings en vroege Unix-geschiedenis.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -79,7 +79,7 @@
                             <span class="lecture-icon">📗</span>
                             <div>
                                 <h3>Lecture 2: File Systems, Users, Ownership & Permissions</h3>
-                                <p>Bestandssystemen, gebruikersbeheer en rechten</p>
+                                <p>Disks → partities → filesystems, mounting/fstab, paden, inodes/links en UGO/ACL rechten.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -102,7 +102,7 @@
                             <span class="lecture-icon">📘</span>
                             <div>
                                 <h3>Lecture 3: Programs, Processes and Threads</h3>
-                                <p>Van BIOS tot applicatie startup</p>
+                                <p>Program vs proces, PCB/states, fork/exec/wait, threads & pitfalls en het bootpad tot systemd.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -125,7 +125,7 @@
                             <span class="lecture-icon">📙</span>
                             <div>
                                 <h3>Lecture 4: Server Virtualization</h3>
-                                <p>Virtualisatie concepten en technieken</p>
+                                <p>Waarom hypervisors, type 1 vs 2, CPU/memory virt, VM-bestanden, vSwitch/port-groups en HA/DRS.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -148,7 +148,7 @@
                             <span class="lecture-icon">📕</span>
                             <div>
                                 <h3>Lecture 5: DevOps Journey Part 1 - Laravel Stack</h3>
-                                <p>Laravel stack en DevOps principes</p>
+                                <p>DevOps (CALMS), Laravel CI/CD flow, config/secrets, PHP-FPM stack, queues/schedulers en deploy checklist.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -171,10 +171,14 @@
                             <span class="lecture-icon">📗</span>
                             <div>
                                 <h3>Lecture 6: DevOps Journey Part 2 - Docker Basics</h3>
-                                <p>Docker fundamentals en containers</p>
+                                <p>Containers vs VM's, container-historiek tot Docker/OCI, install stappen, kerncommando's, tagging en networking.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
+                            <a href="#lecture6-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
                             <a href="../../courses/osc/cursus/OSC-Lecture-6---DevOps-Journey-Part-2---Docker-Basics.pdf"
                                 class="btn-icon" target="_blank" rel="noopener"
                                 aria-label="Open Lecture 6 PDF in nieuw tabblad" title="Open PDF">
@@ -190,7 +194,7 @@
                             <span class="lecture-icon">📘</span>
                             <div>
                                 <h3>Lecture 7: DevOps Journey Part 3 - Docker Essentials</h3>
-                                <p>Geavanceerde Docker concepten</p>
+                                <p>Compose/orchestratie, volumes/secrets, productie-hardening en build/push naar registries.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -209,7 +213,7 @@
                             <span class="lecture-icon">📙</span>
                             <div>
                                 <h3>Lecture 8: Encryption in Action</h3>
-                                <p>Encryptie principes en toepassingen</p>
+                                <p>Crypto-basics, sym/asymsleutels, PKI/certificaten, TLS-handshake en praktische gebruikspatronen.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -228,7 +232,7 @@
                             <span class="lecture-icon">📕</span>
                             <div>
                                 <h3>Lecture 9: Cloud Concepts</h3>
-                                <p>Cloud computing en architectuur</p>
+                                <p>Cloud modellen (IaaS/PaaS/SaaS), infra bouwblokken, shared responsibility en kost/elasticiteit.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -247,7 +251,7 @@
                             <span class="lecture-icon">📙</span>
                             <div>
                                 <h3>Lecture 10: ICT Infra Costing</h3>
-                                <p>Kostencalculatie en infrastructuur</p>
+                                <p>Capex vs opex, TCO-berekening, sizing/overcommit keuzes en prijsvergelijkingen on-prem vs cloud.</p>
                             </div>
                         </div>
                         <div class="lecture-actions">
@@ -312,6 +316,16 @@
                 </button>
             </div>
             <div class="summary-content" data-fragment="../pages/fragments/lecture5-summary.html"></div>
+        </section>
+
+        <section id="lecture6-summary" class="content-section summary-section" aria-labelledby="lecture6-heading">
+            <div class="summary-header">
+                <h2 id="lecture6-heading">📚 Lecture 6: DevOps Journey Part 2 - Docker Basics - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="../pages/fragments/lecture6-summary.html"></div>
         </section>
     </main>
 

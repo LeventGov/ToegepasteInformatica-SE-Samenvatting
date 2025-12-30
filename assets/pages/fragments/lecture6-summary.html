@@ -1,0 +1,61 @@
+<h3>1. Containers vs VM's</h3>
+<p>Containers virtualiseren het OS: gedeelde kernel, geïsoleerde processen, lichtgewicht en snel te starten. VM's virtualiseren hardware via een hypervisor; elke VM heeft een volledig OS en is zwaarder maar sterker gescheiden.</p>
+
+<h3>2. Evolutie naar Docker</h3>
+<ul>
+    <li>1979 chroot → 2000 FreeBSD jails → 2001 Linux VServer → 2004 Solaris Zones/OpenVZ.</li>
+    <li>2006 cgroups + namespaces → 2008 LXC: eerste complete Linux containers.</li>
+    <li>2013 Docker open source bovenop LXC; 2014 libcontainer vervangt LXC → wordt runc.</li>
+    <li>2015 OCI-standaard: Docker doneert runc en later containerd voor runtime/image specs.</li>
+</ul>
+
+<h3>3. Waarom Docker doorbrak</h3>
+<ul>
+    <li>Developer ervaring: Git-achtige workflow, eenvoudige CLI, Dockerfile voor reproduceerbare builds.</li>
+    <li>Standaard imageformaat: build once, run anywhere, scheiding app vs infra.</li>
+    <li>Ecosysteem: Docker Hub voor delen, compose voor multi-container, brug tussen Dev en Ops.</li>
+</ul>
+
+<h3>4. Docker stack en alternatieven</h3>
+<ul>
+    <li>Stack: Docker CLI → dockerd (Engine) → containerd (lifecycle) → runc (OCI runtime) → Linux kernel.</li>
+    <li>Docker Desktop: levert lichte Linux-VM + UI op Windows/macOS; stuurt dezelfde Engine aan.</li>
+    <li>Alternatieven runtimes: Podman (daemonless), containerd (CNCF), CRI-O (Kubernetes). Registries: Docker Hub, quay.io, images.linuxcontainers.org.</li>
+</ul>
+
+<h3>5. Docker correct installeren (Debian)</h3>
+<ul>
+    <li>Vermijd verouderde distro-pakketten; gebruik Docker's repo.</li>
+    <li>Stapjes: apt update; installeer curl/gpg/ca-certificates/apt-transport-https.</li>
+    <li>Importeer sleutel → voeg repo (enkele echo-regel) → apt update → install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin.</li>
+    <li>Check en enable service; voeg gebruiker aan docker-groep en herlogin/newgrp; verifieer met docker --version.</li>
+</ul>
+
+<h3>6. Basiscommando's</h3>
+<ul>
+    <li>docker pull <image> (alleen downloaden); docker run <image> (start container, evt. -d, -p).</li>
+    <li>docker exec -ti <container> <cmd> voor shell/commands; docker start/stop/rm voor lifecycle.</li>
+    <li>docker ps voor lopende containers; docker inspect voor metadata; docker logs voor output.</li>
+    <li>docker build -t name:tag . om eigen image te bouwen.</li>
+</ul>
+
+<h3>7. Images en tagging</h3>
+<ul>
+    <li>Images zijn gelaagd (overlay2); gedeelde lagen besparen opslag. Overzicht met docker image ls.</li>
+    <li>Opruimen: docker image rm <name> (niet als container gebruikt), docker image prune voor ongebruikte.</li>
+    <li>Tagging: gebruik semver en OS (bv. 1.27.1-alpine); vermijd latest/mainline in productie; standaardiseer tags.</li>
+    <li>docker image tag SOURCE[:tag] TARGET[:tag] om achteraf tags toe te voegen.</li>
+</ul>
+
+<h3>8. Networking basics</h3>
+<ul>
+    <li>Standaard bridge-netwerk met docker0; containers krijgen IP binnen dit subnet.</li>
+    <li>Inspecteer netwerken met docker network ls/inspect; container netwerkinfo via docker inspect of ip a binnenin.</li>
+    <li>Publiceren via port forwarding: -p host:container (elke hostpoort maar één keer te gebruiken); iptables regelt regels.</li>
+</ul>
+
+<h3>9. Logs en lab focus</h3>
+<ul>
+    <li>Logs opvragen met docker logs; opgeslagen per container in /var/lib/docker/containers/<id>/<id>-json.log.</li>
+    <li>Lab: installeer via Docker repo, run hello-world, onderzoek images/containers, oefen tags, bekijk logs en bridge-netwerk/port mapping.</li>
+</ul>
