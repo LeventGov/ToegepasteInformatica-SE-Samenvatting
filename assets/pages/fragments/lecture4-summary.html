@@ -1,0 +1,155 @@
+<h3>1. Het "Waarom" van Virtualisatie</h3>
+<p>Vroeger draaide op één fysieke server slechts één besturingssysteem (OS) met één applicatie.</p>
+
+<h4>Het probleem (Verspilling)</h4>
+<p>Moderne servers zijn "beesten" (bv. 64 CPU-cores, 512GB RAM). Een simpele webserver of printserver gebruikt misschien
+    maar 5% van die kracht. De overige 95% is verspilling van stroom, koeling en geld.</p>
+
+<h4>De oplossing (Consolidatie)</h4>
+<p>Door virtualisatie kunnen we meerdere virtuele servers (VM's) op één fysieke server draaien.</p>
+
+<h4>Fysiek vs. Virtueel</h4>
+<ul>
+    <li><strong>Fysiek:</strong> Moeilijk te verhuizen, gebonden aan specifieke drivers/hardware.</li>
+    <li><strong>Virtueel:</strong> Een VM is simpelweg een verzameling bestanden op een schijf. Je kunt een server dus
+        kopiëren ("Copy-Paste") of verplaatsen naar een andere fysieke server zonder dat het OS het merkt.</li>
+</ul>
+
+<h3>2. De Hypervisor: Types (Belangrijk voor examen!)</h3>
+<p>De software die virtualisatie mogelijk maakt heet de Hypervisor (of Virtual Machine Monitor - VMM). Er zijn twee
+    smaken:</p>
+
+<h4>Type 1: Bare Metal (Native)</h4>
+<ul>
+    <li><strong>Werking:</strong> De hypervisor wordt direct op de hardware geïnstalleerd. Er is geen Windows of Linux
+        die eronder draait.</li>
+    <li><strong>Performance:</strong> Zeer hoog, want er is geen "tussenpersoon" (host OS).</li>
+    <li><strong>Voorbeelden:</strong> VMware ESXi (marktleider), Microsoft Hyper-V (core), Citrix XenServer.</li>
+    <li><strong>Gebruik:</strong> In datacenters en productieomgevingen.</li>
+</ul>
+
+<h4>Type 2: Hosted</h4>
+<ul>
+    <li><strong>Werking:</strong> Je hebt eerst een standaard OS (Host OS, bv. Windows 10 of macOS) en installeert de
+        hypervisor als een applicatie.</li>
+    <li><strong>Performance:</strong> Lager. Elke actie van de VM moet door de hypervisor én door het Host OS naar de
+        hardware. Dit geeft overhead.</li>
+    <li><strong>Voorbeelden:</strong> VMware Workstation, Oracle VirtualBox, VMware Fusion.</li>
+    <li><strong>Gebruik:</strong> Voor testen, ontwikkelen en studenten (op je laptop).</li>
+</ul>
+
+<h3>3. CPU Virtualisatie: Het Ring-Probleem</h3>
+<p>Hoe fop je een OS zodat het denkt dat het de baas is over de CPU, terwijl het eigenlijk in een VM zit?</p>
+
+<h4>Protection Rings</h4>
+<p>Zoals in Lecture 1 gezien, draait de Kernel in Ring 0 (baas) en Apps in Ring 3.</p>
+
+<h4>Het conflict</h4>
+<p>Een Guest OS (in een VM) wil in Ring 0 draaien. Maar de Hypervisor zit al in Ring 0. Twee kapiteins op één schip
+    werkt niet.</p>
+
+<h4>Oplossingen</h4>
+<ul>
+    <li><strong>Binary Translation (Oud):</strong> De hypervisor herschrijft "gevaarlijke" instructies van de Guest
+        on-the-fly naar veilige instructies. (Traag).</li>
+    <li><strong>Paravirtualization:</strong> Het Guest OS wordt aangepast ("ik weet dat ik virtueel ben") en doet
+        Hypercalls naar de hypervisor in plaats van directe hardware-calls.</li>
+    <li><strong>Hardware Assisted (Modern - Intel VT-x / AMD-V):</strong> De CPU-fabrikanten hebben een nieuwe modus
+        toegevoegd: Root Mode (voor de hypervisor, Ring -1 als het ware) en Non-Root Mode (voor de VM's). Hierdoor kan
+        de VM gewoon in zijn eigen Ring 0 draaien zonder conflict.</li>
+</ul>
+
+<h3>4. Geheugen Virtualisatie</h3>
+<p>De VM denkt dat hij een aaneengesloten blok fysiek RAM heeft (bijv. van adres 0 tot 4GB). De hypervisor moet dit
+    vertalen naar verspreide stukjes écht RAM.</p>
+
+<h4>Overcommitment</h4>
+<p>Je kunt meer RAM uitdelen aan VM's dan je fysiek hebt, zolang ze het niet allemaal tegelijk gebruiken.</p>
+
+<h4>Technieken</h4>
+<ul>
+    <li><strong>Transparent Page Sharing:</strong> Als 5 VM's dezelfde Windows-versie draaien, zijn veel geheugenblokken
+        identiek. De hypervisor slaat deze maar 1x op en laat iedereen ernaar wijzen (Deduplicatie in RAM).</li>
+    <li><strong>Ballooning:</strong> Een speciale driver in de VM "blaast een ballon op" (reserveert nep-geheugen) om
+        ongebruikt RAM terug te geven aan de hypervisor als die krap zit.</li>
+</ul>
+
+<h3>5. De VM Bestanden (VMware specifiek)</h3>
+<p>Een virtuele machine is een map met bestanden. Je moet weten wat ze doen:</p>
+<ul>
+    <li><strong>.vmx:</strong> Het configuratiebestand (CPU count, RAM grootte, netwerkkaart types). Dit is de
+        blauwdruk.</li>
+    <li><strong>.vmdk:</strong> De virtuele harde schijf (bevat de data).</li>
+    <li><strong>.nvram:</strong> De BIOS/UEFI instellingen van de VM.</li>
+    <li><strong>.log:</strong> Tekstbestanden met logboeken (handig bij troubleshooting).</li>
+</ul>
+
+<h3>6. Virtueel Netwerk (vSwitch)</h3>
+<p>Hoe komen VM's op het internet?</p>
+<ul>
+    <li><strong>vNIC:</strong> De VM heeft een virtuele netwerkkaart.</li>
+    <li><strong>vSwitch:</strong> In de hypervisor zit een virtuele switch. Dit werkt net als een fysieke switch.</li>
+    <li><strong>Uplink:</strong> De vSwitch is verbonden met de fysieke netwerkkaart (NIC) van de server, die als brug
+        naar de buitenwereld fungeert.</li>
+    <li><strong>Port Groups:</strong> Je kunt op één vSwitch verschillende groepen maken (bv. "Studenten", "Docenten")
+        om verkeer te scheiden (VLANs).</li>
+</ul>
+
+<h3>7. Shared Storage (De sleutel tot magie)</h3>
+<p>Als elke server zijn eigen lokale harde schijf heeft (DAS - Direct Attached Storage), zit een VM "vast" op die
+    server.</p>
+
+<h4>De Oplossing (SAN/NAS)</h4>
+<p>Alle fysieke servers zijn verbonden met één centraal opslagsysteem (Storage Area Network).</p>
+
+<ul>
+    <li><strong>LUN:</strong> Een stuk opslag op dat SAN dat door alle ESXi-servers tegelijk gezien wordt.</li>
+    <li><strong>Resultaat:</strong> De VM draait (CPU/RAM) op Server A, maar zijn bestanden staan op de Shared Storage.
+        Server B kan ook bij die bestanden. Dit maakt geavanceerde features mogelijk.</li>
+</ul>
+
+<h3>8. Geavanceerde Features (vCenter)</h3>
+<p>Dankzij Shared Storage en vCenter (de management server) kan je "tovenen":</p>
+
+<h4>vMotion</h4>
+<p>Je verplaatst een draaiende VM van Server A naar Server B zonder downtime. De gebruiker merkt niets. (Het geheugen
+    wordt gekopieerd terwijl de VM werkt).</p>
+
+<h4>Storage vMotion</h4>
+<p>Je verplaatst de bestanden (de schijf) van de ene opslag naar de andere terwijl de VM draait.</p>
+
+<h4>HA (High Availability)</h4>
+<p>Als Fysieke Server A crasht (stroomuitval), ziet Server B dat. Server B start de VM's van de kapotte server opnieuw
+    op.</p>
+<p><em>Let op: Er is een korte downtime (reboot tijd).</em></p>
+
+<h4>FT (Fault Tolerance)</h4>
+<p>Voor kritieke systemen. Er draait een "Schaduw VM" mee op Server B die exact hetzelfde doet. Als A crasht, neemt B
+    het direct over zonder reboot. (Zero downtime, maar kost 2x zoveel resources).</p>
+
+<h4>DRS (Distributed Resource Scheduler)</h4>
+<p>Load Balancing. Als Server A het te druk krijgt, verplaatst DRS automatisch VM's naar Server B (via vMotion) om de
+    last te verdelen.</p>
+
+<h3>9. Labo Context: Nested Virtualization</h3>
+<p>Omdat studenten geen dure server krijgen, gebruiken we in het lab Nested Virtualization.</p>
+<ul>
+    <li>Je draait VMware Workstation (Type 2) op je laptop.</li>
+    <li>Daarbinnen installeer je ESXi (Type 1).</li>
+    <li>Binnen die virtuele ESXi draai je je test-VM's.</li>
+</ul>
+
+<p><strong>Vereiste:</strong> Je moet in de BIOS van je laptop Intel VT-x of AMD-V aanzetten, anders werkt dit niet.</p>
+
+<h4>Analogie</h4>
+<p>Zie een fysieke server als een groot kantoorgebouw (Hardware).</p>
+<ul>
+    <li><strong>Vroeger (Legacy):</strong> Eén bedrijf huurde het hele gebouw, zelfs als ze maar 3 mensen in dienst
+        hadden. Zonde van de ruimte.</li>
+    <li><strong>Nu (Virtualisatie):</strong> De Hypervisor is de vastgoedbeheerder. Hij deelt het gebouw op in virtuele
+        kantoren. De VM's zijn de verschillende bedrijven in het gebouw. Ze denken dat ze alleen zijn (Isolated), maar
+        ze delen de elektriciteit en de lift (CPU/Geheugen).</li>
+</ul>
+
+<p>vMotion is alsof je een heel bedrijf verhuist naar het gebouw aan de overkant terwijl iedereen gewoon doorwerkt aan
+    zijn bureau, zonder dat de telefoonverbinding verbreekt.</p>
