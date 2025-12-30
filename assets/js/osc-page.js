@@ -90,4 +90,21 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+    // Study Tips button
+    const studyTipBtn = document.getElementById('study-tip-btn');
+    if (studyTipBtn) {
+        studyTipBtn.addEventListener('click', () => {
+            const modal = document.getElementById('study-tips-modal');
+            if (modal) {
+                const isVisible = modal.style.display !== 'none';
+                modal.style.display = isVisible ? 'none' : 'block';
+                if (!isVisible) {
+                    setTimeout(() => {
+                        modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        });
+    }
 });

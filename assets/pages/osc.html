@@ -38,6 +38,81 @@
                 <a href="#lecture1-summary" class="btn btn-secondary" aria-label="Bekijk samenvatting">
                     📚 Bekijk Samenvatting
                 </a>
+                <button id="study-tip-btn" class="btn btn-secondary" aria-label="Bekijk studiestrategie">
+                    💡 Study Tips
+                </button>
+            </div>
+        </section>
+
+        <section id="study-tips-modal" class="content-section" style="display: none; background: #f9f5f0; border-left: 4px solid #d97706;">
+            <div class="summary-header">
+                <h2>💡 Studiestrategie voor het examen</h2>
+                <button class="expand-btn" onclick="document.getElementById('study-tips-modal').style.display = 'none';" aria-label="Sluit study tips">
+                    <span class="expand-icon">✕</span>
+                </button>
+            </div>
+            <div class="summary-content">
+                <h3>1. Fase: Voorbereiding (Per lecture)</h3>
+                <ul>
+                    <li><strong>Lees de samenvatting</strong> eerst (snel overzicht van kernconcepten)</li>
+                    <li><strong>Open de PDF-slides</strong> via de 📄 knop om details/voorbeelden te zien</li>
+                    <li><strong>Noteer jezelf</strong> de begrippen die je niet snapt</li>
+                </ul>
+
+                <h3>2. Fase: Consolidatie (Alles doorgenomen)</h3>
+                <ul>
+                    <li><strong>Herhaal de samenvattingen</strong> (je kent nu de grote lijn)</li>
+                    <li><strong>Maak aantekeningen</strong> van vragen die je hebt → stel ze aan docent</li>
+                </ul>
+
+                <h3>3. Fase: Testing (Mock Exam voorbereiding)</h3>
+                <ul>
+                    <li><strong>Run de Mock Exam</strong> (📝 Start Mock Exam knop)</li>
+                    <li><strong>Bekijk welke onderwerpen je mist</strong> (fout antwoorden = blinde vlekken)</li>
+                    <li><strong>Teruggaan naar die lecture-samenvatting</strong> voor dat specifieke onderdeel</li>
+                    <li><strong>Herhaal totdat je consistent ~80%+ haalt</strong></li>
+                </ul>
+
+                <h3>4. Praktische timeline</h3>
+                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                    <tr style="background: #e5e7eb;">
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;"><strong>Dag 1</strong></td>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;">Lees alle 6 samenvattingen snel door (overview-modus)</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;"><strong>Dag 2-3</strong></td>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;">Diep duiken in moeilijke onderwerpen (notebook gebruiken)</td>
+                    </tr>
+                    <tr style="background: #e5e7eb;">
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;"><strong>Dag 4-5</strong></td>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;">Mock exam multiple keren → analyse van fouten</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;"><strong>Dag 6</strong></td>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;">Focussessies op je zwakke punten</td>
+                    </tr>
+                    <tr style="background: #e5e7eb;">
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;"><strong>Dag 7</strong></td>
+                        <td style="border: 1px solid #d1d5db; padding: 0.5rem;">Finale mock exam → evaluatie</td>
+                    </tr>
+                </table>
+
+                <h3>5. Mock Exam strategie</h3>
+                <ul>
+                    <li>✅ <strong>Eerste keer:</strong> geen haast, kijken naar je kennis</li>
+                    <li>✅ <strong>Tweede keer:</strong> sneller gaan, timing oefenen (dit is het echte tempo)</li>
+                    <li>✅ <strong>Derde keer:</strong> focus op de onderwerpen waar je steeds fout gaat</li>
+                    <li>✅ <strong>Noteer per vraag:</strong> waarom ging dit fout? Terug naar welke summary-sectie?</li>
+                </ul>
+
+                <h3>6. Pro tip: Cyclische aanpak</h3>
+                <p style="background: #fef3c7; padding: 1rem; border-radius: 0.5rem; font-weight: bold;">
+                    Samenvatting (THEORIE) → PDF slides (VOORBEELDEN) → Mock exam (FEEDBACK) → Terug naar samenvatting
+                </p>
+
+                <p style="margin-top: 1rem; color: #666;">
+                    <strong>Kortom:</strong> Summaries zijn je <strong>snelle referentie</strong>, PDFs je <strong>diepgaande bronnen</strong>, mock exam je <strong>feedback-loop</strong>. Gebruik ze cyclisch tot je consistent goed scoort! 📚→📝→✅
+                </p>
             </div>
         </section>
 
