@@ -153,3 +153,13 @@
 
 <p>vMotion is alsof je een heel bedrijf verhuist naar het gebouw aan de overkant terwijl iedereen gewoon doorwerkt aan
     zijn bureau, zonder dat de telefoonverbinding verbreekt.</p>
+
+<h3>10. VM's als bestanden</h3>
+<p>Een VM is letterlijk een bundel bestanden: .vmx (config CPU/RAM/netwerk), .vmdk (disk), .nvram (BIOS/UEFI), .log en
+    snapshot-bestanden. Daardoor kan je kopiëren, klonen (linked/full) en snel terugrollen via snapshots.</p>
+
+<h3>11. Type 1 vs Type 2 extra</h3>
+<p>Type 1 (ESXi/Hyper-V/KVM) draait direct op hardware en ondersteunt CPU/memory overcommit (shares, reservations,
+    ballooning, swapping). Type 2 (Workstation/VirtualBox) draait op een host-OS met extra overhead maar handig voor
+    labs. Beide gebruiken vSwitches; op ESXi werk je met port groups en uplinks, geen ingebouwde NAT/host-only (anders
+    dan Workstation).</p>

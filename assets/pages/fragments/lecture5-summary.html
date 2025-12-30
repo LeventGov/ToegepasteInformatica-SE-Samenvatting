@@ -14,7 +14,12 @@
     <li><strong>Rollback:</strong> houd vorige artefacten en DB-backups beschikbaar.</li>
 </ul>
 
-<h3>3. Laravel stack kernconcepten</h3>
+<h3>3. Van "works on my machine" naar productie</h3>
+<p>Verschillen tussen laptop en prod: OS (Windows vs Linux), PHP-extensies, permissiemodel, netwerk/firewall, resources
+    en concurrency. Checklist: dependencies (composer.json), PHP-versie/extensies, .env per omgeving, logging naar files
+    i.p.v. browser, staging-test en rollback-plan.</p>
+
+<h3>4. Laravel stack kernconcepten</h3>
 <ul>
     <li><strong>MVC:</strong> Routes → Controllers → Views; Models via Eloquent ORM.</li>
     <li><strong>Composer:</strong> dependency manager; lockfile vastzetten voor reproduceerbare builds.</li>
@@ -22,14 +27,14 @@
     <li><strong>Testing:</strong> phpunit/pest; prefer tests in CI voordat er gedeployed wordt.</li>
 </ul>
 
-<h3>4. Configuratie en secrets</h3>
+<h3>5. Configuratie en secrets</h3>
 <ul>
     <li><strong>.env:</strong> bevat APP_ENV, APP_KEY, DB_*, MAIL_*, QUEUE_*, CACHE_*; nooit committen.</li>
     <li><strong>Prod:</strong> APP_DEBUG=false; config:cache en route:cache voor performance.</li>
     <li><strong>Secretsbeheer:</strong> gebruik vault/secret manager of CI/CD variabelen, niet hardcoded.</li>
 </ul>
 
-<h3>5. Runtime stack</h3>
+<h3>6. Runtime stack</h3>
 <ul>
     <li><strong>Weblaag:</strong> Nginx/Apache als reverse proxy → PHP-FPM; document root is <code>public/</code>.
     </li>
@@ -38,7 +43,7 @@
     <li><strong>Stateless deploys:</strong> uploads naar object storage (bv. S3) zodat pods/servers stateless blijven.</li>
 </ul>
 
-<h3>6. Database en migrations</h3>
+<h3>7. Database en migrations</h3>
 <ul>
     <li><strong>Migrations:</strong> versieer DB-schema; <code>migrate</code> en <code>rollback</code> voor evoluties.</li>
     <li><strong>Seeders:</strong> vullen testdata; handig voor dev/staging.</li>
@@ -47,10 +52,15 @@
         productie-run.</li>
 </ul>
 
-<h3>7. Deployment checklist</h3>
+<h3>8. Deployment checklist</h3>
 <ul>
     <li>composer install --no-dev --optimize-autoloader; npm ci && npm run build indien frontend assets.</li>
     <li>php artisan config:cache, route:cache, view:cache voor snellere boot.</li>
     <li>Controleer permissies op storage/ en bootstrap/cache.</li>
     <li>Healthchecks: HTTP 200 op <code>/health</code> of vergelijkbaar; monitor logs en metrics (APM).</li>
 </ul>
+
+<h3>9. Hostingopties en beheer</h3>
+<p>Stack kan op bare metal, VM of containers draaien; productie meestal Type 1 hypervisor of managed host. Automatiseren
+    met config management (Ansible) of containers; beheer services met systemd (start/stop/restart/enable) en harden met
+    SSH, firewall, fail2ban.</p>

@@ -1,69 +1,60 @@
-<h3>1. Opslag: Van Hardware naar Abstractie</h3>
-<p>De CPU praat niet direct met de harde schijf. RAM is snel, vluchtig en direct bereikbaar; Disk is traag, persistent
-    en goedkoop. Data wordt van Disk naar RAM geladen voordat de CPU het kan gebruiken. Het bestandssysteem presenteert
-    fysieke opslag via een boomstructuur zodat data georganiseerd en terugvindbaar is.</p>
+<h3>1. Opslaglagen en bestandssystemen</h3>
+<p>RAM is snel en vluchtig; disk is traag maar persistent. Data gaat van disk naar RAM voor de CPU. Een bestandssysteem
+    verbergt de schijf als een boomstructuur zodat je paden krijgt in plaats van blokadressen.</p>
 
 <h3>2. Partitionering</h3>
-<p>Voor gebruik krijgt een schijf een adrestabel via partitionering. Dit biedt veiligheid en flexibiliteit.</p>
+<p>Een schijf krijgt eerst een partitie-adrestabel voor veiligheid en flexibiliteit.</p>
 <ul>
-    <li>MBR: BIOS, max. 4 primaire partities, tot 2 TB.</li>
-    <li>GPT: UEFI, tot 128 partities, zeer grote schijven, redundante header.</li>
+    <li><strong>MBR:</strong> Legacy BIOS, max 4 primaire of 3+1 extended (tot 23 logische), 2TB limiet.</li>
+    <li><strong>GPT:</strong> UEFI, redundante headers, tot 128 partities en zeer grote schijven.</li>
+</ul>
+<p>Linux naming: /dev/sdX letters per disk; commands: fdisk/cfdisk/parted. Denk vooraf na over root/home/swap layout.</p>
+
+<h3>3. Formatteren en filesystem-keuze</h3>
+<p>Formatteren = filesystem plaatsen. Journaling logt geplande writes voor herstel.</p>
+<ul>
+    <li><strong>Ext4:</strong> Snel, stabiel, journaling (Linux standaard).</li>
+    <li><strong>XFS/Reiser/ZFS:</strong> Respectievelijk hoge throughput, kleine files, checksums/replicatie.</li>
+    <li><strong>NTFS:</strong> Windows, journaling/encryptie. <strong>FAT32/exFAT:</strong> Universeel, 4GB limiet bij
+        FAT32.</li>
 </ul>
 
-<h3>3. Formatteren & Bestandssystemen</h3>
-<p>Formatteren plaatst een bestandssysteem. Journaling logt geplande wijzigingen om herstel te bieden na uitval.</p>
+<h3>4. Mounting en /etc/fstab</h3>
+<p>Één directoryboom vanaf /. Een mount point koppelt een partitie/apparaat of netwerkshare. /etc/fstab maakt mounts
+    blijvend (device, mountpoint, type, opties zoals defaults/noatime/users, dump, fsck-orde).</p>
+
+<h3>5. Belangrijke paden</h3>
 <ul>
-    <li>FAT32: Universeel, 4GB limiet, geen permissies.</li>
-    <li>NTFS: Windows, journaling en encryptie.</li>
-    <li>Ext4: Linux, snel en stabiel, journaling.</li>
-    <li>ZFS: Geavanceerd, checksums en volume manager.</li>
+    <li>/bin en /sbin: essentiële binaries; /usr/bin|/usr/sbin moderne locatie.</li>
+    <li>/etc: systeemconfig; /lib: libraries; /home: gebruikersdata; /tmp: tijdelijk; /dev: device files.</li>
 </ul>
 
-<h3>4. Linux Structuur & Mounting</h3>
-<p>Linux heeft één boom vanaf /. Mounting koppelt een apparaat aan een map.</p>
+<h3>6. Inodes en links</h3>
+<p>Een inode bevat metadata+bloklocaties; namen staan in directory entries.</p>
 <ul>
-    <li>/bin, /sbin: Programma's.</li>
-    <li>/etc: Configuratie.</li>
-    <li>/home: Gebruikersdata.</li>
-    <li>/dev: Apparaatbestanden.</li>
-    <li>/tmp: Tijdelijk.</li>
+    <li><strong>Hard link:</strong> Extra naam naar dezelfde inode; data blijft bij verwijderen origineel.</li>
+    <li><strong>Symlink:</strong> Wijst naar pad; breekt als doel weg is.</li>
 </ul>
 
-<h3>5. Inodes en Links</h3>
-<p>Bestandsnamen bestaan niet voor de schijf; inodes bevatten metadata.</p>
+<h3>7. Archiveren en compressie</h3>
 <ul>
-    <li>Hard Link: Extra naam naar hetzelfde inode; data blijft bij verwijderen origineel.</li>
-    <li>Soft Link: Padverwijzing; breekt als origineel weg is.</li>
+    <li>tar -czvf file.tar.gz dir/ (inpakken+comprimeren)</li>
+    <li>tar -xzvf file.tar.gz (uitpakken)</li>
 </ul>
 
-<h3>6. Archivering en Compressie</h3>
+<h3>8. Gebruikers en groepen</h3>
 <ul>
-    <li>Inpakken: tar -czvf naam.tar.gz map/</li>
-    <li>Uitpakken: tar -xzvf naam.tar.gz</li>
+    <li>Root UID 0; UID/GID bepalen rechten. /etc/passwd voor accounts, /etc/shadow voor hashes.</li>
+    <li>Gebruik sudo voor traceerbare admin taken.</li>
 </ul>
 
-<h3>7. Gebruikersbeheer</h3>
+<h3>9. Permissies (UGO) en speciale bits</h3>
 <ul>
-    <li>UID: Root = 0; GID voor groepsrechten.</li>
-    <li>/etc/passwd: Gebruikersinfo. /etc/shadow: hashes.</li>
-    <li>Gebruik sudo voor auditing en veiligheid.</li>
+    <li>Rechten per User/Group/Other: r(4) w(2) x(1). Notatie: drwxr-xr--.</li>
+    <li>SUID (s bij user x): run als eigenaar; SGID (s bij group x): mappen erven groep; Sticky (t bij other x): alleen
+        eigenaar mag verwijderen.</li>
+    <li>Umask trekt rechten af: basis 666 (files) / 777 (dirs); umask 022 → dirs 755, files 644.</li>
 </ul>
 
-<h3>8. Permissies (UGO)</h3>
-<ul>
-    <li>Read (4), Write (2), Execute (1) per User/Group/Other.</li>
-    <li>Voorbeeld: drwxr-xr--</li>
-</ul>
-
-<h3>9. Speciale Permissies</h3>
-<ul>
-    <li>SUID: Uitvoering met rechten van eigenaar; zichtbaar als s bij user execute.</li>
-    <li>SGID: Map erft groep; s bij group execute.</li>
-    <li>Sticky Bit: Alleen eigenaar mag verwijderen in gedeelde map; t bij other execute.</li>
-</ul>
-
-<h3>10. Umask</h3>
-<p>Base File = 666, Dir = 777. Umask 022 → 755 voor mappen.</p>
-
-<h3>11. ACL</h3>
-<p>Fijnmazige rechten, herkenbaar aan +. Gebruik getfacl en setfacl.</p>
+<h3>10. ACL</h3>
+<p>Fijnmazige rechten buiten UGO, zichtbaar als +. Tools: getfacl, setfacl.</p>

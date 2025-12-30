@@ -1,50 +1,46 @@
-<h3>1. Programma's vs. Processen</h3>
-<p>Programma: passief bestand op schijf. Proces: actief, uitvoering met huidige staat in geheugen.</p>
+<h3>1. Programma's vs. Processen en geheugenlayout</h3>
+<p>Programma = passief bestand; proces = actief met staat (program counter, registers, open files, geheugen).</p>
 <ul>
-    <li>Text: Code.</li>
-    <li>Data: Globale variabelen.</li>
-    <li>Heap: Groeit omhoog, dynamisch geheugen.</li>
-    <li>Stack: Groeit omlaag, parameters en returns.</li>
+    <li>Text/Code, Data, Heap (groeit omhoog, dynamic alloc), Stack (groeit omlaag, calls/locals).</li>
 </ul>
 
-<h3>2. PCB</h3>
-<p>Bevat processtaat, program counter, registers, geheugeninfo, accounting en I/O-status.</p>
+<h3>2. PCB, processtaten en context switches</h3>
+<p>PCB bewaart staat (registers, PC, geheugen, I/O, accounting). Staten: New → Ready → Running → Waiting → Terminated;
+    transities via dispatch/interrupt/I/O. Context switch = PCB A opslaan en PCB B laden → overhead zonder werk.</p>
 
-<h3>3. Processtaten</h3>
+<h3>3. Procescreatie en relaties</h3>
 <ul>
-    <li>New, Ready, Running, Waiting, Terminated.</li>
-    <li>Transities: Dispatch, Interrupt, I/O wait.</li>
+    <li>fork(): dupliceert proces; parent krijgt child PID, child PID=0.</li>
+    <li>exec(): vervangt geheugen door nieuw programma.</li>
+    <li>wait(): parent wacht op child; zonder wait → zombie; parent dood → orphan geadopteerd door init/systemd.</li>
 </ul>
 
-<h3>4. Context Switching</h3>
-<p>CPU slaat staat op in PCB A en laadt PCB B; overhead zonder nuttig werk.</p>
+<h3>4. Stack vs Heap</h3>
+<p>Stack voor aanroepen/locals, LIFO, limiet per thread; Heap voor dynamische allocaties. Pas op voor leaks en buffer
+    overflows; pointerbeheer cruciaal (pass-by-value vs pass-by-reference).</p>
 
-<h3>5. Procescreatie</h3>
+<h3>5. Threads</h3>
+<p>Lichte processen: delen code/data/files, eigen stack/PC/registers. Voordelen: responsiviteit, resource sharing,
+    schaalbaarheid; nadelen: race conditions en complex debuggen.</p>
 <ul>
-    <li>fork(): Parent krijgt PID, Child krijgt 0.</li>
-    <li>exec(): Vervangt geheugen met nieuw programma.</li>
-    <li>wait(): Parent wacht tot child klaar.</li>
-    <li>Zombie: Geen wait() gedaan. Orphan: Parent weg, geadopteerd door init/systemd.</li>
+    <li>Applicatie beslist scheduling/aansturen (niet alleen OS).</li>
+    <li>Kernel threads vs user-level threads; modellen 1:1, N:1, M:N.</li>
 </ul>
 
-<h3>6. Threads</h3>
-<p>Delen Code/Data/Bestanden; eigen Stack en Registers. Voordelen: responsiviteit en schaalbaarheid. Risico: race
-    conditions.</p>
+<h3>6. Motivatie en valkuilen</h3>
+<p>Gebruik threads voor parallel I/O (browser tabs, clients). Risico's: deadlocks, lost updates, dirty/phantom reads.
+    Synchronisatie en juiste mapping naar OS-threads zijn cruciaal.</p>
 
 <h3>7. Bootproces</h3>
 <ul>
-    <li>Firmware (BIOS/UEFI): POST, zoekt bootdevice.</li>
-    <li>Bootloader: MBR → GRUB laadt kernel in RAM.</li>
-    <li>Kernel: Laadt initrd, start PID 1.</li>
-    <li>Init (systemd): Start services en login.</li>
+    <li>Firmware (BIOS/UEFI) → POST → kiest bootdevice.</li>
+    <li>Bootloader (MBR/GRUB) laadt kernel + initrd in RAM.</li>
+    <li>Kernel start PID 1 (systemd/init) → targets (multi-user/graphical) → services.</li>
 </ul>
 
-<h3>8. SystemD & Daemons</h3>
+<h3>8. Systemd & daemons</h3>
 <ul>
-    <li>Daemon: Achtergrondprocessen (sshd, systemd).</li>
-    <li>systemctl: start/stop/restart/enable.</li>
-    <li>Service files: [Unit], [Service], [Install]. Targets: multi-user, graphical.</li>
+    <li>Daemons: achtergrond (sshd, systemd). systemctl start/stop/restart/enable.</li>
+    <li>Service files: secties [Unit], [Service], [Install]; targets bepalen bootprofiel.</li>
+    <li>User services in ~/.config/systemd/user/, beheer met systemctl --user.</li>
 </ul>
-
-<h3>9. Gebruikersservices</h3>
-<p>Locatie: ~/.config/systemd/user/. Gebruik systemctl --user voor status en beheer.</p>

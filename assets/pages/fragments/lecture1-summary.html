@@ -1,17 +1,6 @@
 <h3>1. Basisconcepten: Hardware en Software</h3>
-<p>De werking van een computer kan metaforisch worden vergeleken met een gezinssituatie om de interactie tussen hardware
-    en software uit te leggen:</p>
-<ul>
-    <li><strong>Hardware (Vader):</strong> De hardware voert het daadwerkelijke werk uit, maar kan slechts één taak
-        tegelijk behandelen.</li>
-    <li><strong>Besturingssysteem (Moeder):</strong> Het besturingssysteem (OS) beheert de verzoeken van de 'kinderen'
-        (applicaties), bepaalt de prioriteit en stuurt de hardware aan. Het neemt de beslissingen over wat het meest
-        urgent is.</li>
-    <li><strong>Software:</strong> Dit omvat niet alleen het OS, maar ook frameworks, bibliotheken en engines (zoals
-        game-engines of database-engines) die bovenop het OS draaien.</li>
-</ul>
-<p>Op het laagste niveau werkt de computer met <strong>enen en nullen (binair)</strong> en logische poorten
-    (<strong>AND, OR, NOT</strong>) die wiskundige bewerkingen uitvoeren op inputsignalen.</p>
+<p>De gezin-metafoor: hardware (vader) voert werk uit, het OS (moeder) beslist prioriteit en stuurt aan; apps zijn de
+    kinderen. Onder de motorkap: bits en logische poorten (AND/OR/NOT) bouwen alles op.</p>
 
 <h3>2. Programmeertalen: Vertaling naar Machinecode</h3>
 <p>Omdat hardware alleen binaire code begrijpt, moeten programmeertalen vertaald worden. Er is een belangrijk
@@ -65,11 +54,8 @@
     gegevens van het volgende proces uit zijn PCB geladen.</p>
 
 <h3>4. Het Besturingssysteem (OS)</h3>
-<p>Het besturingssysteem heeft als doel de manager van het systeem te zijn.</p>
-
-<h4>Functies</h4>
-<p>Het is verantwoordelijk voor het opstarten (booting), geheugenbeheer, procesbeheer, databeveiliging en het aansturen
-    van hardware (disk management).</p>
+<p>Doel: systeemmanager. Functies: booten, proces- en geheugenbeheer, hardware/disk-management, beveiliging, locking om
+    conflicts te vermijden.</p>
 
 <h4>Protection Rings</h4>
 <p>Om stabiliteit en veiligheid te garanderen, werkt de processor met verschillende privileges, de zogenaamde 'ringen':
@@ -111,21 +97,15 @@
 </ul>
 
 <h3>5. Virtualisatie</h3>
-<p>Er zijn verschillende manieren om meerdere besturingssystemen op één stuk hardware te draaien:</p>
-
-<h4>Full Virtualization (CPU Emulatie)</h4>
-<p>De hypervisor emuleert de volledige hardware. Het gast-OS weet niet dat het virtueel draait. De hypervisor draait in
-    Ring 0 en het gast-OS in Ring 1.</p>
-
-<h4>Paravirtualization (OS Assisted)</h4>
-<p>Het gast-OS is aangepast en 'weet' dat het gevirtualiseerd is. Het communiceert efficiënter met de hypervisor via
-    <strong>Hypercalls</strong> (vergelijkbaar met system calls) in plaats van dat de hardware volledig geëmuleerd moet
-    worden.</p>
-
-<h4>Containers</h4>
-<p>In tegenstelling tot virtuele machines (VM's) die elk een volledig OS en kernel hebben, delen containers de kernel
-    van de host. Een container bevat alleen de applicatie en zijn specifieke bibliotheken/afhankelijkheden. Dit maakt ze
-    lichter en sneller te implementeren ("microservices").</p>
+<p>Manieren om meerdere OS'en te draaien:</p>
+<ul>
+    <li><strong>Full virtualization:</strong> Hypervisor emuleert hardware; gast-OS denkt dat het native draait.</li>
+    <li><strong>Paravirtualization:</strong> Gast weet dat het virtueel is en gebruikt hypercalls (vergelijkbaar met
+        syscalls) → minder overhead.</li>
+    <li><strong>Hardware-assisted:</strong> CPU-root mode (ring -1) voor hypervisor; gast kan gewoon in eigen ring 0.</li>
+    <li><strong>Containers:</strong> Delen de host-kernel, bevatten alleen app + libs; lichtgewicht en snel
+        inzetbaar.</li>
+</ul>
 
 <h3>6. Geschiedenis (Selectief)</h3>
 <p>De evolutie van computers kent enkele belangrijke mijlpalen:</p>
