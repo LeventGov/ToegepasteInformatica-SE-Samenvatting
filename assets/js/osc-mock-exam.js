@@ -1,6 +1,6 @@
 const oscQuizData = {
 
-    title: "Operating System Concepts - Lectures 1–5",
+    title: "Operating System Concepts - Lectures 1-6",
 
     questions: [
 
@@ -2211,6 +2211,162 @@ const oscQuizData = {
             explanationCorrect: "In productie zet je APP_DEBUG=false en cache je config/routes voor snelle boot; install zonder --dev en regel storage/permissions.",
 
             explanationIncorrect: "Prod vraagt caching en debug uit; geen dev dependencies of onbeschermde lokale uploads zonder beleid."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Wat is het kernverschil tussen containers en VM's?",
+
+            options: [
+
+                "Containers virtualiseren hardware en draaien elk hun eigen kernel",
+
+                "Containers delen de host-kernel en isoleren processen, VM's hebben een volledige eigen OS-stack",
+
+                "VM's zijn lichter en starten sneller dan containers",
+
+                "Er is geen verschil, beide delen altijd dezelfde kernel"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Containers delen de host-kernel en isoleren processen; VM's virtualiseren hardware en bevatten elk een volledige OS-kernel.",
+
+            explanationIncorrect: "VM's virtualiseren hardware en hebben een eigen kernel; containers delen de host-kernel en zijn lichter."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Welke kernelfeatures maken LXC en Docker mogelijk?",
+
+            options: [
+
+                "iptables en selinux",
+
+                "cgroups en namespaces",
+
+                "swap en tmpfs",
+
+                "cron en syslog"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Linux cgroups (resources) en namespaces (isolatie) vormen de basis voor LXC en dus Docker.",
+
+            explanationIncorrect: "Containers steunen op cgroups en namespaces; iptables of cron zijn niet de kernbouwstenen."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Waarom installeer je Docker op Debian via Docker's eigen repository?",
+
+            options: [
+
+                "Omdat de Debian pakketten meestal nieuwer zijn dan upstream",
+
+                "Omdat de Debian repo geen GPG-key vereist",
+
+                "Omdat de distributiepakketten vaak verouderd of incompleet zijn",
+
+                "Omdat Docker alleen werkt zonder updates"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Debian stable levert vaak oude/incomplete Docker-builds; de Docker repo geeft actuele componenten en updates.",
+
+            explanationIncorrect: "De reden is dat distro pakketten verouderen of incompleet zijn; niet omdat Debian nieuwer of keyloos is."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Welke tagging-aanpak is veilig voor productie?",
+
+            options: [
+
+                "Altijd latest gebruiken",
+
+                "Geen tag meegeven zodat latest pakt",
+
+                "Semver versie en eventueel OS in de tag zetten (bv. 1.27.1-alpine)",
+
+                "Alleen mainline gebruiken"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Pin versies met semver en evt. OS (bv. 1.27.1-alpine) om onverwachte updates te vermijden; vermijd latest/mainline in prod.",
+
+            explanationIncorrect: "latest of mainline verbergt versiewijzigingen; pin een semver tag (evt. met OS) voor voorspelbare builds."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Wat doet docker run -p 8080:80 httpd?",
+
+            options: [
+
+                "Bindt containerpoort 8080 aan hostpoort 80",
+
+                "Bindt hostpoort 8080 aan containerpoort 80 zodat de service op host:8080 bereikbaar is",
+
+                "Opent alleen een shell in de container",
+
+                "Voegt een extra netwerkinterface toe"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "-p host:container publiceert containerpoort 80 op hostpoort 8080, zodat je via host:8080 de httpd container bereikt.",
+
+            explanationIncorrect: "-p 8080:80 mapt hostpoort 8080 naar containerpoort 80; het opent geen shell en keert de mapping niet om."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Waar vind je standaard de Docker containerlogs terug op de host?",
+
+            options: [
+
+                "/var/log/syslog",
+
+                "/etc/docker/daemon.json",
+
+                "/var/lib/docker/containers/<id>/<id>-json.log",
+
+                "/usr/local/bin/docker-logs"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Standaard logt Docker per container naar /var/lib/docker/containers/<id>/<id>-json.log.",
+
+            explanationIncorrect: "De standaard json logs staan per container onder /var/lib/docker/containers/<id>/<id>-json.log; niet in syslog of daemon.json."
 
         }
 
