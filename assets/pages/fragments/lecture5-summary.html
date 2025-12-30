@@ -1,0 +1,56 @@
+<h3>1. DevOps doelen en mentaliteit</h3>
+<p>DevOps koppelt development en operations om sneller, betrouwbaarder en herhaalbaar te releasen.</p>
+<ul>
+    <li><strong>CALMS:</strong> Culture, Automation, Lean, Measurement, Sharing.</li>
+    <li><strong>Kernprincipes:</strong> Korte feedbackloops, alles versiebeheer (infra as code), automatiseren waar
+        mogelijk, meten en bijsturen.</li>
+</ul>
+
+<h3>2. Code- en releaseflow (Laravel context)</h3>
+<ul>
+    <li><strong>Branching:</strong> feature branches → merge naar dev/main via pull request en review.</li>
+    <li><strong>CI:</strong> composer install, lint/tests (phpunit/pest), security checks, build artifacts.</li>
+    <li><strong>CD:</strong> versie taggen, artefact deployen naar test/staging → productie na goedkeuring.</li>
+    <li><strong>Rollback:</strong> houd vorige artefacten en DB-backups beschikbaar.</li>
+</ul>
+
+<h3>3. Laravel stack kernconcepten</h3>
+<ul>
+    <li><strong>MVC:</strong> Routes → Controllers → Views; Models via Eloquent ORM.</li>
+    <li><strong>Composer:</strong> dependency manager; lockfile vastzetten voor reproduceerbare builds.</li>
+    <li><strong>Artisan:</strong> CLI voor serve, migrate, tinker, queue:work, schedule:run.</li>
+    <li><strong>Testing:</strong> phpunit/pest; prefer tests in CI voordat er gedeployed wordt.</li>
+</ul>
+
+<h3>4. Configuratie en secrets</h3>
+<ul>
+    <li><strong>.env:</strong> bevat APP_ENV, APP_KEY, DB_*, MAIL_*, QUEUE_*, CACHE_*; nooit committen.</li>
+    <li><strong>Prod:</strong> APP_DEBUG=false; config:cache en route:cache voor performance.</li>
+    <li><strong>Secretsbeheer:</strong> gebruik vault/secret manager of CI/CD variabelen, niet hardcoded.</li>
+</ul>
+
+<h3>5. Runtime stack</h3>
+<ul>
+    <li><strong>Weblaag:</strong> Nginx/Apache als reverse proxy → PHP-FPM; document root is <code>public/</code>.
+    </li>
+    <li><strong>Queues & schedulers:</strong> queue workers via supervisor/systemd; cron roept elke minuut
+        <code>php artisan schedule:run</code> aan.</li>
+    <li><strong>Stateless deploys:</strong> uploads naar object storage (bv. S3) zodat pods/servers stateless blijven.</li>
+</ul>
+
+<h3>6. Database en migrations</h3>
+<ul>
+    <li><strong>Migrations:</strong> versieer DB-schema; <code>migrate</code> en <code>rollback</code> voor evoluties.</li>
+    <li><strong>Seeders:</strong> vullen testdata; handig voor dev/staging.</li>
+    <li><strong>Eloquent:</strong> models met relationships (hasOne/hasMany/belongsToMany) + query builder.</li>
+    <li><strong>Backups & migratie-venster:</strong> plan onderhoud, test schema changes in staging, neem backup voor
+        productie-run.</li>
+</ul>
+
+<h3>7. Deployment checklist</h3>
+<ul>
+    <li>composer install --no-dev --optimize-autoloader; npm ci && npm run build indien frontend assets.</li>
+    <li>php artisan config:cache, route:cache, view:cache voor snellere boot.</li>
+    <li>Controleer permissies op storage/ en bootstrap/cache.</li>
+    <li>Healthchecks: HTTP 200 op <code>/health</code> of vergelijkbaar; monitor logs en metrics (APM).</li>
+</ul>
