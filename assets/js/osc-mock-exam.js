@@ -2,6 +2,7 @@ const oscQuizData = {
     title: "Operating System Concepts - Lectures 1–4",
     questions: [
         {
+            lecture: "Lecture 1",
             question: "Wat is de rol van het besturingssysteem in de metafoor van een gezinssituatie?",
             options: [
                 "Het besturingssysteem is de vader die het werk uitvoert",
@@ -14,6 +15,7 @@ const oscQuizData = {
             explanationIncorrect: "In de metafoor is het besturingssysteem de moeder die de verzoeken beheert en beslissingen neemt over prioriteiten, niet de uitvoerende hardware (vader)."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is het belangrijkste voordeel van een compiler ten opzichte van een interpreter?",
             options: [
                 "Het analyseren van de broncode gaat sneller",
@@ -26,6 +28,7 @@ const oscQuizData = {
             explanationIncorrect: "Het voordeel van een compiler is de snellere uitvoering; interpreters vertalen regel voor regel en zijn trager."
         },
         {
+            lecture: "Lecture 1",
             question: "Welk geheugensegment groeit van een hoog adres naar beneden?",
             options: [
                 "Heap",
@@ -38,6 +41,7 @@ const oscQuizData = {
             explanationIncorrect: "De heap groeit omhoog; de stack groeit omlaag en bevat aanroepframes."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is de 'Von Neumann bottleneck'?",
             options: [
                 "Beperking in data-overdracht tussen CPU en geheugen",
@@ -50,6 +54,7 @@ const oscQuizData = {
             explanationIncorrect: "Het gaat om data-overdracht tussen CPU en geheugen, niet om RAM-grootte of core-aantal."
         },
         {
+            lecture: "Lecture 1",
             question: "In welke 'ring' draait de kernel van het besturingssysteem?",
             options: [
                 "Ring 1",
@@ -62,6 +67,7 @@ const oscQuizData = {
             explanationIncorrect: "De kernel draait in Ring 0; Ring 3 is voor gebruikersapplicaties."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat gebeurt er bij een System Call?",
             options: [
                 "De processor blijft in User Mode",
@@ -74,6 +80,7 @@ const oscQuizData = {
             explanationIncorrect: "System Calls geven geen directe hardwaretoegang vanuit User Mode; ze wisselen kort naar Kernel Mode."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is het verschil tussen Full Virtualization en Paravirtualization?",
             options: [
                 "Bij Paravirtualization weet het gast-OS dat het gevirtualiseerd is",
@@ -86,6 +93,7 @@ const oscQuizData = {
             explanationIncorrect: "Paravirtualization is aangepast en 'bewust'; full virt is onbewust en hardware-emulerend."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is een belangrijk voordeel van containers t.o.v. virtuele machines?",
             options: [
                 "Containers hebben elk een eigen kernel",
@@ -98,6 +106,7 @@ const oscQuizData = {
             explanationIncorrect: "VM's hebben elk een volledige kernel; containers delen de host-kernel en zijn lichter."
         },
         {
+            lecture: "Lecture 1",
             question: "Wie wordt beschouwd als de eerste computerprogrammeur?",
             options: [
                 "Charles Babbage",
@@ -110,6 +119,7 @@ const oscQuizData = {
             explanationIncorrect: "Babbage ontwierp de machine, Lovelace schreef de programma's."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat stelt Moore's Law?",
             options: [
                 "Computers worden elke twee jaar twee keer zo groot",
@@ -122,6 +132,7 @@ const oscQuizData = {
             explanationIncorrect: "Moore's Law gaat om transistorverdubbeling, niet om grootte of RAM-snelheid."
         },
         {
+            lecture: "Lecture 1",
             question: "Welke programmeertaal werd ontwikkeld door Dennis Ritchie?",
             options: [
                 "Python",
@@ -134,6 +145,7 @@ const oscQuizData = {
             explanationIncorrect: "Ritchie is verantwoordelijk voor C, niet voor Python of Java."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is een belangrijk principe van de Unix filosofie?",
             options: [
                 "Elk programma moet alles kunnen doen",
@@ -158,6 +170,7 @@ const oscQuizData = {
             explanationIncorrect: "POSIX is een standaard, geen taal of hardware."
         },
         {
+            lecture: "Lecture 1",
             question: "Hoeveel tekens kan ASCII representeren?",
             options: [
                 "256",
@@ -170,6 +183,7 @@ const oscQuizData = {
             explanationIncorrect: "Extended ASCII gebruikt 8 bits (256); standaard ASCII is 7 bits (128)."
         },
         {
+            lecture: "Lecture 2",
             question: "Hoe geeft UTF-8 aan hoeveel bytes een karakter gebruikt?",
             options: [
                 "Door de kleur van de tekst",
@@ -182,6 +196,7 @@ const oscQuizData = {
             explanationIncorrect: "UTF-8 is variabel; ASCII is 1 byte, andere tekens 2–4 bytes."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is de PCB (Process Control Block)?",
             options: [
                 "Een type hardware component",
@@ -194,6 +209,7 @@ const oscQuizData = {
             explanationIncorrect: "De PCB is een datastructuur, geen hardware of tool; essentieel voor scheduling."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is het verschil tussen Top Half en Bottom Half in de kernel?",
             options: [
                 "Top Half synchroon (system calls), Bottom Half asynchroon (interrupts)",
@@ -206,6 +222,7 @@ const oscQuizData = {
             explanationIncorrect: "Bottom Half is voor hardware-interrupts; Top Half voor software-verzoeken."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is een belangrijk voordeel van een Monolithic Kernel?",
             options: [
                 "Betere stabiliteit bij driver crashes",
@@ -218,6 +235,7 @@ const oscQuizData = {
             explanationIncorrect: "Monolithic is snel; nadeel is dat crashes systeemwijd kunnen zijn."
         },
         {
+            lecture: "Lecture 1",
             question: "Waarom is een Microkernel stabieler maar trager dan een Monolithic Kernel?",
             options: [
                 "Omdat het minder functies heeft",
@@ -230,6 +248,7 @@ const oscQuizData = {
             explanationIncorrect: "Stabiliteit komt door isolatie; traagheid door message passing en context switches."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat doet partitioneren van een schijf?",
             options: [
                 "Het maakt bestanden kleiner",
@@ -242,6 +261,7 @@ const oscQuizData = {
             explanationIncorrect: "Formatteren plaatst het bestandssysteem; partitioneren verdeelt de schijf."
         },
         {
+            lecture: "Lecture 2",
             question: "Welke combinatie is correct: BIOS/MBR versus UEFI/GPT?",
             options: [
                 "BIOS hoort bij GPT",
@@ -254,6 +274,7 @@ const oscQuizData = {
             explanationIncorrect: "MBR/BIOS is klassiek; GPT/UEFI is modern en robuust."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is journaling in bestandssystemen?",
             options: [
                 "Compressie van bestanden",
@@ -266,6 +287,7 @@ const oscQuizData = {
             explanationIncorrect: "Geen compressie of backup; het is een wijzigingslog voor betrouwbaarheid."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is een inode?",
             options: [
                 "De bestandsnaam",
@@ -278,6 +300,7 @@ const oscQuizData = {
             explanationIncorrect: "De naam hoort niet bij de inode maar bij de directory."
         },
         {
+            lecture: "Lecture 2",
             question: "Verschil hard link vs symlink?",
             options: [
                 "Geen verschil",
@@ -290,6 +313,7 @@ const oscQuizData = {
             explanationIncorrect: "Symlinks zijn padverwijzingen; hard links delen dezelfde inode."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat betekent umask 022 voor mappen?",
             options: [
                 "777",
@@ -302,6 +326,7 @@ const oscQuizData = {
             explanationIncorrect: "Umask trekt rechten af van de basis; voor directories 777 - 022 = 755."
         },
         {
+            lecture: "Lecture 3",
             question: "Programma vs proces?",
             options: [
                 "Geen verschil",
@@ -314,6 +339,7 @@ const oscQuizData = {
             explanationIncorrect: "Proces = uitvoering; programma = bestand."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat doet fork() in Unix?",
             options: [
                 "Laadt een kernelmodule",
@@ -326,6 +352,7 @@ const oscQuizData = {
             explanationIncorrect: "fork() creëert een child; parent krijgt PID, child krijgt 0."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat delen threads binnen één proces?",
             options: [
                 "Eigen Code en Data",
@@ -338,6 +365,7 @@ const oscQuizData = {
             explanationIncorrect: "Ze delen Code/Data/Bestanden en hebben eigen Stack/Registers."
         },
         {
+            lecture: "Lecture 3",
             question: "Welke volgorde beschrijft het bootproces?",
             options: [
                 "Kernel → BIOS → GRUB → Systemd",
@@ -350,6 +378,7 @@ const oscQuizData = {
             explanationIncorrect: "Eerst firmware, dan bootloader, dan kernel+initrd, daarna services via systemd."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is het primaire doel van virtualisatie?",
             options: [
                 "Hardware sneller maken",
@@ -362,6 +391,7 @@ const oscQuizData = {
             explanationIncorrect: "Het doel is consolidatie en efficiënt gebruik van hardware, niet zozeer snelheid of kosten direct."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is het verschil tussen een Type 1 (Bare Metal) en Type 2 (Hosted) Hypervisor?",
             options: [
                 "Type 1 draait op de hardware, Type 2 draait in een Host-OS (bv. VirtualBox op Windows)",
@@ -374,6 +404,7 @@ const oscQuizData = {
             explanationIncorrect: "Type 1 is Bare Metal (direct op hardware); Type 2 is Hosted (in een Host-OS)."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is vMotion in VMware?",
             options: [
                 "Een manier om VM-bestanden te comprimeren",
@@ -386,6 +417,7 @@ const oscQuizData = {
             explanationIncorrect: "vMotion is live migratie van VM's, niet compressie, beveiliging of RAM-verandering."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is het doel van memory overcommitment in virtualisatie?",
             options: [
                 "Meer RAM per VM",
@@ -398,6 +430,7 @@ const oscQuizData = {
             explanationIncorrect: "Het gaat om efficiënt geheugenbeheer, niet om meer RAM direct toe te wijzen."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is een logische poort in binaire logica?",
             options: [
                 "Een netwerkpoort",
@@ -410,6 +443,7 @@ const oscQuizData = {
             explanationIncorrect: "Logische poorten zijn hardware-circuits, niet netwerk-gerelateerd."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat is het verschil tussen monolithic en microkernel architectuur?",
             options: [
                 "Monolithic is kleiner",
@@ -422,6 +456,7 @@ const oscQuizData = {
             explanationIncorrect: "Stabiliteit vs snelheid tradeoff; monolithic draait alles in Ring 0."
         },
         {
+            lecture: "Lecture 2",
             question: "Welke schijfpartitietabel hoort bij UEFI?",
             options: [
                 "MBR",
@@ -434,6 +469,7 @@ const oscQuizData = {
             explanationIncorrect: "GPT is modern (UEFI); MBR is klassiek (BIOS)."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is FAT32?",
             options: [
                 "Linux bestandssysteem",
@@ -446,6 +482,7 @@ const oscQuizData = {
             explanationIncorrect: "FAT32 werkt overal maar heeft beperkingen; NTFS is moderner."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is Ext4?",
             options: [
                 "Een Windows bestandssysteem",
@@ -458,6 +495,7 @@ const oscQuizData = {
             explanationIncorrect: "Ext4 is Linux-native, niet voor Windows."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is SUID (Set User ID)?",
             options: [
                 "Een soort gebruikersgroep",
@@ -470,6 +508,7 @@ const oscQuizData = {
             explanationIncorrect: "SUID staat toe dat programma's hoger draaien dan de aanroeper."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is de Sticky Bit?",
             options: [
                 "Een versleuteling voor bestanden",
@@ -482,6 +521,7 @@ const oscQuizData = {
             explanationIncorrect: "Nuttig voor gedeelde directories; alleen de eigenaar mag verwijderen."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is ACL (Access Control List)?",
             options: [
                 "Omgewijs van UGO permissies",
@@ -494,6 +534,7 @@ const oscQuizData = {
             explanationIncorrect: "ACL buiten standaard UGO; gebruik getfacl en setfacl."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat bevat /etc in Linux?",
             options: [
                 "Gebruikersbestanden",
@@ -506,6 +547,7 @@ const oscQuizData = {
             explanationIncorrect: "/etc is configuratie; /tmp is tijdelijk; /home is voor users."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat bevat /dev in Linux?",
             options: [
                 "Applicaties",
@@ -518,6 +560,7 @@ const oscQuizData = {
             explanationIncorrect: "/dev = device files; /lib = libraries."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat doet exec() in Unix?",
             options: [
                 "Voert een bestand uit",
@@ -530,6 +573,7 @@ const oscQuizData = {
             explanationIncorrect: "exec() transformeert het proces; fork() maakt child."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat doet wait() in Unix?",
             options: [
                 "Pauzeert het systeem",
@@ -542,6 +586,7 @@ const oscQuizData = {
             explanationIncorrect: "wait() is kritiek voor parent-child synchronisatie."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat is een Zombie proces?",
             options: [
                 "Een proces dat crasht",
@@ -554,6 +599,7 @@ const oscQuizData = {
             explanationIncorrect: "Zombie ontstaat zonder wait(); init/systemd kunnen orphans adopteren."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat is een Orphan proces?",
             options: [
                 "Hetzelfde als zombie",
@@ -566,6 +612,7 @@ const oscQuizData = {
             explanationIncorrect: "Orphan ≠ Zombie; parent weg vs kind niet afgehaald."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat zijn procestoestanden?",
             options: [
                 "New, Ready, Running, Waiting, Terminated",
@@ -578,6 +625,7 @@ const oscQuizData = {
             explanationIncorrect: "Vijf klassieke toestanden; transities via dispatcher en I/O.",
         },
         {
+            lecture: "Lecture 3",
             question: "Wat is Context Switching?",
             options: [
                 "Het veranderen van bestandspermissies",
@@ -590,6 +638,7 @@ const oscQuizData = {
             explanationIncorrect: "Context switch is essential voor scheduling; kost CPU-tijd zonder werk."
         },
         {
+            lecture: "Lecture 3",
             question: "Wat is een Daemon?",
             options: [
                 "Een GUI-applicatie",
@@ -602,6 +651,7 @@ const oscQuizData = {
             explanationIncorrect: "Daemons zijn services; systemctl beheert ze."
         },
         {
+            lecture: "Lecture 3",
             question: "Welke systemctl commando's zijn belangrijk?",
             options: [
                 "start/stop/delete/remove",
@@ -614,6 +664,7 @@ const oscQuizData = {
             explanationIncorrect: "systemctl is de manager van systemd services."
         },
         {
+            lecture: "Lecture 3",
             question: "Waar staan user services in Linux?",
             options: [
                 "/etc/systemd/system/",
@@ -626,6 +677,7 @@ const oscQuizData = {
             explanationIncorrect: "User services thuismap; system services in /etc."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is tar in Linux archivering?",
             options: [
                 "Een compressie-algoritme",
@@ -638,6 +690,7 @@ const oscQuizData = {
             explanationIncorrect: "tar is archiveringstool; gzip comprimeren."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat doet Binary Translation in CPU-virtualisatie?",
             options: [
                 "Zet code naar hardware-niveau",
@@ -650,6 +703,7 @@ const oscQuizData = {
             explanationIncorrect: "Binary Translation is oud; Hardware Assisted is moderner (VT-x/AMD-V)."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Hardware Assisted virtualisatie (VT-x / AMD-V)?",
             options: [
                 "CPU-fabrikanten voegden Root Mode (Ring -1) toe",
@@ -662,6 +716,7 @@ const oscQuizData = {
             explanationIncorrect: "VT-x/AMD-V is hardware-gesteund; sneller dan Binary Translation."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Transparent Page Sharing in geheugen-virtualisatie?",
             options: [
                 "Alle VM's delen dezelfde RAM",
@@ -674,6 +729,7 @@ const oscQuizData = {
             explanationIncorrect: "Page Sharing dedupliceren geheugen; Ballooning geeft ongebruikt RAM terug."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Ballooning in geheugen-virtualisatie?",
             options: [
                 "RAM opblazen",
@@ -686,6 +742,7 @@ const oscQuizData = {
             explanationIncorrect: "Ballooning regelt geheugendruk zonder downtime."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is .vmx in VMware?",
             options: [
                 "De virtuele harde schijf",
@@ -698,6 +755,7 @@ const oscQuizData = {
             explanationIncorrect: ".vmx = config; .vmdk = schijf; .nvram = BIOS; .log = logs."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is .vmdk in VMware?",
             options: [
                 "Het configuratiebestand",
@@ -710,6 +768,7 @@ const oscQuizData = {
             explanationIncorrect: ".vmdk is de disk; .vmx is de config."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is vSwitch?",
             options: [
                 "Een fysieke netwerkkaart",
@@ -722,6 +781,7 @@ const oscQuizData = {
             explanationIncorrect: "vSwitch verbindt VM's; uplink naar echte network."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Port Group in vSwitch?",
             options: [
                 "Een VM",
@@ -734,6 +794,7 @@ const oscQuizData = {
             explanationIncorrect: "Port Groups = logische groepen op vSwitch; zoals VLAN's."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is een LUN in gedeelde opslag?",
             options: [
                 "Een VM",
@@ -746,6 +807,7 @@ const oscQuizData = {
             explanationIncorrect: "LUN = shared storage; DAS = lokaal per server."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Storage vMotion?",
             options: [
                 "VM naar ander netwerk verplaatsen",
@@ -758,6 +820,7 @@ const oscQuizData = {
             explanationIncorrect: "Storage vMotion = schijf migratie; vMotion = CPU migratie."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is HA (High Availability) in VMware?",
             options: [
                 "Geen downtime",
@@ -770,6 +833,7 @@ const oscQuizData = {
             explanationIncorrect: "HA ≠ FT; HA heeft reboot-downtime; FT geen."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is FT (Fault Tolerance) in VMware?",
             options: [
                 "Hetzelfde als HA",
@@ -782,6 +846,7 @@ const oscQuizData = {
             explanationIncorrect: "FT ≠ HA; FT = continuous protection, zeer duur."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is DRS (Distributed Resource Scheduler)?",
             options: [
                 "Schijf-herstelservice",
@@ -794,6 +859,7 @@ const oscQuizData = {
             explanationIncorrect: "DRS = automated load balancing; niet voor backups."
         },
         {
+            lecture: "Lecture 4",
             question: "Wat is Nested Virtualization?",
             options: [
                 "Twee VM's in één",
@@ -806,6 +872,8 @@ const oscQuizData = {
             explanationIncorrect: "Nested gebruikt voor labs; vereist VT-x/AMD-V in BIOS."
         },
         {
+            lecture: "Lecture 1",
+            lecture: "Lecture 1",
             question: "Wat is POSIX?",
             options: [
                 "Een OS",
@@ -818,6 +886,7 @@ const oscQuizData = {
             explanationIncorrect: "POSIX is een standaard, niet een OS of taal."
         },
         {
+            lecture: "Lecture 2",
             question: "Hoeveel bits gebruikt Extended ASCII?",
             options: [
                 "7 bits",
@@ -830,6 +899,7 @@ const oscQuizData = {
             explanationIncorrect: "Standaard ASCII = 7 bits (128); Extended = 8 bits (256)."
         },
         {
+            lecture: "Lecture 2",
             question: "Wat is UTF-16?",
             options: [
                 "ASCII alternatief",
@@ -842,6 +912,7 @@ const oscQuizData = {
             explanationIncorrect: "UTF-16 is vaste breedte; UTF-8 variabel."
         },
         {
+            lecture: "Lecture 1",
             question: "Wat doet een Scheduler in het OS?",
             options: [
                 "Plant events",

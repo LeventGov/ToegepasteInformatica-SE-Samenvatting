@@ -11,6 +11,7 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/quiz.css">
 </head>
 
 <body>
@@ -31,6 +32,11 @@
             <div class="quiz-header">
                 <h2>Operating System Concepts - Lectures 1–4</h2>
                 <p>Beantwoord alle vragen en krijg direct uitleg bij elk antwoord.</p>
+            </div>
+
+            <div class="quiz-timer" role="status" aria-label="Quiz timer">
+                <span class="timer-label">⏱️ Tijd:</span>
+                <span id="timer" class="timer-display">00:00</span>
             </div>
 
             <div class="quiz-progress" role="status" aria-label="Quiz voortgang">
@@ -62,6 +68,11 @@
             <div id="score-percentage" class="results-score">0%</div>
             <div id="score-message" class="results-message">Geweldig gedaan!</div>
 
+            <div class="results-time">
+                <span class="time-label">⏱️ Totale Tijd:</span>
+                <span id="total-time">00:00</span>
+            </div>
+
             <div class="results-details">
                 <div class="result-stat">
                     <div id="correct-count" class="result-stat-value">0</div>
@@ -75,6 +86,11 @@
                     <div id="total-answered" class="result-stat-value">0</div>
                     <div class="result-stat-label">Beantwoord</div>
                 </div>
+            </div>
+
+            <div id="lecture-breakdown" class="lecture-breakdown">
+                <h3>Resultaten per Lecture</h3>
+                <div id="lecture-scores"></div>
             </div>
 
             <div class="card-actions">

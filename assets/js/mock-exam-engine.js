@@ -1,5 +1,10 @@
 const quizData = { title: '', questions: [] };
-let currentQuestion = 0; let score = 0; let answers = [];
+let currentQuestion = 0; 
+let score = 0; 
+let answers = [];
+let startTime = null;
+let timerInterval = null;
+let elapsedSeconds = 0;
 const quizContainer = document.getElementById('quiz-container');
 const resultsContainer = document.getElementById('results-container');
 const questionNumber = document.getElementById('question-number');
@@ -12,7 +17,35 @@ const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
 const restartBtn = document.getElementById('restart-btn');
 const homeBtn = document.getElementById('home-btn');
-function initQuiz(data){ quizData.title = data.title; quizData.questions = data.questions; totalQuestions.textContent = quizData.questions.length; displayQuestion(); }
+const timerDisplay = document.getElementById('timer');
+
+function startTimer(){
+    startTime = Date.now();
+    timerInterval = setInterval(function(){
+        elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsedSeconds / 60);
+        const seconds = elapsedSeconds % 60;
+        timerDisplay.textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+    }, 100);
+}
+
+function stopTimer(){
+    if(timerInterval) clearInterval(timerInterval);
+}
+
+function formatTime(seconds){
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return (minutes < 10 ? '0' : '') + minutes + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+function initQuiz(data){ 
+    quizData.title = data.title; 
+    quizData.questions = data.questions; 
+    totalQuestions.textContent = quizData.questions.length; 
+    startTimer();
+    displayQuestion(); 
+}
 function displayQuestion(){ const question = quizData.questions[currentQuestion]; questionNumber.textContent = currentQuestion + 1; questionText.textContent = question.question; const progress = ((currentQuestion + 1) / quizData.questions.length) * 100; progressFill.style.width = progress + '%'; answersContainer.innerHTML = ''; explanationContainer.innerHTML = ''; explanationContainer.style.display = 'none'; const letters = ['A','B','C','D','E','F']; question.options.forEach(function(option,index){ var button = document.createElement('button'); button.className = 'answer-btn'; button.setAttribute('role','button'); button.setAttribute('aria-label','Antwoord ' + letters[index] + ': ' + option); button.innerHTML = '<span class="answer-letter">' + letters[index] + '</span><span>' + option + '</span>'; button.addEventListener('click', function(){ selectAnswer(index, button); }); answersContainer.appendChild(button); }); updateNavigationButtons(); if (answers[currentQuestion] !== undefined) { showPreviousAnswer(); } }
 function selectAnswer(answerIndex, button){ const question = quizData.questions[currentQuestion]; const isCorrect = answerIndex === question.correctAnswer; answers[currentQuestion] = { selectedAnswer: answerIndex, isCorrect: isCorrect }; if (isCorrect && !answers[currentQuestion].scored){ score++; answers[currentQuestion].scored = true; } var allButtons = answersContainer.querySelectorAll('.answer-btn'); allButtons.forEach(function(btn){ btn.disabled = true; }); allButtons[question.correctAnswer].classList.add('correct'); if (!isCorrect){ button.classList.add('incorrect'); } showExplanation(isCorrect, question); nextBtn.disabled = false; }
 function showExplanation(isCorrect, question){ explanationContainer.style.display = 'block'; var explanationTitle = isCorrect ? '✅ Correct!' : '❌ Helaas, dit is niet het juiste antwoord.'; var explanationText = isCorrect ? question.explanationCorrect : question.explanationIncorrect; explanationContainer.innerHTML = '<div class="explanation-title">' + explanationTitle + '</div><div class="explanation-text">' + explanationText + '</div>'; var announcement = document.createElement('div'); announcement.className = 'sr-only'; announcement.setAttribute('role','status'); announcement.setAttribute('aria-live','polite'); announcement.textContent = explanationTitle + ' ' + explanationText; document.body.appendChild(announcement); setTimeout(function(){ announcement.remove(); }, 1000); }
@@ -20,9 +53,60 @@ function showPreviousAnswer(){ var answer = answers[currentQuestion]; if (answer
 function nextQuestion(){ if (currentQuestion < quizData.questions.length - 1){ currentQuestion++; displayQuestion(); } else { showResults(); } }
 function previousQuestion(){ if (currentQuestion > 0){ currentQuestion--; displayQuestion(); } }
 function updateNavigationButtons(){ prevBtn.disabled = currentQuestion === 0; if (answers[currentQuestion] !== undefined){ nextBtn.disabled = false; nextBtn.textContent = currentQuestion === quizData.questions.length - 1 ? 'Toon Resultaten' : 'Volgende Vraag →'; } else { nextBtn.disabled = true; nextBtn.textContent = 'Volgende Vraag →'; } }
-function showResults(){ quizContainer.style.display = 'none'; resultsContainer.style.display = 'block'; var percentage = Math.round((score / quizData.questions.length) * 100); var totalAnswered = answers.filter(function(a){ return a !== undefined; }).length; var correct = answers.filter(function(a){ return a && a.isCorrect; }).length; var incorrect = totalAnswered - correct; document.getElementById('score-percentage').textContent = percentage + '%'; document.getElementById('score-message').textContent = getScoreMessage(percentage); document.getElementById('correct-count').textContent = correct; document.getElementById('incorrect-count').textContent = incorrect; document.getElementById('total-answered').textContent = totalAnswered; var announcement = document.createElement('div'); announcement.className = 'sr-only'; announcement.setAttribute('role','status'); announcement.setAttribute('aria-live','polite'); announcement.textContent = 'Quiz voltooid! Je score is ' + percentage + '%. ' + correct + ' correct, ' + incorrect + ' incorrect van de ' + totalAnswered + ' beantwoorde vragen.'; document.body.appendChild(announcement); setTimeout(function(){ announcement.remove(); }, 1000); }
+function showResults(){ 
+    stopTimer();
+    quizContainer.style.display = 'none'; 
+    resultsContainer.style.display = 'block'; 
+    var percentage = Math.round((score / quizData.questions.length) * 100); 
+    var totalAnswered = answers.filter(function(a){ return a !== undefined; }).length; 
+    var correct = answers.filter(function(a){ return a && a.isCorrect; }).length; 
+    var incorrect = totalAnswered - correct; 
+    document.getElementById('score-percentage').textContent = percentage + '%'; 
+    document.getElementById('score-message').textContent = getScoreMessage(percentage); 
+    document.getElementById('correct-count').textContent = correct; 
+    document.getElementById('incorrect-count').textContent = incorrect; 
+    document.getElementById('total-answered').textContent = totalAnswered;
+    document.getElementById('total-time').textContent = formatTime(elapsedSeconds);
+    
+    // Calculate per-lecture scores
+    var lectureScores = { 'Lecture 1': {correct: 0, total: 0}, 'Lecture 2': {correct: 0, total: 0}, 'Lecture 3': {correct: 0, total: 0}, 'Lecture 4': {correct: 0, total: 0} };
+    quizData.questions.forEach(function(question, index){
+        if(question.lecture){
+            lectureScores[question.lecture].total += 1;
+            if(answers[index] && answers[index].isCorrect) lectureScores[question.lecture].correct += 1;
+        }
+    });
+    
+    var lectureScoresHtml = '';
+    Object.keys(lectureScores).forEach(function(lecture){
+        var score_data = lectureScores[lecture];
+        if(score_data.total > 0){
+            var lecturePercentage = Math.round((score_data.correct / score_data.total) * 100);
+            lectureScoresHtml += '<div class="lecture-score-item"><span>' + lecture + ':</span> <strong>' + score_data.correct + '/' + score_data.total + '</strong> (' + lecturePercentage + '%)</div>';
+        }
+    });
+    document.getElementById('lecture-scores').innerHTML = lectureScoresHtml;
+    
+    var announcement = document.createElement('div'); 
+    announcement.className = 'sr-only'; 
+    announcement.setAttribute('role','status'); 
+    announcement.setAttribute('aria-live','polite'); 
+    announcement.textContent = 'Quiz voltooid! Je score is ' + percentage + '%. ' + correct + ' correct, ' + incorrect + ' incorrect van de ' + totalAnswered + ' beantwoorde vragen. Tijd: ' + formatTime(elapsedSeconds) + '.'; 
+    document.body.appendChild(announcement); 
+    setTimeout(function(){ announcement.remove(); }, 1000); 
+}
 function getScoreMessage(percentage){ if (percentage === 100) return 'Perfect! Je beheerst de stof uitstekend! 🎉'; if (percentage >= 80) return 'Geweldig! Je bent goed voorbereid! 🌟'; if (percentage >= 60) return 'Goed gedaan! Nog wat herhaling en je zit goed! 👍'; if (percentage >= 40) return 'Je bent op de goede weg, blijf oefenen! 📚'; return 'Blijf studeren, je kunt het! 💪'; }
-function restartQuiz(){ currentQuestion = 0; score = 0; answers = []; quizContainer.style.display = 'block'; resultsContainer.style.display = 'none'; displayQuestion(); }
+function restartQuiz(){ 
+    currentQuestion = 0; 
+    score = 0; 
+    answers = []; 
+    elapsedSeconds = 0;
+    timerDisplay.textContent = '00:00';
+    quizContainer.style.display = 'block'; 
+    resultsContainer.style.display = 'none'; 
+    startTimer();
+    displayQuestion(); 
+}
 nextBtn.addEventListener('click', nextQuestion);
 prevBtn.addEventListener('click', previousQuestion);
 restartBtn.addEventListener('click', restartQuiz);
