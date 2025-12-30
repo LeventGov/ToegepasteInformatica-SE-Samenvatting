@@ -1,5 +1,5 @@
 const oscQuizData = {
-    title: "Operating System Concepts - Lectures 1–4",
+    title: "Operating System Concepts - Lectures 1–5",
     questions: [
         {
             lecture: "Lecture 1",
@@ -923,6 +923,136 @@ const oscQuizData = {
             correctAnswer: 1,
             explanationCorrect: "Scheduler kiest proces based on PCB data en scheduling algoritmes.",
             explanationIncorrect: "Scheduler = dispatcher; gebruikt PCB-informatie."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Waar staat CALMS voor in DevOps?",
+            options: [
+                "Culture, Automation, Lean, Measurement, Sharing",
+                "Cloud, Agile, Lean, Monitoring, Security",
+                "Culture, Agile, Legacy, Metrics, Support",
+                "Code, Automation, Logging, Metrics, Security"
+            ],
+            correctAnswer: 0,
+            explanationCorrect: "CALMS beschrijft de DevOps-pijlers: cultuur, automatisering, lean werken, meten en kennis delen.",
+            explanationIncorrect: "CALMS staat voor Culture, Automation, Lean, Measurement, Sharing; niet alleen tooling of security."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Wat is het hoofddoel van DevOps in deze context?",
+            options: [
+                "Langzamere releases met meer handwerk",
+                "Sneller en betrouwbaarder releasen via gedeelde verantwoordelijkheid en automatisering",
+                "Meer servers kopen zonder procesaanpassing",
+                "Alleen operations automatiseren zonder developers te betrekken"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "DevOps verbindt dev en ops om sneller en consistenter te releasen door automatisering en korte feedbackloops.",
+            explanationIncorrect: "Het doel is snelheid en betrouwbaarheid via samenwerking en automatisering, niet meer handwerk of alleen hardware."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Waarom commit je het .env-bestand niet in Laravel?",
+            options: [
+                "Het breekt de tests",
+                "Het bevat secrets en omgevingsspecifieke configuratie; gebruik een secret manager of CI/CD variabelen",
+                "Het maakt de app trager",
+                "Het is alleen nodig voor Windows"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: ".env bevat gevoelige keys (APP_KEY, DB, mail). Bewaar ze via secrets/CI-variabelen en commit ze niet.",
+            explanationIncorrect: ".env hoort niet in git vanwege secrets en per-omgeving verschillen; gebruik een secret manager of pipeline-variabelen."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Wat is de document root bij een Laravel deploy?",
+            options: [
+                "./",
+                "storage/",
+                "resources/",
+                "public/"
+            ],
+            correctAnswer: 3,
+            explanationCorrect: "Webserver (Nginx/Apache) moet naar public/ wijzen; daar staan index.php en assets-entry.",
+            explanationIncorrect: "Alleen public/ is de juiste webroot; storage/ of resources/ mogen niet direct publiek zijn."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Waarom check je composer.lock in en gebruik je die in CI/CD?",
+            options: [
+                "Het versnelt PHP-FPM",
+                "Het fixeert dependency-versies voor reproduceerbare builds",
+                "Het vervangt composer.json",
+                "Het voegt caching toe aan routes"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "composer.lock borgt exact dezelfde pakketversies in alle omgevingen, wat reproduceerbare builds geeft.",
+            explanationIncorrect: "composer.lock fixeert versies; het vervangt composer.json niet en heeft niets met PHP-FPM routing te maken."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Hoe laat je Laravel geplande taken draaien?",
+            options: [
+                "Handmatig elke dag",
+                "Cron job die elke minuut 'php artisan schedule:run' aanroept",
+                "Eenmalig bij deploy",
+                "Via php artisan migrate"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "Een cron entry roept elke minuut schedule:run aan; Laravel voert dan due tasks uit.",
+            explanationIncorrect: "Scheduler draait via cron elke minuut; het is geen migratie of eenmalige deploy-stap."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Wat moet de waarde van APP_DEBUG in productie zijn?",
+            options: [
+                "true, zodat fouten zichtbaar zijn",
+                "false, zodat geen stacktraces/leakage naar gebruikers gaat",
+                "Maakt niet uit",
+                "true zolang logs aan staan"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "In productie zet je APP_DEBUG=false om geen gevoelige info te tonen; log fouten intern.",
+            explanationIncorrect: "APP_DEBUG moet uit in productie om geen stacktraces of secrets te tonen."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Hoe run je queue workers betrouwbaar in Laravel?",
+            options: [
+                "Handmatig php artisan queue:work in een losse shell",
+                "Via supervisor/systemd die queue:work processen beheert",
+                "Alleen via cron",
+                "Queue workers zijn niet nodig"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "Gebruik supervisor of systemd om queue:work als service te bewaken en te herstarten.",
+            explanationIncorrect: "Losse shells zijn fragiel; een process manager (supervisor/systemd) hoort de workers draaiend te houden."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Hoe houd je file uploads stateless bij deployments?",
+            options: [
+                "Uploads lokaal in storage/app opslaan",
+                "Uploads naar object storage (bv. S3) sturen zodat app-servers stateless blijven",
+                "Uploads in git committen",
+                "Uploads in /tmp bewaren"
+            ],
+            correctAnswer: 1,
+            explanationCorrect: "Object storage (S3 e.d.) maakt web/worker nodes stateless en voorkomt verlies bij herdeploys.",
+            explanationIncorrect: "Lokale opslag of git is niet stateless; gebruik object storage zodat servers uitwisselbaar zijn."
+        },
+        {
+            lecture: "Lecture 5",
+            question: "Welke stap hoort in de deployment checklist voor performance?",
+            options: [
+                "php artisan config:cache, route:cache en view:cache draaien",
+                "Alle caches wissen",
+                "APP_ENV=local zetten",
+                "composer install --dev in productie"
+            ],
+            correctAnswer: 0,
+            explanationCorrect: "Config/route/view cache versnellen bootstrap; combineer met --no-dev install en juiste permissies.",
+            explanationIncorrect: "In productie cache je config/routes/views en installeer je zonder dev dependencies; APP_ENV blijft production."
         }
     ]
 };

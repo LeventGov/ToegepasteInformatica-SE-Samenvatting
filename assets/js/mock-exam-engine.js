@@ -149,7 +149,7 @@ function showResults(){
     document.getElementById('total-time').textContent = formatTime(elapsedSeconds);
     
     // Calculate per-lecture scores
-    var lectureScores = { 'Lecture 1': {correct: 0, total: 0}, 'Lecture 2': {correct: 0, total: 0}, 'Lecture 3': {correct: 0, total: 0}, 'Lecture 4': {correct: 0, total: 0} };
+    var lectureScores = { 'Lecture 1': {correct: 0, total: 0}, 'Lecture 2': {correct: 0, total: 0}, 'Lecture 3': {correct: 0, total: 0}, 'Lecture 4': {correct: 0, total: 0}, 'Lecture 5': {correct: 0, total: 0} };
     quizData.questions.forEach(function(question, index){
         if(question.lecture){
             lectureScores[question.lecture].total += 1;
