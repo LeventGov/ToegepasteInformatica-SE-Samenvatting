@@ -8,6 +8,14 @@ function toggleSection(section) {
     }
 }
 
+function collapseAllSummaries(exceptId) {
+    document.querySelectorAll('.summary-section').forEach(sec => {
+        if (!exceptId || ('#' + sec.id) !== exceptId) {
+            sec.classList.remove('expanded');
+        }
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflowX = 'hidden';
 
@@ -20,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const element = document.querySelector(window.location.hash);
             if (element) {
+                collapseAllSummaries(window.location.hash);
                 const section = element.closest('.summary-section') || element;
                 if (section) {
                     section.classList.add('expanded');
@@ -36,6 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
+                collapseAllSummaries(link.getAttribute('href'));
                 const section = target.closest('.summary-section') || target;
                 if (section) {
                     section.classList.add('expanded');
@@ -43,9 +53,28 @@ window.addEventListener('DOMContentLoaded', () => {
                         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 100);
                 }
+                const lecturesSection = document.getElementById('lectures-section');
+                if (lecturesSection) {
+                    lecturesSection.classList.remove('expanded');
+                }
             }
         });
     });
+
+    const lecturesSection = document.getElementById('lectures-section');
+    if (lecturesSection) {
+        const header = lecturesSection.querySelector('.section-header');
+        if (header) {
+            header.addEventListener('click', () => toggleSection(lecturesSection));
+            const btn = header.querySelector('.expand-btn');
+            if (btn) {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleSection(lecturesSection);
+                });
+            }
+        }
+    }
 
     document.querySelectorAll('.summary-header').forEach(header => {
         header.addEventListener('click', () => {

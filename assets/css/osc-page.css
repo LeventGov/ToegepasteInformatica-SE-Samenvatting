@@ -3,6 +3,31 @@
     gap: 1rem;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.collapsible .lectures-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.collapsible.expanded .lectures-list {
+    max-height: 5000px;
+}
+
+.collapsible .expand-icon {
+    transition: transform 0.3s ease;
+}
+
+.collapsible.expanded .expand-icon {
+    transform: rotate(180deg);
+}
+
 .lecture-card {
     background: var(--bg-secondary);
     border: 2px solid var(--border-color);

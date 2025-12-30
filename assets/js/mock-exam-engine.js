@@ -5,6 +5,7 @@ let answers = [];
 let startTime = null;
 let timerInterval = null;
 let elapsedSeconds = 0;
+const optionOrder = {};
 const quizContainer = document.getElementById('quiz-container');
 const resultsContainer = document.getElementById('results-container');
 const questionNumber = document.getElementById('question-number');
@@ -46,10 +47,89 @@ function initQuiz(data){
     startTimer();
     displayQuestion(); 
 }
-function displayQuestion(){ const question = quizData.questions[currentQuestion]; questionNumber.textContent = currentQuestion + 1; questionText.textContent = question.question; const progress = ((currentQuestion + 1) / quizData.questions.length) * 100; progressFill.style.width = progress + '%'; answersContainer.innerHTML = ''; explanationContainer.innerHTML = ''; explanationContainer.style.display = 'none'; const letters = ['A','B','C','D','E','F']; question.options.forEach(function(option,index){ var button = document.createElement('button'); button.className = 'answer-btn'; button.setAttribute('role','button'); button.setAttribute('aria-label','Antwoord ' + letters[index] + ': ' + option); button.innerHTML = '<span class="answer-letter">' + letters[index] + '</span><span>' + option + '</span>'; button.addEventListener('click', function(){ selectAnswer(index, button); }); answersContainer.appendChild(button); }); updateNavigationButtons(); if (answers[currentQuestion] !== undefined) { showPreviousAnswer(); } }
-function selectAnswer(answerIndex, button){ const question = quizData.questions[currentQuestion]; const isCorrect = answerIndex === question.correctAnswer; answers[currentQuestion] = { selectedAnswer: answerIndex, isCorrect: isCorrect }; if (isCorrect && !answers[currentQuestion].scored){ score++; answers[currentQuestion].scored = true; } var allButtons = answersContainer.querySelectorAll('.answer-btn'); allButtons.forEach(function(btn){ btn.disabled = true; }); allButtons[question.correctAnswer].classList.add('correct'); if (!isCorrect){ button.classList.add('incorrect'); } showExplanation(isCorrect, question); nextBtn.disabled = false; }
+function shuffleArray(arr){
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function displayQuestion(){
+    const question = quizData.questions[currentQuestion];
+    questionNumber.textContent = currentQuestion + 1;
+    questionText.textContent = question.question;
+    const progress = ((currentQuestion + 1) / quizData.questions.length) * 100;
+    progressFill.style.width = progress + '%';
+    answersContainer.innerHTML = '';
+    explanationContainer.innerHTML = '';
+    explanationContainer.style.display = 'none';
+
+    const letters = ['A','B','C','D','E','F'];
+    const indices = optionOrder[currentQuestion] || shuffleArray(question.options.map((_, i) => i));
+    optionOrder[currentQuestion] = indices;
+
+    indices.forEach(function(optIndex, pos){
+        const option = question.options[optIndex];
+        const button = document.createElement('button');
+        button.className = 'answer-btn';
+        button.setAttribute('role','button');
+        button.setAttribute('aria-label','Antwoord ' + letters[pos] + ': ' + option);
+        button.dataset.optionIndex = optIndex;
+        button.innerHTML = '<span class="answer-letter">' + letters[pos] + '</span><span>' + option + '</span>';
+        button.addEventListener('click', function(){ selectAnswer(optIndex, button); });
+        answersContainer.appendChild(button);
+    });
+
+    updateNavigationButtons();
+    if (answers[currentQuestion] !== undefined) {
+        showPreviousAnswer();
+    }
+}
+
+function selectAnswer(optionIndex, button){
+    const question = quizData.questions[currentQuestion];
+    const isCorrect = optionIndex === question.correctAnswer;
+    answers[currentQuestion] = { ...(answers[currentQuestion] || {}), selectedAnswer: optionIndex, isCorrect: isCorrect };
+    if (isCorrect && !answers[currentQuestion].scored){
+        score++;
+        answers[currentQuestion].scored = true;
+    }
+    var allButtons = answersContainer.querySelectorAll('.answer-btn');
+    allButtons.forEach(function(btn){
+        btn.disabled = true;
+        const btnIndex = Number(btn.dataset.optionIndex);
+        if (btnIndex === question.correctAnswer) {
+            btn.classList.add('correct');
+        }
+    });
+    if (!isCorrect){
+        button.classList.add('incorrect');
+    }
+    showExplanation(isCorrect, question);
+    nextBtn.disabled = false;
+}
 function showExplanation(isCorrect, question){ explanationContainer.style.display = 'block'; var explanationTitle = isCorrect ? '✅ Correct!' : '❌ Helaas, dit is niet het juiste antwoord.'; var explanationText = isCorrect ? question.explanationCorrect : question.explanationIncorrect; explanationContainer.innerHTML = '<div class="explanation-title">' + explanationTitle + '</div><div class="explanation-text">' + explanationText + '</div>'; var announcement = document.createElement('div'); announcement.className = 'sr-only'; announcement.setAttribute('role','status'); announcement.setAttribute('aria-live','polite'); announcement.textContent = explanationTitle + ' ' + explanationText; document.body.appendChild(announcement); setTimeout(function(){ announcement.remove(); }, 1000); }
-function showPreviousAnswer(){ var answer = answers[currentQuestion]; if (answer){ var allButtons = answersContainer.querySelectorAll('.answer-btn'); var question = quizData.questions[currentQuestion]; allButtons.forEach(function(btn){ btn.disabled = true; }); allButtons[question.correctAnswer].classList.add('correct'); if (!answer.isCorrect){ allButtons[answer.selectedAnswer].classList.add('incorrect'); } showExplanation(answer.isCorrect, question); nextBtn.disabled = false; } }
+function showPreviousAnswer(){
+    var answer = answers[currentQuestion];
+    if (answer){
+        var allButtons = answersContainer.querySelectorAll('.answer-btn');
+        var question = quizData.questions[currentQuestion];
+        allButtons.forEach(function(btn){
+            btn.disabled = true;
+            const btnIndex = Number(btn.dataset.optionIndex);
+            if (btnIndex === question.correctAnswer) {
+                btn.classList.add('correct');
+            }
+            if (!answer.isCorrect && btnIndex === answer.selectedAnswer) {
+                btn.classList.add('incorrect');
+            }
+        });
+        showExplanation(answer.isCorrect, question);
+        nextBtn.disabled = false;
+    }
+}
 function nextQuestion(){ if (currentQuestion < quizData.questions.length - 1){ currentQuestion++; displayQuestion(); } else { showResults(); } }
 function previousQuestion(){ if (currentQuestion > 0){ currentQuestion--; displayQuestion(); } }
 function updateNavigationButtons(){ prevBtn.disabled = currentQuestion === 0; if (answers[currentQuestion] !== undefined){ nextBtn.disabled = false; nextBtn.textContent = currentQuestion === quizData.questions.length - 1 ? 'Toon Resultaten' : 'Volgende Vraag →'; } else { nextBtn.disabled = true; nextBtn.textContent = 'Volgende Vraag →'; } }
@@ -100,6 +180,7 @@ function restartQuiz(){
     currentQuestion = 0; 
     score = 0; 
     answers = []; 
+    Object.keys(optionOrder).forEach(k => delete optionOrder[k]);
     elapsedSeconds = 0;
     timerDisplay.textContent = '00:00';
     quizContainer.style.display = 'block'; 
