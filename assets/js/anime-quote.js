@@ -1,27 +1,51 @@
-// Anime Quote Fetcher with prefetch
-const ANIME_QUOTE_API = 'https://api.animechan.io/v1/quotes/random';
+// Anime Quote Fetcher using local CSV dataset (no external API)
+const QUOTE_DATA_URL = 'assets/dataset/lessreal-data.csv';
 const REFRESH_INTERVAL = 1800000; // 30 minutes
+const PREFETCH_SIZE = 10;
 
-let nextQuote = null;
+let quotes = [];
+let quoteQueue = [];
 
-async function fetchSingleQuote() {
+async function loadQuotesFromCsv() {
     try {
-        const response = await fetch(ANIME_QUOTE_API);
-        if (!response.ok) throw new Error('Failed to fetch quote');
-        const data = await response.json();
-        return normalizeQuote(data.quote, data.character, data.anime);
+        const response = await fetch(QUOTE_DATA_URL);
+        if (!response.ok) throw new Error('Failed to load quotes CSV');
+        const text = await response.text();
+        quotes = parseCsv(text);
     } catch (error) {
-        console.error('Error fetching anime quote:', error);
-        return fallbackQuote();
+        console.error('Error loading local quote CSV:', error);
+        quotes = []; // fallback will be used
     }
 }
 
-function normalizeQuote(text, character, anime) {
-    return {
-        text: text || 'Anime Quote',
-        character: character || '',
-        anime: anime || 'Anime'
-    };
+function parseCsv(text) {
+    const lines = text.split('\n').slice(1); // skip header
+    const parsed = [];
+    for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) continue;
+        const parts = line.split(';');
+        if (parts.length < 4) continue;
+        const anime = cleanField(parts[1]);
+        const character = cleanField(parts[2]);
+        const quoteText = cleanField(parts[3]);
+        if (!quoteText) continue;
+        parsed.push({ text: quoteText, character, anime });
+    }
+    return parsed;
+}
+
+function cleanField(value) {
+    if (!value) return '';
+    return value.trim()
+        .replace(/^"|"$/g, '')
+        .replace(/^\(|\)$/g, '')
+        .trim();
+}
+
+function randomQuote() {
+    if (quotes.length === 0) return fallbackQuote();
+    return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
 function updateQuote(text, character, anime) {
@@ -49,16 +73,22 @@ function fallbackQuote() {
     return fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
 }
 
-async function prefetchNextQuote() {
-    nextQuote = await fetchSingleQuote();
+async function prefillQueue() {
+    while (quoteQueue.length < PREFETCH_SIZE) {
+        quoteQueue.push(randomQuote());
+    }
+}
+
+async function nextPrefetchedQuote() {
+    if (quoteQueue.length === 0) await prefillQueue();
+    const quote = quoteQueue.shift() || randomQuote();
+    await prefillQueue();
+    return quote;
 }
 
 async function useNextQuote() {
-    // Use prefetched if available, otherwise fetch now
-    const quote = nextQuote || await fetchSingleQuote();
+    const quote = await nextPrefetchedQuote();
     updateQuote(quote.text, quote.character, quote.anime);
-    // Immediately prefetch the next one
-    prefetchNextQuote();
 }
 
 function setLoading(isLoading) {
@@ -69,14 +99,12 @@ function setLoading(isLoading) {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load first quote and prefetch next
+    await loadQuotesFromCsv();
+    await prefillQueue();
     await useNextQuote();
-    await prefetchNextQuote();
 
-    // Auto-refresh quote every 30 minutes
     setInterval(useNextQuote, REFRESH_INTERVAL);
     
-    // Manual refresh button
     const refreshBtn = document.getElementById('refresh-quote-btn');
     if (refreshBtn) {
         refreshBtn.addEventListener('click', async () => {
