@@ -74,7 +74,7 @@ main {
 
 .intro {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 0.2rem;
     padding: 2rem;
     background: var(--bg-card);
     border-radius: 15px;
@@ -90,6 +90,151 @@ main {
 .intro p {
     font-size: 1.1rem;
     color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+
+.anime-quote-section {
+    margin: 0 0 0.6rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.quote-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-box {
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 180, 200, 0.08));
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-left: 3px solid var(--accent-primary);
+    border-radius: 8px;
+    padding: 0.65rem 3.25rem 0.45rem 0.9rem;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 0.35s ease-out;
+    position: relative;
+    overflow: visible;
+    transition: all 0.2s ease;
+}
+
+.quote-box::before {
+    content: '"';
+    position: absolute;
+    top: -4px;
+    left: 8px;
+    font-size: 2.2rem;
+    color: rgba(0, 217, 255, 0.1);
+    line-height: 1;
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+
+.quote-box:hover {
+    border-color: rgba(0, 217, 255, 0.35);
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.12), rgba(0, 180, 200, 0.09));
+    box-shadow: 0 4px 20px rgba(0, 217, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.quote-text {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0 0 0.15rem 0;
+    line-height: 1.32;
+    word-wrap: break-word;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-author {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #9fe3ff;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.25px;
+    display: block;
+}
+
+.quote-refresh-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, var(--accent-primary), #00a8cc);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.16s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 6px 14px rgba(0, 217, 255, 0.32);
+    flex-shrink: 0;
+    color: #ffffff;
+    z-index: 5000;
+}
+
+.refresh-icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    stroke-width: 2.3;
+}
+
+.quote-refresh-btn:hover {
+    transform: translateY(-50%);
+    box-shadow: 0 7px 16px rgba(0, 217, 255, 0.3);
+}
+
+.quote-refresh-btn:hover .refresh-icon {
+    animation: spin 0.6s linear infinite;
+}
+
+.quote-refresh-btn:active {
+    transform: translateY(-50%);
+}
+
+.quote-refresh-btn.loading .refresh-icon {
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .courses h2 {
@@ -190,6 +335,30 @@ main {
     background: transparent;
     border-color: var(--accent-secondary);
     color: var(--accent-secondary);
+}
+
+.btn-study-tips {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-study-tips::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-study-tips:hover:not(.disabled) {
+    background: transparent;
+    border-color: #06b6d4;
+    color: #06b6d4;
 }
 
 .btn.disabled {
