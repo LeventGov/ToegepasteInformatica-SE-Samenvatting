@@ -11,240 +11,159 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
-    <style>
-        .study-guide-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .study-phase {
-            background: white;
-            border-left: 4px solid #3b82f6;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .study-phase h3 {
-            color: #1f2937;
-            margin-top: 0;
-            font-size: 1.3rem;
-        }
-
-        .study-phase ul {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .study-phase li {
-            margin: 0.7rem 0;
-            line-height: 1.6;
-        }
-
-        .timeline-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-table th {
-            background: #3b82f6;
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .timeline-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .timeline-table tr:hover {
-            background: #f9fafb;
-        }
-
-        .timeline-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .timeline-table td:first-child {
-            font-weight: 600;
-            color: #3b82f6;
-            width: 80px;
-        }
-
-        .highlight-box {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .highlight-box p {
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .cycle-flow {
-            background: #f0f9ff;
-            border-left: 4px solid #06b6d4;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1.5rem 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .conclusion {
-            background: #f0fdf4;
-            border-left: 4px solid #10b981;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .conclusion p {
-            margin: 0.5rem 0;
-            line-height: 1.6;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            padding: 0.5rem 1rem;
-            background: #e5e7eb;
-            color: #1f2937;
-            text-decoration: none;
-            border-radius: 0.375rem;
-            transition: background 0.2s;
-        }
-
-        .back-btn:hover {
-            background: #d1d5db;
-        }
-
-        .phase-number {
-            display: inline-block;
-            background: #3b82f6;
-            color: white;
-            width: 32px;
-            height: 32px;
-            line-height: 32px;
-            text-align: center;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/study-guide.css">
 </head>
 
 <body>
     <header role="banner">
         <nav role="navigation" aria-label="Hoofdnavigatie">
             <div class="container">
-                <h1>💡 Study Guide - Examen Voorbereiding</h1>
-                <p class="subtitle">Stap-voor-stap strategie voor het OSC-examen</p>
+                <h1>💡 Study Guide</h1>
+                <p class="subtitle">Examen voorbereiding strategie</p>
             </div>
         </nav>
     </header>
 
-    <main role="main" class="study-guide-container">
-        <a href="osc.html" class="back-btn">← Terug naar OSC</a>
+    <main role="main" class="study-main">
+        <div class="container">
+            <a href="osc.html" class="back-link">← Terug naar OSC</a>
 
-        <div class="study-phase">
-            <h3><span class="phase-number">1</span>Fase: Voorbereiding (Per lecture)</h3>
-            <ul>
-                <li><strong>Lees de samenvatting</strong> eerst (snel overzicht van kernconcepten)</li>
-                <li><strong>Open de PDF-slides</strong> via de 📄 knop om details/voorbeelden te zien</li>
-                <li><strong>Noteer jezelf</strong> de begrippen die je niet snapt</li>
-            </ul>
+            <section class="study-intro">
+                <div class="intro-content">
+                    <h2>🎯 Jouw stappenplan naar examen succes</h2>
+                    <p>Volg deze gestructureerde aanpak om optimaal voor te bereiden op het OSC-examen</p>
+                </div>
+            </section>
+
+            <section class="study-phases">
+                <div class="phase-card">
+                    <div class="phase-badge">1</div>
+                    <div class="phase-body">
+                        <h3>Voorbereiding</h3>
+                        <p class="phase-subtitle">Per lecture</p>
+                        <ul class="phase-list">
+                            <li><strong>Lees de samenvatting</strong> eerst (snel overzicht van kernconcepten)</li>
+                            <li><strong>Open de PDF-slides</strong> via de 📄 knop om details/voorbeelden te zien</li>
+                            <li><strong>Noteer jezelf</strong> de begrippen die je niet snapt</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-badge">2</div>
+                    <div class="phase-body">
+                        <h3>Consolidatie</h3>
+                        <p class="phase-subtitle">Alles doorgenomen</p>
+                        <ul class="phase-list">
+                            <li><strong>Herhaal de samenvattingen</strong> (je kent nu de grote lijn)</li>
+                            <li><strong>Maak aantekeningen</strong> van vragen die je hebt → stel ze aan docent</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-badge">3</div>
+                    <div class="phase-body">
+                        <h3>Testing</h3>
+                        <p class="phase-subtitle">Mock Exam voorbereiding</p>
+                        <ul class="phase-list">
+                            <li><strong>Run de Mock Exam</strong> (📝 Start Mock Exam knop)</li>
+                            <li><strong>Bekijk welke onderwerpen je mist</strong> (fout antwoorden = blinde vlekken)</li>
+                            <li><strong>Teruggaan naar die lecture-samenvatting</strong> voor dat specifieke onderdeel</li>
+                            <li><strong>Herhaal totdat je consistent ~80%+ haalt</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="study-timeline">
+                <h2>📅 Praktische timeline</h2>
+                <div class="timeline-grid">
+                    <div class="timeline-item">
+                        <div class="timeline-day">Dag 1</div>
+                        <p>Lees alle 6 samenvattingen snel door (overview-modus)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Dag 2-3</div>
+                        <p>Diep duiken in moeilijke onderwerpen (je notebook gebruiken)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Dag 4-5</div>
+                        <p>Mock exam multiple keren → analyse van fouten</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Dag 6</div>
+                        <p>Focussessies op je zwakke punten</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Dag 7</div>
+                        <p>Finale mock exam → evaluatie</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="study-phases">
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <div class="phase-number">5</div>
+                        <h3>Mock Exam strategie</h3>
+                        <p class="phase-subtitle">Hoe je voorbereidt jezelf voor</p>
+                    </div>
+                    <ul class="phase-list">
+                        <li>✅ <strong>Eerste keer:</strong> geen haast, kijken naar je kennis</li>
+                        <li>✅ <strong>Tweede keer:</strong> sneller gaan, timing oefenen (dit is het echte tempo)</li>
+                        <li>✅ <strong>Derde keer:</strong> focus op de onderwerpen waar je steeds fout gaat</li>
+                        <li>✅ <strong>Noteer per vraag:</strong> waarom ging dit fout? Terug naar welke summary-sectie?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="study-cycle">
+                <h2>🔄 Cyclische aanpak</h2>
+                <div class="cycle-box">
+                    <div class="cycle-step">
+                        <div class="cycle-icon">📚</div>
+                        <p>Samenvatting<br><small>THEORIE</small></p>
+                    </div>
+                    <div class="cycle-arrow">→</div>
+                    <div class="cycle-step">
+                        <div class="cycle-icon">📄</div>
+                        <p>PDF slides<br><small>VOORBEELDEN</small></p>
+                    </div>
+                    <div class="cycle-arrow">→</div>
+                    <div class="cycle-step">
+                        <div class="cycle-icon">📝</div>
+                        <p>Mock exam<br><small>FEEDBACK</small></p>
+                    </div>
+                    <div class="cycle-arrow">↻</div>
+                </div>
+                <p class="cycle-text">Herhaal deze cyclus tot je consistent goed scoort!</p>
+            </section>
+
+            <section class="study-conclusion">
+                <h3>✨ Kernpunten</h3>
+                <div class="conclusion-grid">
+                    <div class="conclusion-item">
+                        <div class="conclusion-title">Summaries</div>
+                        <p>Snelle referentie</p>
+                    </div>
+                    <div class="conclusion-item">
+                        <div class="conclusion-title">PDFs</div>
+                        <p>Diepgaande bronnen</p>
+                    </div>
+                    <div class="conclusion-item">
+                        <div class="conclusion-title">Mock Exam</div>
+                        <p>Feedback-loop</p>
+                    </div>
+                </div>
+                <p class="conclusion-cta">Gebruik ze cyclisch tot je consistent goed scoort! 📚→📝→✅</p>
+            </section>
+
+            <section class="study-actions">
+                <a href="osc.html" class="btn btn-primary">← Terug naar OSC</a>
+                <a href="osc-mock-exam.html" class="btn btn-study-tips">📝 Start Mock Exam</a>
+            </section>
         </div>
-
-        <div class="study-phase">
-            <h3><span class="phase-number">2</span>Fase: Consolidatie (Alles doorgenomen)</h3>
-            <ul>
-                <li><strong>Herhaal de samenvattingen</strong> (je kent nu de grote lijn)</li>
-                <li><strong>Maak aantekeningen</strong> van vragen die je hebt → stel ze aan docent</li>
-            </ul>
-        </div>
-
-        <div class="study-phase">
-            <h3><span class="phase-number">3</span>Fase: Testing (Mock Exam voorbereiding)</h3>
-            <ul>
-                <li><strong>Run de Mock Exam</strong> (📝 Start Mock Exam knop)</li>
-                <li><strong>Bekijk welke onderwerpen je mist</strong> (fout antwoorden = blinde vlekken)</li>
-                <li><strong>Teruggaan naar die lecture-samenvatting</strong> voor dat specifieke onderdeel</li>
-                <li><strong>Herhaal totdat je consistent ~80%+ haalt</strong></li>
-            </ul>
-        </div>
-
-        <div class="study-phase">
-            <h3><span class="phase-number">4</span>Praktische timeline</h3>
-            <table class="timeline-table">
-                <thead>
-                    <tr>
-                        <th>Moment</th>
-                        <th>Actie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dag 1</td>
-                        <td>Lees alle 6 samenvattingen snel door (overview-modus)</td>
-                    </tr>
-                    <tr>
-                        <td>Dag 2-3</td>
-                        <td>Diep duiken in moeilijke onderwerpen (je notebook gebruiken)</td>
-                    </tr>
-                    <tr>
-                        <td>Dag 4-5</td>
-                        <td>Mock exam multiple keren → analyse van fouten</td>
-                    </tr>
-                    <tr>
-                        <td>Dag 6</td>
-                        <td>Focussessies op je zwakke punten</td>
-                    </tr>
-                    <tr>
-                        <td>Dag 7</td>
-                        <td>Finale mock exam → evaluatie</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="study-phase">
-            <h3><span class="phase-number">5</span>Mock Exam strategie</h3>
-            <ul>
-                <li>✅ <strong>Eerste keer:</strong> geen haast, kijken naar je kennis</li>
-                <li>✅ <strong>Tweede keer:</strong> sneller gaan, timing oefenen (dit is het echte tempo)</li>
-                <li>✅ <strong>Derde keer:</strong> focus op de onderwerpen waar je steeds fout gaat</li>
-                <li>✅ <strong>Noteer per vraag:</strong> waarom ging dit fout? Terug naar welke summary-sectie?</li>
-            </ul>
-        </div>
-
-        <div class="cycle-flow">
-            <h3 style="margin-top: 0;">🔄 Pro tip: Cyclische aanpak</h3>
-            Samenvatting (THEORIE) → PDF slides (VOORBEELDEN) → Mock exam (FEEDBACK) → Terug naar samenvatting
-        </div>
-
-        <div class="conclusion">
-            <p><strong>Kortom:</strong></p>
-            <p>Summaries zijn je <strong>snelle referentie</strong>, PDFs je <strong>diepgaande bronnen</strong>, mock exam je <strong>feedback-loop</strong>.</p>
-            <p style="text-align: center; font-size: 1.2rem;">
-                Gebruik ze cyclisch tot je consistent goed scoort! 📚→📝→✅
-            </p>
-        </div>
-
-        <a href="osc.html" class="back-btn" style="margin-top: 2rem;">← Terug naar OSC</a>
     </main>
 
     <footer role="contentinfo">
@@ -257,3 +176,4 @@
 </body>
 
 </html>
+

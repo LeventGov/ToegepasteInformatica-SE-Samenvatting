@@ -1,0 +1,406 @@
+/* Study Guide CSS */
+
+.study-main {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    transition: var(--transition);
+    font-size: 1.05rem;
+}
+
+.back-link:hover {
+    gap: 0.8rem;
+    color: var(--accent-primary);
+}
+
+/* Intro Section */
+.study-intro {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #2a3649 100%);
+    padding: 3.5rem;
+    border-radius: 15px;
+    margin-bottom: 4rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+.intro-content h2 {
+    color: var(--accent-primary);
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.intro-content p {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Phases Grid */
+.study-phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.phase-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.phase-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--shadow);
+    border-color: var(--accent-primary);
+}
+
+.phase-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+}
+
+.phase-body {
+    flex: 1;
+}
+
+.phase-body h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.phase-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 500;
+    display: block;
+}
+
+.phase-list {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style: none;
+}
+
+.phase-list li {
+    margin: 1.2rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.phase-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-success);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.phase-list li strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+/* Timeline Section */
+.study-timeline {
+    margin: 4rem 0;
+}
+
+.study-timeline h2 {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.timeline-item {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #2a3649 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.timeline-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--shadow);
+    border-color: var(--accent-primary);
+}
+
+.timeline-day {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Cycle Section */
+.study-cycle {
+    margin: 4rem 0;
+}
+
+.study-cycle h2 {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.cycle-box {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #2a3649 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 8px 24px var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.cycle-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+    min-width: 120px;
+}
+
+.cycle-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.cycle-step p {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.cycle-step small {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.cycle-arrow {
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.cycle-text {
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Conclusion Section */
+.study-conclusion {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #1a3a2a 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 3rem;
+    margin: 4rem 0;
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+.study-conclusion h3 {
+    color: var(--accent-success);
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.conclusion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.conclusion-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.conclusion-title {
+    color: var(--accent-success);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.conclusion-item p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.conclusion-cta {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Actions Section */
+.study-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.study-actions .btn {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .study-intro {
+        padding: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .intro-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .intro-content p {
+        font-size: 1rem;
+    }
+
+    .phase-card {
+        padding: 1.8rem;
+    }
+
+    .phase-header {
+        gap: 1rem;
+    }
+
+    .phase-number {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .phase-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .cycle-box {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .cycle-icon {
+        font-size: 2rem;
+    }
+
+    .cycle-arrow {
+        font-size: 1.2rem;
+    }
+
+    .study-conclusion {
+        padding: 1.8rem;
+    }
+
+    .conclusion-grid {
+        gap: 1rem;
+    }
+
+    .study-actions {
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .study-actions .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        min-width: 150px;
+    }
+}
