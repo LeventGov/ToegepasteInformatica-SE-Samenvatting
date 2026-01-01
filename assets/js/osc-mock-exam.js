@@ -40,7 +40,7 @@ const oscQuizData = {
 
                 "Het analyseren van de broncode gaat sneller",
 
-                "Het is geheugeneffici├½nter",
+                "Het is geheugenefficiënter",
 
                 "De uiteindelijke uitvoering van de code is sneller",
 
@@ -300,7 +300,7 @@ const oscQuizData = {
 
                 "Elk programma moet alles kunnen doen",
 
-                "Laat elk programma ├®├®n ding heel goed doen",
+                "Laat elk programma één ding heel goed doen",
 
                 "Gebruik binaire data voor communicatie",
 
@@ -310,13 +310,15 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "Elk programma doet ├®├®n ding heel goed; combineer via tekststromen.",
+            explanationCorrect: "Elk programma doet één ding heel goed; combineer via tekststromen.",
 
             explanationIncorrect: "Unix benadrukt eenvoud en modulariteit, niet all-in-one complexiteit."
 
         },
 
         {
+
+            lecture: "Lecture 1",
 
             question: "Wat is POSIX?",
 
@@ -388,7 +390,7 @@ const oscQuizData = {
 
             explanationCorrect: "De eerste byte geeft de lengte aan; vervolgbytes beginnen met 10xxxxxx.",
 
-            explanationIncorrect: "UTF-8 is variabel; ASCII is 1 byte, andere tekens 2ÔÇô4 bytes."
+            explanationIncorrect: "UTF-8 is variabel; ASCII is 1 byte, andere tekens 2-4 bytes."
 
         },
 
@@ -516,7 +518,7 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "Partitioneren cre├½ert logische delen met eigen adrestabellen voor veiligheid en flexibiliteit.",
+            explanationCorrect: "Partitioneren creëert logische delen met eigen adrestabellen voor veiligheid en flexibiliteit.",
 
             explanationIncorrect: "Formatteren plaatst het bestandssysteem; partitioneren verdeelt de schijf."
 
@@ -646,7 +648,7 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "777 minus 022 ÔåÆ 755 (rwxr-xr-x).",
+            explanationCorrect: "777 minus 022 → 755 (rwxr-xr-x).",
 
             explanationIncorrect: "Umask trekt rechten af van de basis; voor directories 777 - 022 = 755."
 
@@ -700,7 +702,7 @@ const oscQuizData = {
 
             explanationCorrect: "fork() maakt een child-proces; exec() vervangt daarna vaak het geheugen.",
 
-            explanationIncorrect: "fork() cre├½ert een child; parent krijgt PID, child krijgt 0."
+            explanationIncorrect: "fork() creëert een child; parent krijgt PID, child krijgt 0."
 
         },
 
@@ -708,7 +710,7 @@ const oscQuizData = {
 
             lecture: "Lecture 3",
 
-            question: "Wat delen threads binnen ├®├®n proces?",
+            question: "Wat delen threads binnen één proces?",
 
             options: [
 
@@ -738,13 +740,13 @@ const oscQuizData = {
 
             options: [
 
-                "Kernel ÔåÆ BIOS ÔåÆ GRUB ÔåÆ Systemd",
+                "Kernel → BIOS → GRUB → Systemd",
 
-                "BIOS/UEFI ÔåÆ MBR/GRUB ÔåÆ Kernel ÔåÆ initrd ÔåÆ PID 1 ÔåÆ services",
+                "BIOS/UEFI → MBR/GRUB → Kernel → initrd → PID 1 → services",
 
-                "Systemd ÔåÆ Kernel ÔåÆ BIOS ÔåÆ GRUB",
+                "Systemd → Kernel → BIOS → GRUB",
 
-                "GRUB ÔåÆ BIOS ÔåÆ initrd ÔåÆ services"
+                "GRUB → BIOS → initrd → services"
 
             ],
 
@@ -766,7 +768,7 @@ const oscQuizData = {
 
                 "Hardware sneller maken",
 
-                "Meerdere besturingssystemen tegelijk laten draaien op ├®├®n fysieke server (consolidatie)",
+                "Meerdere besturingssystemen tegelijk laten draaien op één fysieke server (consolidatie)",
 
                 "Het internet sneller maken",
 
@@ -776,9 +778,9 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "Virtualisatie stelt je in staat meerdere VM's op ├®├®n fysieke server te draaien, wat resources bespaard en flexibiliteit biedt.",
+            explanationCorrect: "Virtualisatie stelt je in staat meerdere VM's op één fysieke server te draaien, wat resources bespaard en flexibiliteit biedt.",
 
-            explanationIncorrect: "Het doel is consolidatie en effici├½nt gebruik van hardware, niet zozeer snelheid of kosten direct."
+            explanationIncorrect: "Het doel is consolidatie en efficiënt gebruik van hardware, niet zozeer snelheid of kosten direct."
 
         },
 
@@ -818,7 +820,7 @@ const oscQuizData = {
 
                 "Een manier om VM-bestanden te comprimeren",
 
-                "Het verplaatsen van een draaiende VM van ├®├®n fysieke host naar een ander zonder downtime",
+                "Het verplaatsen van een draaiende VM van één fysieke host naar een ander zonder downtime",
 
                 "Een beveiligingsfeature",
 
@@ -854,9 +856,9 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "Overcommitment maakt effici├½nt gebruik van RAM mogelijk; de hypervisor beheerst beschikbare RAM tussen VM's.",
+            explanationCorrect: "Overcommitment maakt efficiënt gebruik van RAM mogelijk; de hypervisor beheerst beschikbare RAM tussen VM's.",
 
-            explanationIncorrect: "Het gaat om effici├½nt geheugenbeheer, niet om meer RAM direct toe te wijzen."
+            explanationIncorrect: "Het gaat om efficiënt geheugenbeheer, niet om meer RAM direct toe te wijzen."
 
         },
 
@@ -1050,7 +1052,7 @@ const oscQuizData = {
 
             options: [
 
-                "Omgewijs van UGO permissies",
+                "Een alternatief voor UGO permissies",
 
                 "Fijnmazige permissies buiten UGO; herkenbaar aan +",
 
@@ -1104,7 +1106,7 @@ const oscQuizData = {
 
                 "Applicaties",
 
-                "Apparaatbestanden (karakterserve, blok-apparaten)",
+                "Apparaatbestanden (karakter- en blok-apparaten)",
 
                 "Gedeelde libraries",
 
@@ -1208,7 +1210,7 @@ const oscQuizData = {
 
                 "Hetzelfde als zombie",
 
-                "Parent is be├½indigd; kind wordt geadopteerd door init/systemd",
+                "Parent is beëindigd; kind wordt geadopteerd door init/systemd",
 
                 "Een proces zonder permissions",
 
@@ -1220,7 +1222,7 @@ const oscQuizData = {
 
             explanationCorrect: "Orphan: parent weg; init/systemd (PID 1) neemt het over.",
 
-            explanationIncorrect: "Orphan Ôëá Zombie; parent weg vs kind niet afgehaald."
+            explanationIncorrect: "Orphan ≠ Zombie; parent weg vs kind niet afgehaald."
 
         },
 
@@ -1244,7 +1246,7 @@ const oscQuizData = {
 
             correctAnswer: 0,
 
-            explanationCorrect: "New ÔåÆ Ready ÔåÆ Running ÔåÆ Waiting ÔåÆ Terminated met Dispatch/Interrupt/I/O transities.",
+            explanationCorrect: "New → Ready → Running → Waiting → Terminated met Dispatch/Interrupt/I/O transities.",
 
             explanationIncorrect: "Vijf klassieke toestanden; transities via dispatcher en I/O.",
 
@@ -1726,9 +1728,9 @@ const oscQuizData = {
 
             options: [
 
-                "Twee VM's in ├®├®n",
+                "Twee VM's in één",
 
-                "VMware Workstation ÔåÆ ESXi ÔåÆ test-VMs (Type 2 ÔåÆ Type 1 ÔåÆ Type 2)",
+                "VMware Workstation → ESXi → test-VMs (Type 2 → Type 1 → Type 2)",
 
                 "VM's op het internet",
 
@@ -1741,34 +1743,6 @@ const oscQuizData = {
             explanationCorrect: "Nested: laptop (Host OS) ÔåÆ Workstation ÔåÆ ESXi ÔåÆ VM's.",
 
             explanationIncorrect: "Nested gebruikt voor labs; vereist VT-x/AMD-V in BIOS."
-
-        },
-
-        {
-
-            lecture: "Lecture 1",
-
-            lecture: "Lecture 1",
-
-            question: "Wat is POSIX?",
-
-            options: [
-
-                "Een OS",
-
-                "Standaard voor API-compatibiliteit tussen Unix-achtige OS'en",
-
-                "Een programmeertaal",
-
-                "Een versie van Linux"
-
-            ],
-
-            correctAnswer: 1,
-
-            explanationCorrect: "POSIX = Portable Operating System Interface; gestandaardiseerde APIs.",
-
-            explanationIncorrect: "POSIX is een standaard, niet een OS of taal."
 
         },
 
@@ -2534,7 +2508,7 @@ const oscQuizData = {
 
             options: [
 
-                "Controlleert of er voldoende schijfruimte beschikbaar is",
+                "Controleert of er voldoende schijfruimte beschikbaar is",
 
                 "Voert periodiek een commando uit om gezondheid van container te controleren",
 
@@ -2601,6 +2575,136 @@ const oscQuizData = {
             explanationCorrect: "RUN voert commando's uit tijdens build-tijd (bv. apt-get install); CMD en ENTRYPOINT gebeuren bij container-start.",
 
             explanationIncorrect: "RUN is build-time; CMD/ENTRYPOINT zijn runtime. RUN voert uit tijdens image-creatie, niet in lopende containers."
+
+        },
+
+        {
+
+            lecture: "Lecture 2",
+
+            question: "Wat bepalen permission bits (755, 644) op bestanden in Linux?",
+
+            options: [
+
+                "De grootte van het bestand in bytes",
+
+                "Wie het bestand mag lezen, schrijven en uitvoeren (rwx voor user, group, others)",
+
+                "De compressie-niveau van het bestand",
+
+                "Wanneer het bestand voor het laatst is gewijzigd"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Permission bits bepalen toegang: rwx (read-write-execute) voor user-group-others. 755 = rwxr-xr-x, 644 = rw-r--r--.",
+
+            explanationIncorrect: "Permissions bepalen lees/schrijf/uitvoer-rechten, niet bestandsgrootte of wijzigingsdatum."
+
+        },
+
+        {
+
+            lecture: "Lecture 3",
+
+            question: "Wat is het Process ID (PID) in Linux?",
+
+            options: [
+
+                "De prioriteit van een proces (0-139 schaal)",
+
+                "De unieke nummeridentifier voor elk proces in het systeem",
+
+                "Het percentage CPU-gebruik van het proces",
+
+                "De geheugengrootte van het proces in MB"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "PID is de unieke ID van elk proces; PID 1 is init/systemd. Je kan processen zoeken/beëindigen via PID.",
+
+            explanationIncorrect: "PID is geen prioriteit of resource-gebruik; het is simpelweg de identificatiecode van het proces."
+
+        },
+
+        {
+
+            lecture: "Lecture 3",
+
+            question: "Welke rol speelt systemd in het Linux boot-proces?",
+
+            options: [
+
+                "systemd is de bootloader die de kernel laadt",
+
+                "systemd is het eerste proces (PID 1) dat services en daemons beheert na kernel-start",
+
+                "systemd is een filesystem waarin kernelmodules worden opgeslagen",
+
+                "systemd is alleen voor bestandssystemen, niet voor procesmanagement"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "systemd (PID 1) is de init-system die na kernel-start alle services opstart en beheert; vervangt oudere init.",
+
+            explanationIncorrect: "systemd is geen bootloader; het is de proces-manager die na kernel-boot alle services aanstuurt."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Wat is een Docker image?",
+
+            options: [
+
+                "Een lopend proces dat een applicatie uitvoert",
+
+                "Een blueprint/template met alle bestanden, dependencies en configuratie voor een container",
+
+                "Een fysieke server waarop containers draaien",
+
+                "Een netwerk-instellingen bestand"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Een image is een onveranderlijke template (gebouwd met Dockerfile) waarmee containers worden gestart.",
+
+            explanationIncorrect: "Image is niet het lopende proces; het is de statische template. Containers zijn instances van images."
+
+        },
+
+        {
+
+            lecture: "Lecture 6",
+
+            question: "Wat zijn cgroups (control groups) in Docker/Linux?",
+
+            options: [
+
+                "Groepen van useraccounts in het systeem",
+
+                "Mechanisme om processenresources (CPU, geheugen) te limiteren en isoleren",
+
+                "Een mappenstructuur voor applicaties",
+
+                "Protocol voor netwerkverbindingen"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "cgroups limiteren en monitoren resources (CPU, RAM, I/O) per proces(groep); cruciaal voor containerisatie.",
+
+            explanationIncorrect: "cgroups zijn geen user-groepen; het zijn kernel-features voor resource-controle op procesniveau."
 
         }
 

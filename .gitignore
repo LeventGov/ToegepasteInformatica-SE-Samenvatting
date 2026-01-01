@@ -1,4 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
+*.py
 tmp/
+extracted_texts/

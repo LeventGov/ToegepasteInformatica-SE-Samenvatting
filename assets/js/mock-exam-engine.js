@@ -137,10 +137,10 @@ function showResults(){
     stopTimer();
     quizContainer.style.display = 'none'; 
     resultsContainer.style.display = 'block'; 
-    var percentage = Math.round((score / quizData.questions.length) * 100); 
     var totalAnswered = answers.filter(function(a){ return a !== undefined; }).length; 
     var correct = answers.filter(function(a){ return a && a.isCorrect; }).length; 
     var incorrect = totalAnswered - correct; 
+    var percentage = totalAnswered > 0 ? Math.round((correct / totalAnswered) * 100) : 0;
     document.getElementById('score-percentage').textContent = percentage + '%'; 
     document.getElementById('score-message').textContent = getScoreMessage(percentage); 
     document.getElementById('correct-count').textContent = correct; 
@@ -149,20 +149,29 @@ function showResults(){
     document.getElementById('total-time').textContent = formatTime(elapsedSeconds);
     
     // Calculate per-lecture scores
-    var lectureScores = { 'Lecture 1': {correct: 0, total: 0}, 'Lecture 2': {correct: 0, total: 0}, 'Lecture 3': {correct: 0, total: 0}, 'Lecture 4': {correct: 0, total: 0}, 'Lecture 5': {correct: 0, total: 0} };
+    var lectureScores = {};
     quizData.questions.forEach(function(question, index){
         if(question.lecture){
+            if(!lectureScores[question.lecture]){
+                lectureScores[question.lecture] = {correct: 0, total: 0};
+            }
             lectureScores[question.lecture].total += 1;
             if(answers[index] && answers[index].isCorrect) lectureScores[question.lecture].correct += 1;
         }
     });
     
     var lectureScoresHtml = '';
-    Object.keys(lectureScores).forEach(function(lecture){
+    Object.keys(lectureScores).sort().forEach(function(lecture){
         var score_data = lectureScores[lecture];
         if(score_data.total > 0){
             var lecturePercentage = Math.round((score_data.correct / score_data.total) * 100);
-            lectureScoresHtml += '<div class="lecture-score-item"><span>' + lecture + ':</span> <strong>' + score_data.correct + '/' + score_data.total + '</strong> (' + lecturePercentage + '%)</div>';
+            lectureScoresHtml += '<div class="lecture-score-item">' +
+                '<div class="lecture-name">' + lecture + '</div>' +
+                '<div class="lecture-bar-container">' +
+                    '<div class="lecture-bar-fill" style="width: ' + lecturePercentage + '%"></div>' +
+                '</div>' +
+                '<div class="lecture-score-text">' + score_data.correct + '/' + score_data.total + '</div>' +
+            '</div>';
         }
     });
     document.getElementById('lecture-scores').innerHTML = lectureScoresHtml;
