@@ -1664,7 +1664,7 @@ const oscQuizData = {
 
             explanationCorrect: "HA: server down? Cluster start VM's opnieuw (korte downtime voor reboot).",
 
-            explanationIncorrect: "HA Ôëá FT; HA heeft reboot-downtime; FT geen."
+            explanationIncorrect: "HA ≠ FT; HA heeft reboot-downtime; FT geen."
 
         },
 
@@ -1690,7 +1690,7 @@ const oscQuizData = {
 
             explanationCorrect: "FT: Shadow VM sync; zero downtime maar 2x resources.",
 
-            explanationIncorrect: "FT Ôëá HA; FT = continuous protection, zeer duur."
+            explanationIncorrect: "FT ≠ HA; FT = continuous protection, zeer duur."
 
         },
 
@@ -1740,7 +1740,7 @@ const oscQuizData = {
 
             correctAnswer: 1,
 
-            explanationCorrect: "Nested: laptop (Host OS) ÔåÆ Workstation ÔåÆ ESXi ÔåÆ VM's.",
+            explanationCorrect: "Nested: laptop (Host OS) → Workstation → ESXi → VM's.",
 
             explanationIncorrect: "Nested gebruikt voor labs; vereist VT-x/AMD-V in BIOS."
 
