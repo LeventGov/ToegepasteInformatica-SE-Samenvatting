@@ -1,6 +1,6 @@
 const oscQuizData = {
 
-    title: "Operating System Concepts - Lectures 1-8",
+    title: "Operating System Concepts - Lectures 1-9",
 
     questions: [
 
@@ -2965,6 +2965,266 @@ const oscQuizData = {
             explanationCorrect: "Juist! Bij normale HTTPS heeft alleen de server een certificaat. Bij mTLS (SSLVerifyClient require) eist de server dat ook de client zich identificeert met een certificaat (PKCS#12 / .p12 bestand).",
 
             explanationIncorrect: "Mutual TLS = wederzijdse authenticatie. Niet alleen server bewijst identiteit, maar ook de client moet certificaat tonen. Als je dat niet hebt → SSL_ERROR_RX_CERTIFICATE_REQUIRED_ALERT."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is het belangrijkste verschil tussen CapEx en OpEx in cloud computing?",
+
+            options: [
+
+                "CapEx zijn operationele kosten, OpEx zijn kapitaalinvesteringen",
+
+                "CapEx is een grote voorafgaande investering in hardware; OpEx is maandelijks betalen voor gebruik",
+
+                "CapEx is alleen voor cloud, OpEx is alleen voor on-premises",
+
+                "CapEx en OpEx zijn hetzelfde, alleen de naam verschilt"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! CapEx (Capital Expenditure) = grote investering vooraf (servers kopen). OpEx (Operating Expenditure) = maandelijkse kosten (cloud-abonnement). Cloud vervangt CapEx door OpEx.",
+
+            explanationIncorrect: "CapEx = vooraf investeren in eigen hardware (duur, vast). OpEx = maandelijks betalen voor cloud-gebruik (flexibel). Cloud shift: van CapEx naar OpEx."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Bij welk cloud service model beheer JIJ het besturingssysteem en middleware?",
+
+            options: [
+
+                "SaaS (Software as a Service)",
+
+                "IaaS (Infrastructure as a Service)",
+
+                "PaaS (Platform as a Service)",
+
+                "On-Premises"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Bij IaaS huur je virtuele hardware (VM's, netwerk, opslag). Jij bent verantwoordelijk voor OS, patches, middleware en applicaties. Provider regelt alleen de infrastructuur.",
+
+            explanationIncorrect: "IaaS = je huurt lege servers, jij installeert alles (OS, apps). PaaS = provider beheert OS/middleware, jij deploy alleen code. SaaS = je gebruikt alleen de app."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Welk cloud service model past bij deze situatie: 'Je schrijft Python-code, uploadt het, en de provider zorgt voor OS-updates, scaling en runtime'?",
+
+            options: [
+
+                "IaaS (Infrastructure as a Service)",
+
+                "PaaS (Platform as a Service)",
+
+                "SaaS (Software as a Service)",
+
+                "On-Premises"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Dit is PaaS. Je deploy alleen je code; de provider beheert het OS, runtime (Python/Node.js), patches en scaling. Voorbeelden: Heroku, Google App Engine.",
+
+            explanationIncorrect: "PaaS = platform voor developers. Jij schrijft code, provider regelt OS/runtime/scaling. IaaS = jij beheert alles vanaf OS. SaaS = je gebruikt alleen de app."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is SaaS (Software as a Service)?",
+
+            options: [
+
+                "Je huurt virtuele machines en installeert zelf software",
+
+                "Je gebruikt een kant-en-klare applicatie via de browser zonder installatie of beheer",
+
+                "Je schrijft code die automatisch wordt gedeployed",
+
+                "Je beheert fysieke servers in een datacenter"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! SaaS = volledige applicatie in de cloud. Jij gebruikt het alleen (Gmail, Office 365, Dropbox). Geen installatie, geen updates, geen beheer - gewoon inloggen en gebruiken.",
+
+            explanationIncorrect: "SaaS = 'uit eten gaan'. Alles is klaar, jij gebruikt het alleen. IaaS = lege keuken huren. PaaS = pizza-bezorgservice (jij kiest, zij bakken)."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is het verschil tussen Public Cloud en Private Cloud?",
+
+            options: [
+
+                "Public Cloud is gratis, Private Cloud kost geld",
+
+                "Public Cloud deelt hardware met anderen (multi-tenancy); Private Cloud is exclusief voor één organisatie",
+
+                "Public Cloud is onveilig, Private Cloud is veilig",
+
+                "Public Cloud draait on-premises, Private Cloud draait bij een provider"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Public Cloud (AWS, Azure) = gedeelde infrastructuur, goedkoop, schaalbaar. Private Cloud = exclusieve omgeving voor één bedrijf, veiliger maar duurder.",
+
+            explanationIncorrect: "Public Cloud = flatgebouw (gedeeld, betaalbaar). Private Cloud = eigen villa (exclusief, duur). Beide kunnen veilig zijn met goede configuratie."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is Hybrid Cloud?",
+
+            options: [
+
+                "Een mix van twee public cloud providers (AWS + Azure)",
+
+                "Een combinatie van on-premises/private cloud en public cloud infrastructuur",
+
+                "Een cloud die zowel Windows als Linux ondersteunt",
+
+                "Een cloud die alleen voor development wordt gebruikt"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Hybrid Cloud combineert on-premises/private (voor gevoelige data) met public cloud (voor schaalbare workloads). Best of both worlds: veiligheid + elasticiteit.",
+
+            explanationIncorrect: "Hybrid = private + public combineren. Voorbeeld: klantdata in eigen datacenter (veilig), website in AWS (schaalbaar). Multi Cloud = meerdere public providers gebruiken."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is het verschil tussen Vertical Scaling en Horizontal Scaling?",
+
+            options: [
+
+                "Vertical = server groter maken (meer CPU/RAM); Horizontal = meer servers toevoegen",
+
+                "Vertical = meer servers; Horizontal = grotere servers",
+
+                "Vertical is alleen voor cloud, Horizontal voor on-premises",
+
+                "Er is geen verschil, het zijn synoniemen"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Correct! Vertical Scaling (Scale Up) = bestaande server groter maken, maar heeft limiet en downtime. Horizontal Scaling (Scale Out) = meer servers naast elkaar, oneindig schaalbaar, typisch cloud-aanpak.",
+
+            explanationIncorrect: "Vertical = één grotere server (limiet, downtime). Horizontal = meer servers (oneindig, load balancer verdeelt verkeer). Cloud favoreert horizontal scaling."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is Multi-tenancy in de cloud?",
+
+            options: [
+
+                "Meerdere applicaties draaien op één VM",
+
+                "Meerdere klanten delen dezelfde fysieke hardware maar zijn logisch geïsoleerd",
+
+                "Een klant gebruikt meerdere cloud providers tegelijk",
+
+                "Een applicatie draait in meerdere datacenters"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Multi-tenancy = jouw VM en die van concurrent draaien op dezelfde fysieke server, maar de hypervisor zorgt voor strikte isolatie. Niemand kan elkaars data zien.",
+
+            explanationIncorrect: "Multi-tenancy = flatgebouw-model. Iedereen deelt fundering (hardware) maar heeft eigen appartement (VM) met eigen sleutel (isolatie). Efficiënt en veilig."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat is het Shared Responsibility Model in cloud security?",
+
+            options: [
+
+                "Provider en klant delen alle security-taken 50/50",
+
+                "Provider is verantwoordelijk voor security VAN de cloud (hardware/netwerk); klant voor security IN de cloud (data/wachtwoorden/OS)",
+
+                "Provider is verantwoordelijk voor alle security, klant hoeft niets te doen",
+
+                "Klant is verantwoordelijk voor alle security, provider doet niets"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Provider beveiligt de infrastructuur (datacenters, hypervisor, netwerk). Jij beveiligt je data, wachtwoorden, OS-patches en firewall-regels. Als jij je credentials lekt, is dat jouw fout!",
+
+            explanationIncorrect: "Security VAN de cloud = provider (fysiek, netwerk). Security IN de cloud = klant (data, access, patches). Als jij AWS-keys op GitHub zet → jouw schuld, niet die van AWS."
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Wat betekent RBAC (Role-Based Access Control) in cloud management?",
+
+            options: [
+
+                "Rechten toekennen op basis van rollen (Developer, Admin) in plaats van per persoon",
+
+                "Een backup-strategie voor cloud data",
+
+                "Een protocol voor netwerk-encryptie",
+
+                "Een methode om servers automatisch te schalen"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Juist! RBAC = rechten toekennen per rol. Voorbeeld: Rol 'Developer' mag VM's starten, rol 'Finance' mag facturen zien. Nieuwe developer? Geef hem de Developer-rol, klaar!",
+
+            explanationIncorrect: "RBAC = Role-Based Access Control. In plaats van elke persoon individuele rechten geven, maak je rollen (Admin, Dev, User) met rechten en wijs mensen toe aan rollen. Efficiënt en overzichtelijk."
 
         }
 
