@@ -1,6 +1,6 @@
 const oscQuizData = {
 
-    title: "Operating System Concepts - Lectures 1-9",
+    title: "Operating System Concepts - Lectures 1-10",
 
     questions: [
 
@@ -3225,6 +3225,266 @@ const oscQuizData = {
             explanationCorrect: "Juist! RBAC = rechten toekennen per rol. Voorbeeld: Rol 'Developer' mag VM's starten, rol 'Finance' mag facturen zien. Nieuwe developer? Geef hem de Developer-rol, klaar!",
 
             explanationIncorrect: "RBAC = Role-Based Access Control. In plaats van elke persoon individuele rechten geven, maak je rollen (Admin, Dev, User) met rechten en wijs mensen toe aan rollen. Efficiënt en overzichtelijk."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat is het verschil tussen Investment Costs en Ongoing Costs in IT?",
+
+            options: [
+
+                "Investment = eenmalige uitgave (servers kopen); Ongoing = terugkerende kosten (elektriciteit, salarissen)",
+
+                "Investment = maandelijkse kosten; Ongoing = jaarlijkse kosten",
+
+                "Investment is alleen voor cloud; Ongoing is alleen voor on-premises",
+
+                "Er is geen verschil, beide zijn hetzelfde"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Correct! Investment costs zijn vaste, eenmalige uitgaven (CapEx zoals hardware aankoop). Ongoing costs zijn terugkerende, vaak variabele kosten (OpEx zoals stroom, cloud-abonnementen, personeel).",
+
+            explanationIncorrect: "Investment = eenmalig, vast (server kopen). Ongoing = terugkerend, vaak variabel (meer gebruik = meer betalen). Denk aan: kopen vs huren."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat is TCO (Total Cost of Ownership)?",
+
+            options: [
+
+                "Alleen de aanschafprijs van hardware",
+
+                "De som van ALLE kosten over de levensduur: aanschaf, installatie, personeel, elektriciteit, koeling, downtime",
+
+                "Alleen de kosten van software licenties",
+
+                "De belasting die je betaalt op IT-investeringen"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! TCO is de ijsberg-metafoor: aanschafprijs is slechts 20% (zichtbaar). De andere 80% zijn 'verborgen' kosten: installatie, training, personeel, stroom, koeling, ruimte en vooral DOWNTIME.",
+
+            explanationIncorrect: "TCO = Total Cost of Ownership. Niet alleen aanschafprijs, maar alle kosten tijdens de hele levensduur. Doel: eerlijke vergelijking tussen opties (goedkope server kan duur uitpakken door hoge stroomkosten)."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat is de belangrijkste reden waarom bedrijven van CapEx naar OpEx willen bij cloud-migratie?",
+
+            options: [
+
+                "Cloud is altijd goedkoper dan on-premises",
+
+                "Geen grote investering vooraf, flexibeler schalen, betalen per gebruik (pay-as-you-go)",
+
+                "Cloud heeft geen ongoing costs",
+
+                "CapEx is illegaal in de cloud"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! OpEx-model betekent: geen grote investering vooraf, je betaalt maandelijks voor wat je gebruikt. Als je groeit, schaal je op. Als het tegenzit, schaal je af. Flexibiliteit is key!",
+
+            explanationIncorrect: "CapEx = kopen (groot bedrag vooraf, risico van over/under-provisioning). OpEx = huren (pay-as-you-go, flexibel). Cloud = OpEx-model, perfect voor startups zonder startkapitaal."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Hoe werkt lineaire afschrijving (depreciation)?",
+
+            options: [
+
+                "Je verdeelt de aanschafkosten gelijkmatig over de levensduur van het apparaat",
+
+                "Het apparaat verliest elk jaar 50% van zijn waarde",
+
+                "Je betaalt elke maand rente over de aanschafprijs",
+
+                "Afschrijving geldt alleen voor software, niet voor hardware"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Juist! Lineaire afschrijving: server kost €5.000, levensduur 5 jaar → €1.000 afschrijving per jaar. Na 5 jaar is de boekwaarde €0 (ook al werkt de server misschien nog).",
+
+            explanationIncorrect: "Lineaire afschrijving = kosten / levensduur. Voorbeeld: €10.000 server, 5 jaar → €2.000/jaar. Dit staat niet voor fysieke waarde, maar boekhoudkundige waarde."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat is de formule voor ROI (Return on Investment)?",
+
+            options: [
+
+                "ROI = Totale Kosten / Winst",
+
+                "ROI = (Winst - Kosten) / Kosten × 100%",
+
+                "ROI = Winst × Kosten",
+
+                "ROI = Aanschafprijs - Verkoopprijs"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! ROI meet of een investering de moeite waard is. Voorbeeld: automatisering kost €10.000, bespaart €2.000/maand aan manuren. Na 5 maanden break-even, daarna pure winst!",
+
+            explanationIncorrect: "ROI = (Winst - Kosten) / Kosten × 100%. Positieve ROI = goed project. Break-even point = moment dat je investering is terugverdiend."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Waarom is een euro vandaag meer waard dan een euro over 5 jaar (NPV concept)?",
+
+            options: [
+
+                "Omdat de munt fysiek slijt",
+
+                "Door inflatie en potentiële rente-opbrengsten (tijdwaarde van geld)",
+
+                "Omdat toekomstige euro's niet bestaan",
+
+                "Dit is niet waar, een euro blijft altijd een euro"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! NPV (Net Present Value) = tijdwaarde van geld. Een euro vandaag kun je investeren en rente verdienen. Door inflatie kun je er over 5 jaar minder voor kopen. Daarom reken je toekomstige winsten terug naar 'huidige waarde'.",
+
+            explanationIncorrect: "NPV-principe: geld heeft geen vaste waarde over tijd. Door inflatie en compound interest (rente op rente) is geld nu meer waard dan later. Einstein noemde compound interest het '8ste wereldwonder'."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Welke Porter-strategie past bij een bedrijf als Ryanair, en wat is de IT-focus?",
+
+            options: [
+
+                "Differentiation - focus op innovatie en user experience",
+
+                "Cost Leadership - focus op efficiëntie en automatisering om kosten te drukken",
+
+                "Focus - richten op een nichemarkt",
+
+                "Ryanair gebruikt geen IT-strategie"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Ryanair/Aldi kiezen voor Cost Leadership: de goedkoopste zijn. IT ondersteunt dit door maximale automatisering en efficiëntie (self-service check-in, goedkope cloud-infrastructuur).",
+
+            explanationIncorrect: "Porter's strategieën: Cost Leadership (goedkoopst: Ryanair), Differentiation (uniek: Apple), Focus (niche). IT moet bedrijfsstrategie ondersteunen, niet andersom."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Waarom kiezen startups bijna altijd voor Public Cloud (OpEx) in plaats van eigen servers (CapEx)?",
+
+            options: [
+
+                "Omdat public cloud goedkoper is op lange termijn",
+
+                "Ze hebben geen startkapitaal voor grote hardware-investering en moeten snel kunnen schalen of falen",
+
+                "Eigen servers zijn illegaal voor startups",
+
+                "Public cloud is veiliger dan eigen servers"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Startups hebben geen €100.000 voor een datacenter. Met cloud betaal je €50/maand om te starten. Als je groeit, schaal je op. Als het mislukt, stop je het abonnement. Perfecte match voor onzekere startup-fase.",
+
+            explanationIncorrect: "Startups = OpEx-model ideaal. Geen grote investering vooraf, flexibel schalen, fail fast mogelijk. Enterprise bedrijven hebben legacy systems en kiezen vaak Hybrid Cloud."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat betekent 'Commodity' in IT-context en wat doe je ermee?",
+
+            options: [
+
+                "Unieke software die jouw bedrijf onderscheidt; je bouwt het zelf",
+
+                "Standaard IT-zaken (e-mail, CRM) die niet uniek zijn; je neemt ze af als SaaS",
+
+                "Hardware die je altijd zelf moet kopen",
+
+                "Geheime technologie die concurrenten niet hebben"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Commodity = niet-onderscheidend. Elke bedrijf heeft e-mail/CRM nodig, maar het maakt je niet uniek. Daarom: koop het als SaaS (Office 365, Salesforce). Bouw geen eigen mailserver meer in 2025!",
+
+            explanationIncorrect: "Commodity = standaard, niet-uniek. Neem het af als SaaS (goedkoop, onderhouden door experts). Investeer je IT-budget in wat je écht onderscheidt van de concurrent."
+
+        },
+
+        {
+
+            lecture: "Lecture 10",
+
+            question: "Wat is het grootste onzichtbare kostenitem in TCO-berekeningen?",
+
+            options: [
+
+                "De aanschafprijs van hardware",
+
+                "Softwarelicenties",
+
+                "Downtime (verlies van omzet als systemen plat liggen)",
+
+                "Kantoorruimte"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Juist! Downtime is de killer. Als je webshop 1 uur offline is tijdens Black Friday, verlies je misschien €100.000 aan omzet. Dat is veel meer dan de kosten van betere hardware of redundante systemen.",
+
+            explanationIncorrect: "TCO-ijsberg: zichtbaar (20%) = hardware/licenties. Onzichtbaar (80%) = installatie, training, personeel, stroom, koeling, ruimte en vooral DOWNTIME (omzetverlies). Goedkope server die vaak crasht = duur!"
 
         }
 
