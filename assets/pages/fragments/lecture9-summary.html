@@ -1,0 +1,139 @@
+<h3>1. Wat is Cloud Computing?</h3>
+<p>Vroeger moesten bedrijven hun eigen servers kopen, koelen en beheren (On-Premises).</p>
+
+<h4>Definitie</h4>
+<p>Cloud computing is het leveren van computerdiensten (servers, opslag, databases, software) via het internet ("de cloud").</p>
+
+<h4>Het Nutsbedrijf-model (Utility)</h4>
+<p>De cloud is als elektriciteit of water uit de kraan. Je bouwt geen eigen energiecentrale; je plugt in en betaalt achteraf voor wat je hebt verbruikt.</p>
+
+<h4>Voordelen</h4>
+<ul>
+    <li><strong>Geen CapEx (Capital Expenditure):</strong> Geen grote investering vooraf in hardware</li>
+    <li><strong>OpEx (Operating Expenditure):</strong> Je betaalt maandelijks (operationele kosten)</li>
+    <li><strong>Elasticiteit:</strong> Je kunt binnen enkele minuten opschalen van 1 naar 1000 servers</li>
+</ul>
+
+<h3>2. Service Modellen (HET Examenonderdeel!)</h3>
+<p>Het belangrijkste concept van deze les is de verdeling van verantwoordelijkheid. <strong>Wie beheert wat?</strong> Dit wordt vaak uitgelegd met de "Pizza as a Service" analogie of de "Stack".</p>
+
+<h4>A. On-Premises (Alles zelf doen)</h4>
+<ul>
+    <li><strong>Jij beheert alles:</strong> Van de netwerkkabels en de airco tot de applicatie en de data</li>
+    <li><strong>Analogie:</strong> Thuis pizza maken (je koopt de oven, het deeg, de kaas, bakt het en eet het op)</li>
+</ul>
+
+<h4>B. IaaS (Infrastructure as a Service)</h4>
+<ul>
+    <li><strong>Wat huur je:</strong> De virtuele hardware (Servers/VM's, Opslag, Netwerk)</li>
+    <li><strong>Wat beheer jij:</strong> Het Besturingssysteem (Windows/Linux), Middleware, Data en Applicaties</li>
+    <li><strong>Provider regelt:</strong> Virtualisatie, Servers, Opslag, Netwerk</li>
+    <li><strong>Voorbeelden:</strong> Amazon EC2, DigitalOcean Droplets, Azure VM</li>
+    <li><strong>Analogie:</strong> "Take & Bake" (Je huurt de keuken/oven, maar brengt je eigen pizza mee)</li>
+</ul>
+
+<h4>C. PaaS (Platform as a Service)</h4>
+<ul>
+    <li><strong>Wat huur je:</strong> Een omgeving om code te draaien (Runtime)</li>
+    <li><strong>Wat beheer jij:</strong> Alleen je Applicatie en je Data</li>
+    <li><strong>Provider regelt:</strong> Het OS, patches, updates, middleware en de hardware</li>
+    <li><strong>Voorbeelden:</strong> Heroku, Google App Engine, Azure App Service</li>
+    <li><strong>Analogie:</strong> Pizza laten bezorgen (Je kiest de pizza, maar iemand anders bakt hem en bezorgt hem. Jij hoeft alleen de tafel te dekken)</li>
+</ul>
+
+<h4>D. SaaS (Software as a Service)</h4>
+<ul>
+    <li><strong>Wat huur je:</strong> De volledige applicatie</li>
+    <li><strong>Wat beheer jij:</strong> Niets (behalve misschien gebruikersinstellingen)</li>
+    <li><strong>Voorbeelden:</strong> Gmail, Microsoft Office 365, Dropbox</li>
+    <li><strong>Analogie:</strong> Uit eten gaan (Je gaat zitten, eet en betaalt. Je hebt geen idee hoe de keuken eruitziet)</li>
+</ul>
+
+<h3>3. Deployment Modellen</h3>
+<p>Waar staat de hardware fysiek en wie mag erop?</p>
+
+<ul>
+    <li><strong>Public Cloud:</strong> Alles staat bij de provider (AWS, Azure). Hardware wordt gedeeld met andere klanten (Multi-tenancy). Goedkoopst en meest schaalbaar</li>
+    <li><strong>Private Cloud:</strong> Een cloud-omgeving die exclusief voor één bedrijf is. Kan in je eigen datacenter staan of gehuurd zijn. Veilig, maar duur</li>
+    <li><strong>Hybrid Cloud:</strong> Een combinatie. Bijvoorbeeld: Gevoelige klantdata staat op een Private Cloud (veilig), maar de website draait in de Public Cloud (schaalbaar)</li>
+    <li><strong>Multi Cloud:</strong> Je gebruikt meerdere providers tegelijk (bijv. AWS voor opslag en Azure voor AI) om "Vendor Lock-in" te voorkomen</li>
+</ul>
+
+<h3>4. Virtualisatie & Resource Pooling</h3>
+<p>De motor achter de cloud is virtualisatie (zoals gezien in Lecture 4).</p>
+
+<h4>Resource Pooling</h4>
+<p>De provider heeft enorme hallen vol servers. Al deze CPU-kracht en RAM wordt op één grote hoop gegooid ("Pool").</p>
+
+<h4>Multi-tenancy</h4>
+<p>Als jij een VM huurt, weet je niet dat jouw VM fysiek op dezelfde server draait als de VM van je concurrent. De Hypervisor zorgt voor strikte isolatie.</p>
+<p><strong>Analogie:</strong> Een flatgebouw. Iedereen heeft zijn eigen sleutel en appartement (isolatie), maar jullie delen allemaal dezelfde waterleiding en fundering (resources).</p>
+
+<h3>5. Schaalbaarheid (Scaling)</h3>
+<p>Er zijn twee manieren om te groeien als je app populair wordt:</p>
+
+<h4>Vertical Scaling (Scale Up)</h4>
+<ul>
+    <li><strong>Wat:</strong> Je maakt de server groter (meer CPU, meer RAM)</li>
+    <li><strong>Nadeel:</strong> Er is een limiet (fysieke hardware houdt ergens op) en je moet vaak herstarten (downtime)</li>
+</ul>
+
+<h4>Horizontal Scaling (Scale Out) - De Cloud Manier</h4>
+<ul>
+    <li><strong>Wat:</strong> Je zet er meer servers naast</li>
+    <li><strong>Voordeel:</strong> Theoretisch oneindig schaalbaar. Als 1 server vol is, start de cloud automatisch een tweede, derde, etc.</li>
+    <li><strong>Tool:</strong> Load Balancer (verdeelt het verkeer over de servers)</li>
+</ul>
+
+<h3>6. Cloud Management (IAM)</h3>
+<p>Wie mag wat doen in jouw cloud-omgeving?</p>
+
+<ul>
+    <li><strong>Authentication (AuthN):</strong> Bewijzen wie je bent (Inloggen/Paspoort)</li>
+    <li><strong>Authorization (AuthZ):</strong> Bepalen wat je mag (Rechten/Visum)</li>
+    <li><strong>RBAC (Role-Based Access Control):</strong> Je geeft rechten niet per persoon, maar per rol
+        <ul>
+            <li><strong>Voorbeeld:</strong> Piet is "Developer" → mag VM's starten. Klaas is "Finance" → mag facturen zien</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>7. SLA & Billing</h3>
+
+<h4>SLA (Service Level Agreement)</h4>
+<p>Het contract waarin de provider belooft hoe betrouwbaar ze zijn.</p>
+<ul>
+    <li><strong>Uptime:</strong> Vaak uitgedrukt in nines (bijv. 99.99%)</li>
+</ul>
+
+<h4>Billing Models</h4>
+<ul>
+    <li><strong>Pay-as-you-go:</strong> Betalen per seconde/GB</li>
+    <li><strong>Spot Pricing:</strong> Je biedt op ongebruikte capaciteit. Heel goedkoop, maar de provider kan de server elk moment afpakken als ze hem zelf nodig hebben</li>
+</ul>
+
+<h3>8. Security: Shared Responsibility Model (Cruciaal!)</h3>
+<p>Veel mensen denken: "Ik zit in de cloud, dus Microsoft regelt de beveiliging." <strong>FOUT.</strong></p>
+
+<ul>
+    <li><strong>Cloud Provider:</strong> Verantwoordelijk voor de beveiliging <strong>VAN</strong> de cloud
+        <ul>
+            <li>(Fysieke datacenters, kabels, hypervisor, netwerk)</li>
+        </ul>
+    </li>
+    <li><strong>Klant (Jij):</strong> Verantwoordelijk voor de beveiliging <strong>IN</strong> de cloud
+        <ul>
+            <li>(Jouw data, jouw wachtwoorden, updates van jouw OS, firewall instellingen)</li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>Belangrijk:</strong> Als jij je AWS-wachtwoord op GitHub zet en gehackt wordt, is dat JOUW schuld, niet die van Amazon.</p>
+
+<h3 class="highlight">Analogie voor IaaS/PaaS/SaaS: Wonen</h3>
+<ul>
+    <li><strong>On-Premises:</strong> Je bouwt zelf een huis, legt de leidingen, regelt gas/water/licht en het onderhoud</li>
+    <li><strong>IaaS:</strong> Je huurt een kaal huis. De huisbaas regelt dat het dak niet lekt (Infrastructuur). Jij moet zelf meubels kopen, schilderen en schoonmaken (OS/App)</li>
+    <li><strong>PaaS:</strong> Je huurt een gemeubileerd hotel. Het bed staat er (Runtime), je hoeft alleen je kleren (Code) in de kast te leggen</li>
+    <li><strong>SaaS:</strong> Je woont in een all-inclusive resort. Je hoeft niet te koken, niet schoon te maken, alleen maar te genieten (Gebruiken)</li>
+</ul>
