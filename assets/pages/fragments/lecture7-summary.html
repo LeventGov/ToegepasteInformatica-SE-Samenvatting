@@ -1,0 +1,179 @@
+<h3>1. Het Ephemeral Storage-probleem</h3>
+<p>Containers zijn ephemeral: als een container stopt of herstart, gaan alle wijzigingen in het bestandssysteem verloren. Dit is een fundamenteel probleem voor applicaties die gegevens moeten behouden:</p>
+<ul>
+    <li>Bestanden die in de container zijn aangemaakt, worden verwijderd</li>
+    <li>Databasegegevens gaan verloren bij container herstart</li>
+    <li>Dit is onacceptabel voor productieomgevingen</li>
+</ul>
+<p><strong>Oplossing:</strong> Docker biedt twee mechanismen voor persistent storage: volumes en bind mounts.</p>
+
+<h3>2. Volumes vs. Bind Mounts</h3>
+
+<h4>A. Volumes</h4>
+<p>Volumes zijn containers voor data, beheerd door Docker. Ze worden opgeslagen in een Docker-managed directory op de host.</p>
+<ul>
+    <li><strong>Creatie:</strong> <code>docker volume create my-volume</code></li>
+    <li><strong>Koppeling:</strong> <code>docker run -v my-volume:/data</code></li>
+    <li><strong>Voordelen:</strong>
+        <ul>
+            <li>Onafhankelijk van het host-bestandssysteem</li>
+            <li>Makkelijk te beheren via Docker-commando's</li>
+            <li>Portabel tussen verschillende host-systemen</li>
+            <li>Kan met meerdere containers worden gedeeld</li>
+        </ul>
+    </li>
+    <li><strong>Praktijk:</strong> Ideaal voor databasebestanden, applicatiegegevens en alles wat langdurig moet bestaan</li>
+</ul>
+
+<h4>B. Bind Mounts</h4>
+<p>Bind mounts koppelen een map van de host rechtstreeks aan de container.</p>
+<ul>
+    <li><strong>Koppeling:</strong> <code>docker run -v /host/path:/container/path</code></li>
+    <li><strong>Voordelen:</strong>
+        <ul>
+            <li>Volledige controle over host-bestanden</li>
+            <li>Nuttig voor development en configuration</li>
+            <li>Je kunt bestanden direct op de host bewerken</li>
+        </ul>
+    </li>
+    <li><strong>Nadelen:</strong>
+        <ul>
+            <li>Afhankelijk van host-bestandssysteem</li>
+            <li>Minder flexibel bij migratie tussen hosts</li>
+            <li>Veiligheidsrisico's mogelijk (toegang host-bestandssysteem)</li>
+        </ul>
+    </li>
+    <li><strong>Praktijk:</strong> Voornaamlijk voor development (broncode, config-files) en testing</li>
+</ul>
+
+<h3>3. Images Bouwen: Dockerfile vs. docker commit</h3>
+
+<h4>Dockerfile-aanpak (aanbevolen)</h4>
+<p>Een Dockerfile is een receptbestand waarin je stap-voor-stap beschrijft hoe je image moet worden gebouwd.</p>
+<ul>
+    <li><strong>Voordelen:</strong>
+        <ul>
+            <li>Reproduceerbaar en version-controleerbaar</li>
+            <li>Transparante build-stappen</li>
+            <li>Eenvoudig op te schalen en te onderhouden</li>
+            <li>Best practice in productie</li>
+        </ul>
+    </li>
+    <li><strong>Build-command:</strong> <code>docker build -t my-image .</code></li>
+</ul>
+
+<h4>docker commit-aanpak (niet aanbevolen)</h4>
+<p>Je voert commando's handmatig uit in een lopende container en maakt dan een image van die container.</p>
+<ul>
+    <li><strong>Nadelen:</strong>
+        <ul>
+            <li>Niet reproduceerbaar</li>
+            <li>Moeilijk debuggen en onderhouden</li>
+            <li>Grote, opgeblazen images</li>
+            <li>Niet geschikt voor productie</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>4. Dockerfile-Instructies</h3>
+<p>De belangrijkste instructies in een Dockerfile:</p>
+<ul>
+    <li><strong>FROM:</strong> De base image waarmee je begint (bv. <code>FROM ubuntu:22.04</code>)</li>
+    <li><strong>WORKDIR:</strong> Stelt de werkmap in de container in (bv. <code>WORKDIR /app</code>)</li>
+    <li><strong>COPY / ADD:</strong> Kopieert bestanden van host naar container (COPY is voorkeur)</li>
+    <li><strong>RUN:</strong> Voert een commando uit tijdens het bouwen (bv. <code>RUN apt-get install python3</code>)</li>
+    <li><strong>CMD:</strong> De standaardopdracht als container start (kan worden overschreven)</li>
+    <li><strong>ENTRYPOINT:</strong> Voert altijd uit, moeilijker om te overschrijven dan CMD</li>
+    <li><strong>EXPOSE:</strong> Documenteert welke poorten de applicatie luistert (bv. <code>EXPOSE 8080</code>)</li>
+    <li><strong>ENV:</strong> Stelt omgevingsvariabelen in</li>
+    <li><strong>VOLUME:</strong> Declareert mountpoints</li>
+</ul>
+
+<h3>5. Docker Compose: Orkestratie Gemakkelijk</h3>
+<p>Docker Compose stelt je in staat meerdere containers als één systeem te definiëren en beheren.</p>
+
+<h4>docker-compose.yml Structuur:</h4>
+<ul>
+    <li><strong>Version:</strong> Geeft aan welke Compose-syntaxversie wordt gebruikt</li>
+    <li><strong>Services:</strong> Elke service is een container (bv. web, database, cache)</li>
+    <li><strong>Volumes:</strong> Defineert named volumes voor persistent data</li>
+    <li><strong>Networks:</strong> Configureert netwerkcommunicatie tussen services</li>
+</ul>
+
+<h4>Praktisch Voorbeeld:</h4>
+<pre>version: '3.8'
+services:
+  web:
+    image: myapp:1.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - app-data:/data
+  db:
+    image: postgres:14
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  app-data:
+  db-data:</pre>
+
+<h4>Belangrijke Commando's:</h4>
+<ul>
+    <li><strong>docker-compose up:</strong> Start alle services</li>
+    <li><strong>docker-compose down:</strong> Stopt en verwijdert containers</li>
+    <li><strong>docker-compose logs:</strong> Bekijkt logs van services</li>
+    <li><strong>docker-compose ps:</strong> Toont status van alle services</li>
+    <li><strong>docker-compose build:</strong> Bouwt custom images</li>
+</ul>
+
+<h3>6. Networking & Service Discovery</h3>
+<p>Docker Compose creëert automatisch een bridge-netwerk waar alle services kunnen communiceren.</p>
+<ul>
+    <li><strong>Automatische DNS-resolutie:</strong> Services kunnen elkaar bereiken via hun servicenaam (bv. <code>web</code> bereikt <code>db</code> via <code>db:5432</code>)</li>
+    <li><strong>Service-Namen als Hosts:</strong> Docker voegt servicenam <code>web</code> toe aan /etc/hosts in elke container</li>
+    <li><strong>Port Exposure:</strong> Alleen poorten in <code>ports:</code> zijn toegankelijk van buiten; service-to-service communicatie gebeurt direct</li>
+</ul>
+
+<h3>7. Resilience: Restart-Policies en Healthchecks</h3>
+
+<h4>Restart-Policies:</h4>
+<p>Bepalen wat Docker doet als een container abnormaal eindigt:</p>
+<ul>
+    <li><strong>no:</strong> Herstart niet (standaard)</li>
+    <li><strong>always:</strong> Herstart altijd, zelfs na Docker daemon herstart</li>
+    <li><strong>on-failure:</strong> Herstart alleen bij non-zero exit code (bv. <code>on-failure:5</code> = max 5 keer)</li>
+    <li><strong>unless-stopped:</strong> Herstart tenzij expliciet gestopt</li>
+</ul>
+
+<h4>Healthchecks:</h4>
+<p>Docker kan actief controleren of een container gezond is:</p>
+<ul>
+    <li><strong>Functie:</strong> Voert periodiek een commando uit (bv. ping naar localhost)</li>
+    <li><strong>Statussen:</strong> healthy, unhealthy, starting</li>
+    <li><strong>Praktijk:</strong> Orchestratoren (Kubernetes) gebruiken dit om beschadigde containers te vervangen</li>
+    <li><strong>Voorbeeld:</strong> <code>HEALTHCHECK CMD curl -f http://localhost/ || exit 1</code></li>
+</ul>
+
+<h3>8. Taarten-Analogie: De Docker-Levenscyclus</h3>
+<p>Dockerfile = Recept (beschrijft hoe je taartt maakt)</p>
+<ul>
+    <li>Ingrediënten: base image, bestanden, software</li>
+    <li>Stappen: RUN, COPY, WORKDIR</li>
+</ul>
+<p>Image = Ingevroren Taar (klaar om te eten, maar nog niet gegeten)</p>
+<ul>
+    <li>Compleet, onveranderlijk snapshot</li>
+    <li>Kan vele malen gereproduceerd worden</li>
+</ul>
+<p>Container = Taartstuk aan tafel (het daadwerkelijke product)</p>
+<ul>
+    <li>Afzonderlijke instantie, kan veranderd/gebruikt worden</li>
+    <li>Ephemeral: als je het opeet (stopt), is het weg</li>
+    <li>Volumes = Bakje naast de taar (gegevens overleven het eten)</li>
+</ul>
+<p>Docker Compose = Restaurant-menu</p>
+<ul>
+    <li>Beschrijft meerdere gerechtenten die samen een maaltijd vormen</li>
+    <li>Orchestreert voorbereiding en presentatie</li>
+    <li>Eenvoudig reproduceerbaar voor elke klant</li>
+</ul>
