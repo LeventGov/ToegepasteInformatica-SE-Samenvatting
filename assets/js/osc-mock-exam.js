@@ -1,6 +1,6 @@
 const oscQuizData = {
 
-    title: "Operating System Concepts - Lectures 1-7",
+    title: "Operating System Concepts - Lectures 1-8",
 
     questions: [
 
@@ -2705,6 +2705,266 @@ const oscQuizData = {
             explanationCorrect: "cgroups limiteren en monitoren resources (CPU, RAM, I/O) per proces(groep); cruciaal voor containerisatie.",
 
             explanationIncorrect: "cgroups zijn geen user-groepen; het zijn kernel-features voor resource-controle op procesniveau."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat is het belangrijkste verschil tussen symmetrische en asymmetrische encryptie?",
+
+            options: [
+
+                "Symmetrische encryptie is veiliger dan asymmetrische",
+
+                "Symmetrische gebruikt één sleutel, asymmetrische gebruikt een sleutelpaar (public/private)",
+
+                "Asymmetrische encryptie is sneller dan symmetrische",
+
+                "Symmetrische encryptie kan alleen gebruikt worden voor HTTPS"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Symmetrische encryptie gebruikt dezelfde sleutel voor encrypt en decrypt (snel maar distributieprobleem). Asymmetrische gebruikt een sleutelpaar waarbij wat met de ene wordt versleuteld alleen met de andere kan worden ontsleuteld.",
+
+            explanationIncorrect: "Het verschil zit in het aantal sleutels: symmetrisch = 1 sleutel (snel), asymmetrisch = 2 sleutels/sleutelpaar (langzaam maar veiliger voor key-exchange)."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wanneer gebruik je de Public Key van iemand anders voor encryptie?",
+
+            options: [
+
+                "Als je wilt bewijzen dat een bericht van jou komt (digitale handtekening)",
+
+                "Als je een bericht wilt sturen dat alleen die persoon kan lezen (confidentiality)",
+
+                "Als je een hash wilt maken van een document",
+
+                "Als je symmetrische encryptie wilt gebruiken"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Voor confidentiality versleutel je met de Public Key van de ontvanger. Alleen hij kan het decrypten met zijn Private Key.",
+
+            explanationIncorrect: "Public Key van de ontvanger = confidentiality (alleen hij kan lezen). Je eigen Private Key = authenticity/signing (bewijzen dat het van jou komt)."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat is de rol van het bestand 'authorized_keys' bij SSH?",
+
+            options: [
+
+                "Het bevat de Private Keys van de server",
+
+                "Het bevat de Public Keys van alle gebruikers die mogen inloggen op de server",
+
+                "Het bevat wachtwoorden van gebruikers in encrypted vorm",
+
+                "Het bevat de fingerprints van servers die je eerder hebt bezocht"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! authorized_keys (op de server) bevat Public Keys van gebruikers die passwordless mogen inloggen. De server gebruikt dit om te checken of jouw Private Key matcht.",
+
+            explanationIncorrect: "authorized_keys staat op de server en bevat Public Keys van clients die binnen mogen. known_hosts (op je laptop) onthoudt server-fingerprints."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Hoe werkt passwordless SSH-login?",
+
+            options: [
+
+                "De server versleutelt een challenge met jouw Public Key; jij lost het op met je Private Key",
+
+                "De server stuurt je wachtwoord encrypted via HTTPS",
+
+                "Je Private Key wordt automatisch naar de server gestuurd",
+
+                "De server genereert een nieuwe Public Key bij elke login"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Juist! De server maakt een random puzzel/challenge, versleutelt die met jouw Public Key (uit authorized_keys), jij lost hem op met je Private Key en stuurt het antwoord terug. Als het klopt, word je binnengelaten.",
+
+            explanationIncorrect: "SSH-authenticatie: server versleutelt challenge met jouw Public Key → jij decrypteert met Private Key → antwoord bewijst dat je de juiste Private Key hebt."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat is een digitale handtekening (digital signature)?",
+
+            options: [
+
+                "Een hash van een document, versleuteld met je Public Key",
+
+                "Een hash van een document, versleuteld met je Private Key",
+
+                "Een wachtwoord dat in een database wordt opgeslagen",
+
+                "Een certificaat uitgegeven door een CA"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Je maakt een hash (vingerafdruk) van het document en versleutelt die hash met je Private Key. Iedereen kan het verifiëren met jouw Public Key, wat bewijst dat het document van jou komt en niet is gewijzigd.",
+
+            explanationIncorrect: "Digital signature = hash versleuteld met je PRIVATE key (niet public). Dit bewijst authenticity en integrity."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat is de rol van een Certificate Authority (CA)?",
+
+            options: [
+
+                "De CA maakt Public Keys voor alle websites",
+
+                "De CA controleert de identiteit van een website en ondertekent hun certificaat met zijn eigen Private Key",
+
+                "De CA slaat alle wachtwoorden van gebruikers op",
+
+                "De CA host alle websites via HTTPS"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! De CA is een vertrouwde derde partij die de identiteit van een website verifieert en hun certificaat digitaal ondertekent. Browsers vertrouwen de CA's waarvan de Root Certificates standaard zijn ingebakken.",
+
+            explanationIncorrect: "Een CA is de 'paspoort-uitgever' van het web. Ze verifiëren identiteit en ondertekenen certificaten zodat browsers kunnen vertrouwen dat www.bank.be echt de bank is."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat staat er IN een X.509 certificaat?",
+
+            options: [
+
+                "De Private Key van de server",
+
+                "De domeinnaam, Public Key, verloopdatum en handtekening van de CA",
+
+                "Alle wachtwoorden van gebruikers",
+
+                "De source code van de website"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Een certificaat bevat: domeinnaam (Subject), Public Key, geldigheidsperiode, en de digitale handtekening van de CA. De Private Key blijft geheim op de server!",
+
+            explanationIncorrect: "Een certificaat is als een digitaal paspoort: het bevat identificatie (domeinnaam), Public Key, geldigheid en een stempel (handtekening) van de CA. De Private Key zit er NOOIT in."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Hoe werkt de SSL/TLS handshake bij HTTPS?",
+
+            options: [
+
+                "Client en server gebruiken alleen symmetrische encryptie voor het hele gesprek",
+
+                "Asymmetrische encryptie wordt gebruikt om een symmetrische Session Key veilig uit te wisselen; daarna wordt die snelle symmetrische key gebruikt",
+
+                "De server stuurt zijn Private Key naar de client",
+
+                "Er wordt helemaal geen encryptie gebruikt, alleen certificaten"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! TLS combineert het beste van beide: asymmetrisch (veilig) wordt gebruikt om een symmetrische Session Key uit te wisselen, daarna switchen beide naar symmetrisch (snel) voor de rest van de communicatie.",
+
+            explanationIncorrect: "TLS handshake: asymmetrische crypto voor veilige key-exchange → daarna symmetrische crypto voor snelheid. Best of both worlds!"
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Waarom krijg je de fout 'Your connection is not private' (NET::ERR_CERT_AUTHORITY_INVALID) bij een self-signed certificaat?",
+
+            options: [
+
+                "De server heeft helemaal geen certificaat",
+
+                "Het certificaat is ondertekend door een CA die jouw browser niet vertrouwt (niet in de trusted root store)",
+
+                "De server gebruikt HTTP in plaats van HTTPS",
+
+                "Je wachtwoord is incorrect"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Bij self-signed certificaten (zoals in het labo) ben jijzelf de CA. Je browser kent jou niet als vertrouwde CA, dus moet je jouw Root CA Certificaat handmatig importeren in de trusted root store.",
+
+            explanationIncorrect: "Self-signed certificaat = ondertekend door jezelf (niet door DigiCert/Let's Encrypt). Browsers vertrouwen alleen pre-installed CA's. Oplossing: importeer je eigen Root CA certificaat."
+
+        },
+
+        {
+
+            lecture: "Lecture 8",
+
+            question: "Wat is Mutual TLS (mTLS) en wanneer krijg je de fout 'SSL_ERROR_RX_CERTIFICATE_REQUIRED_ALERT'?",
+
+            options: [
+
+                "mTLS betekent dat alleen de server een certificaat heeft; de fout gebeurt als de server offline is",
+
+                "mTLS betekent dat ZOWEL server als client een certificaat moeten hebben; de fout gebeurt als jouw browser geen client-certificaat heeft geladen",
+
+                "mTLS is een oude versie van TLS die niet meer wordt gebruikt",
+
+                "Deze fout gebeurt alleen bij HTTP, niet bij HTTPS"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Bij normale HTTPS heeft alleen de server een certificaat. Bij mTLS (SSLVerifyClient require) eist de server dat ook de client zich identificeert met een certificaat (PKCS#12 / .p12 bestand).",
+
+            explanationIncorrect: "Mutual TLS = wederzijdse authenticatie. Niet alleen server bewijst identiteit, maar ook de client moet certificaat tonen. Als je dat niet hebt → SSL_ERROR_RX_CERTIFICATE_REQUIRED_ALERT."
 
         }
 
