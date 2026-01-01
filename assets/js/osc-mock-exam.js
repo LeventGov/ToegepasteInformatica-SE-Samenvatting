@@ -1,6 +1,6 @@
 const oscQuizData = {
 
-    title: "Operating System Concepts - Lectures 1-6",
+    title: "Operating System Concepts - Lectures 1-7",
 
     questions: [
 
@@ -2367,6 +2367,240 @@ const oscQuizData = {
             explanationCorrect: "Standaard logt Docker per container naar /var/lib/docker/containers/<id>/<id>-json.log.",
 
             explanationIncorrect: "De standaard json logs staan per container onder /var/lib/docker/containers/<id>/<id>-json.log; niet in syslog of daemon.json."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Wat is het fundamentale probleem met ephemeral storage in containers?",
+
+            options: [
+
+                "Containers gebruiken teveel geheugen",
+
+                "Alle wijzigingen in het bestandssysteem gaan verloren bij herstart of stop",
+
+                "Docker kan geen bestanden schrijven naar de host",
+
+                "Volumes zijn te langzaam"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Containers zijn ephemeral: als ze stoppen, gaan alle wijzigingen verloren. Dit is waarom volumes en bind mounts nodig zijn.",
+
+            explanationIncorrect: "Het kernprobleem is dat containers ephemeral zijn—alle gegevens gaan verloren bij stop/herstart, vandaar volumes."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Wat is het voornaamste voordeel van volumes boven bind mounts?",
+
+            options: [
+
+                "Volumes zijn sneller",
+
+                "Volumes worden beheerd door Docker en zijn onafhankelijk van het host-bestandssysteem",
+
+                "Bind mounts ondersteunen multi-container sharing niet",
+
+                "Volumes vereisen geen schrijftoegang op de host"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Volumes worden beheerd door Docker, zijn onafhankelijk van host-bestandssysteem en zijn portabel—ideaal voor productie.",
+
+            explanationIncorrect: "Het voordeel van volumes is dat ze Docker-managed zijn en onafhankelijk van het host-bestandssysteem; bind mounts zijn meer voor development."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Wat is het verschil tussen CMD en ENTRYPOINT in een Dockerfile?",
+
+            options: [
+
+                "CMD is sneller dan ENTRYPOINT",
+
+                "CMD kan worden overschreven, ENTRYPOINT voert altijd uit",
+
+                "ENTRYPOINT is verouderd",
+
+                "CMD is alleen voor images, ENTRYPOINT voor containers"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "CMD kan worden overschreven bij docker run, ENTRYPOINT voert altijd uit en is moeilijker om te overschrijven.",
+
+            explanationIncorrect: "CMD is overschrijfbaar; ENTRYPOINT voert altijd uit en biedt meer controle over het uitvoeringsgedrag."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Welk commando start alle services gedefinieerd in docker-compose.yml?",
+
+            options: [
+
+                "docker-compose start",
+
+                "docker-compose up",
+
+                "docker-compose run",
+
+                "docker-compose build"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "docker-compose up start alle services. 'docker-compose start' start slechts bestaande (gestopte) services.",
+
+            explanationIncorrect: "'docker-compose up' creëert en start alle services; 'start' is voor al bestaande containers."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Hoe bereiken services elkaar in een Docker Compose-netwerk?",
+
+            options: [
+
+                "Via IP-adressen uit een extern lookup-systeem",
+
+                "Via poort-forwarding op de host",
+
+                "Automatische DNS-resolutie op servicenaam (bv. db:5432)",
+
+                "Ze kunnen elkaar niet bereiken zonder externe netwerkconfiguratie"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Docker Compose creëert een bridge-netwerk met automatische DNS; services bereiken elkaar via servicenaam.",
+
+            explanationIncorrect: "Compose hanteert automatische service-discovery via DNS—services bereiken elkaar direct op servicenaam."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Welke restart-policy zorgt ervoor dat een container altijd opnieuw start, zelfs na Docker daemon herstart?",
+
+            options: [
+
+                "always",
+
+                "on-failure",
+
+                "unless-stopped",
+
+                "no"
+
+            ],
+
+            correctAnswer: 0,
+
+            explanationCorrect: "Met 'always' herstart Docker de container automatisch, ook na daemon-herstart.",
+
+            explanationIncorrect: "'always' herstart onvoorwaardelijk; 'unless-stopped' is gelijaardig maar kan worden gestopt; 'on-failure' herstart alleen bij crashes."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Wat doet een HEALTHCHECK in Docker?",
+
+            options: [
+
+                "Controlleert of er voldoende schijfruimte beschikbaar is",
+
+                "Voert periodiek een commando uit om gezondheid van container te controleren",
+
+                "Verwijdert automatisch beschadigde containers",
+
+                "Monitor CPU en geheugengebruik"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "HEALTHCHECK voert periodiek een commando uit (bv. HTTP-ping) en stelt de status in op healthy/unhealthy.",
+
+            explanationIncorrect: "HEALTHCHECK is voor actieve gezondheidscontrole via periodieke commands, niet voor systeembronnen."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "In de taarten-analogie, wat vertegenwoordigt Docker Compose?",
+
+            options: [
+
+                "Het recept (Dockerfile)",
+
+                "De ingevroren taart (Image)",
+
+                "Het taartstuk aan tafel (Container)",
+
+                "Het restaurant-menu (meerdere gerechten samen)"
+
+            ],
+
+            correctAnswer: 3,
+
+            explanationCorrect: "Docker Compose is het restaurant-menu—het orchestreert meerdere gerechtenten (services) tot een samenhangende maaltijd.",
+
+            explanationIncorrect: "Compose orchestreert meerdere services net zoals een menu meerdere gerechtenten presenteert als samenhangend diner."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Wat is het voornaamste doel van RUN-instructies in een Dockerfile?",
+
+            options: [
+
+                "Het voert commando's uit terwijl de container draait",
+
+                "Het voert commando's uit TIJDENS het bouwen van de image",
+
+                "Het definieert de standaardcommando's bij container-start",
+
+                "Het kopieert bestanden van host naar container"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "RUN voert commando's uit tijdens build-tijd (bv. apt-get install); CMD en ENTRYPOINT gebeuren bij container-start.",
+
+            explanationIncorrect: "RUN is build-time; CMD/ENTRYPOINT zijn runtime. RUN voert uit tijdens image-creatie, niet in lopende containers."
 
         }
 
