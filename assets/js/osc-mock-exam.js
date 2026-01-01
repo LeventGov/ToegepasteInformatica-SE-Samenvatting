@@ -2611,19 +2611,34 @@ const oscQuizData = {
 
 
 function shuffleQuestions(questions) {
-
     const shuffled = [...questions];
-
     for (let i = shuffled.length - 1; i > 0; i--) {
-
         const j = Math.floor(Math.random() * (i + 1));
-
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-
     }
+    // Also shuffle answers for each question and track correct answer index
+    return shuffled.map(q => shuffleQuestionAnswers(q));
+}
 
-    return shuffled;
-
+function shuffleQuestionAnswers(question) {
+    // Create array of {option, isCorrect} pairs
+    const optionsWithFlags = question.options.map((opt, idx) => ({
+        option: opt,
+        isCorrect: idx === question.correctAnswer
+    }));
+    
+    // Shuffle the pairs
+    for (let i = optionsWithFlags.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optionsWithFlags[i], optionsWithFlags[j]] = [optionsWithFlags[j], optionsWithFlags[i]];
+    }
+    
+    // Create new shuffled question
+    const shuffledQuestion = { ...question };
+    shuffledQuestion.options = optionsWithFlags.map(item => item.option);
+    shuffledQuestion.correctAnswer = optionsWithFlags.findIndex(item => item.isCorrect);
+    
+    return shuffledQuestion;
 }
 
 
