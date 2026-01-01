@@ -3486,6 +3486,214 @@ const oscQuizData = {
 
             explanationIncorrect: "TCO-ijsberg: zichtbaar (20%) = hardware/licenties. Onzichtbaar (80%) = installatie, training, personeel, stroom, koeling, ruimte en vooral DOWNTIME (omzetverlies). Goedkope server die vaak crasht = duur!"
 
+        },
+
+        {
+
+            lecture: "Lecture 2",
+
+            question: "Welke is de beste manier om root te worden in een modern Linux-systeem?",
+
+            options: [
+
+                "su",
+
+                "su --login",
+
+                "sudo su",
+
+                "sudo su --login (of sudo -i)"
+
+            ],
+
+            correctAnswer: 3,
+
+            explanationCorrect: "Correct! sudo su --login (of sudo -i) combineert het beste van beide werelden: je gebruikt je eigen wachtwoord (auditing), en je laadt de volledige schone omgeving van root (PATH, home directory). Dit voorkomt fouten en is veiliger.",
+
+            explanationIncorrect: "su = root-wachtwoord nodig (vaak vergrendeld in Ubuntu). sudo su = eigen wachtwoord maar geen schone omgeving. sudo su --login = auditing + schone omgeving!"
+
+        },
+
+        {
+
+            lecture: "Lecture 2",
+
+            question: "Je wilt dat een bestand alleen gelezen en geschreven kan worden door de eigenaar, gelezen door de groep, en de rest mag niets. Welke permissies (octaal) gebruik je?",
+
+            options: [
+
+                "755",
+
+                "640",
+
+                "644",
+
+                "750"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! 640 = rw-r-----. Eigenaar (6 = 4+2 = read+write), Groep (4 = read), Others (0 = niets). Perfect voor bestanden met gevoelige data die de groep moet kunnen lezen.",
+
+            explanationIncorrect: "Reken het uit: Owner = rw = 4+2 = 6, Group = r = 4, Others = 0. Resultaat: 640. Niet 644 (others kan dan lezen) of 755 (iedereen kan lezen en uitvoeren)."
+
+        },
+
+        {
+
+            lecture: "Lecture 3",
+
+            question: "Wat is de functie van de Scheduler in een besturingssysteem?",
+
+            options: [
+
+                "Het inplannen van back-ups op een bepaald tijdstip",
+
+                "Het bepalen welk proces gebruik mag maken van de CPU en voor hoe lang",
+
+                "Het beheren van het virtuele geheugen",
+
+                "Het opstarten van de computer (Booting)"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! De Scheduler is de verkeersregelaar van de CPU. Hij bepaalt welk proces wanneer CPU-tijd krijgt en switcht razendsnel tussen processen (context switching) om de illusie te wekken dat alles tegelijk draait.",
+
+            explanationIncorrect: "De CPU Scheduler beheert processen, niet back-ups (dat doet cron/systemd timers). Hij is onderdeel van de kernel en zorgt voor multitasking door snel te wisselen tussen actieve processen."
+
+        },
+
+        {
+
+            lecture: "Lecture 4",
+
+            question: "Je ziet in VMware een bestand genaamd server.vmdk van 1 KB. Waar staat de daadwerkelijke schijfdata?",
+
+            options: [
+
+                "De server is leeg",
+
+                "De data staat in het werkgeheugen (RAM)",
+
+                "Dit is alleen de Descriptor File (tekst); de data zit in een verborgen -flat.vmdk bestand",
+
+                "VMware slaat data op in de cloud"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Juist! Een VMDK bestaat uit twee bestanden: de kleine .vmdk (descriptor file, tekstbestand met metadata) en het grote -flat.vmdk (binary data file met de eigenlijke schijfdata). VMware's UI toont ze als één bestand voor overzicht.",
+
+            explanationIncorrect: "VMDK = twee bestanden. Descriptor (.vmdk, ~1KB tekstbestand met config) + Data (-flat.vmdk, gigabytes aan binaire schijfdata). De webinterface verbergt het -flat bestand voor overzicht."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Je hebt een webserver container draaien. De applicatie crasht plotseling met exit code 1. Wat gebeurt er als je restart policy op 'on-failure' staat?",
+
+            options: [
+
+                "De container blijft gestopt",
+
+                "De container wordt automatisch opnieuw opgestart",
+
+                "De container wordt verwijderd",
+
+                "Docker probeert de image opnieuw te pullen"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! restart: on-failure betekent: herstart alleen als de container crasht (exit code ≠ 0). Bij exit code 1 (fout) zal Docker automatisch proberen de container opnieuw te starten.",
+
+            explanationIncorrect: "Restart policies: no (niets), always (altijd), unless-stopped (altijd behalve bij stop), on-failure (alleen bij crashes met exit code ≠ 0). Exit code 1 = crash, dus herstart!"
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Je start een container met een database wachtwoord via environment variable (-e DB_PASS=geheim). Terwijl de container draait, verander je deze variabele op de host. Wat gebeurt er in de container?",
+
+            options: [
+
+                "De container pikt de wijziging direct op (Hot Reload)",
+
+                "De container herstart zichzelf om de wijziging toe te passen",
+
+                "Er gebeurt niets; omgevingsvariabelen worden alleen bij het opstarten ingelezen",
+
+                "De container crasht"
+
+            ],
+
+            correctAnswer: 2,
+
+            explanationCorrect: "Juist! Een proces (PID 1 in de container) leest zijn environment variables in bij het starten. Eenmaal draaiend, kijkt het daar nooit meer naar. Wil je de waarde aanpassen? Stop de container en start een nieuwe met de nieuwe waarde.",
+
+            explanationIncorrect: "Environment variables zijn immutable voor draaiende processen. Ze worden ingevoerd bij het starten. Wil je runtime config changes? Gebruik config files met volume mounts of secrets."
+
+        },
+
+        {
+
+            lecture: "Lecture 7",
+
+            question: "Je hebt twee containers: 'web' en 'db'. In de web container probeert de code verbinding te maken met de database via localhost. Waarom werkt dit niet?",
+
+            options: [
+
+                "De firewall blokkeert het",
+
+                "In een container verwijst localhost altijd naar de container zelf, niet naar andere containers of de host",
+
+                "De database staat uit",
+
+                "Je hebt geen poorten gemapt"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Correct! Containers zijn geïsoleerd met hun eigen netwerkstack. localhost (127.0.0.1) verwijst naar de container zelf. Container B is een andere 'computer'. Oplossing: gebruik de servicenaam (db) als hostname - Docker's DNS vertaalt dit.",
+
+            explanationIncorrect: "Container networking: elke container heeft eigen loopback (localhost). Voor inter-container communicatie gebruik je de container/service namen (Docker DNS) of bridge network IP's. localhost = alleen jezelf!"
+
+        },
+
+        {
+
+            lecture: "Lecture 9",
+
+            question: "Bij Cloud Computing (IaaS-model), wie is er verantwoordelijk voor de beveiliging van het fysieke datacenter?",
+
+            options: [
+
+                "De Klant (Jij)",
+
+                "De Cloud Provider (bijv. AWS/Azure)",
+
+                "De Overheid",
+
+                "Niemand, het is 'de cloud'"
+
+            ],
+
+            correctAnswer: 1,
+
+            explanationCorrect: "Juist! Shared Responsibility Model: Provider = beveiliging VAN de cloud (fysiek datacenter, hekken, bewakers, stroom, servers, hypervisor). Klant = beveiliging IN de cloud (OS updates, firewall, wachtwoorden, data-encryptie).",
+
+            explanationIncorrect: "IaaS Shared Responsibility: Provider regelt fysieke beveiliging (gebouw, hardware, netwerk). Jij regelt logische beveiliging (OS patches, firewall regels, sterke wachtwoorden). Beide zijn verantwoordelijk!"
+
         }
 
     ]
