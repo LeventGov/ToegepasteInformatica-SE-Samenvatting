@@ -1,0 +1,152 @@
+<section class="lecture-content">
+    <h2>Lecture 8: Encryption in Action (SSH, HTTPS & Certificates)</h2>
+
+    <article class="content-block">
+        <h3>1. De Basis: Twee soorten Versleuteling</h3>
+        
+        <h4>A. Symmetrische Encryptie (Symmetric)</h4>
+        <ul>
+            <li><strong>Concept:</strong> Er is maar één sleutel. Dezelfde sleutel wordt gebruikt om het bericht op slot te doen (encrypt) én weer open te maken (decrypt)</li>
+            <li><strong>Voordeel:</strong> Het is razendsnel</li>
+            <li><strong>Nadeel:</strong> Het distributieprobleem - hoe geef ik jou die sleutel veilig via het onveilige internet? Als een hacker de sleutel onderschept, kan hij alles lezen</li>
+            <li><strong>Voorbeelden:</strong> DES, AES</li>
+        </ul>
+
+        <h4>B. Asymmetrische Encryptie (Asymmetric)</h4>
+        <ul>
+            <li><strong>Concept:</strong> Je hebt een sleutelpaar (Key Pair)</li>
+            <li><strong>Public Key:</strong> Deze mag iedereen hebben. Je zet hem op je website of geeft hem aan vrienden</li>
+            <li><strong>Private Key:</strong> Deze houd je strikt geheim</li>
+            <li><strong>Regel:</strong> Wat je met de ene sleutel versleutelt, kan alleen met de andere sleutel ontsleuteld worden</li>
+            <li><strong>Nadeel:</strong> Het is wiskundig complex en dus traag</li>
+        </ul>
+    </article>
+
+    <article class="content-block">
+        <h3>2. Toepassingen van Asymmetrische Keys</h3>
+        
+        <h4>Scenario 1: Confidentiality (Geheimhouding)</h4>
+        <ul>
+            <li><strong>Doel:</strong> Ik wil een bericht sturen dat alleen Bob kan lezen</li>
+            <li><strong>Actie:</strong> Ik versleutel het bericht met de Public Key van Bob</li>
+            <li><strong>Resultaat:</strong> Alleen Bob (die de bijbehorende Private Key heeft) kan het openmaken. Zelfs ik kan het niet meer lezen na het versleutelen</li>
+        </ul>
+
+        <h4>Scenario 2: Authenticity & Integrity (Digitale Handtekening)</h4>
+        <ul>
+            <li><strong>Doel:</strong> Ik wil bewijzen dat dit bericht écht van mij komt en niet veranderd is</li>
+            <li><strong>Actie:</strong> Ik versleutel (of teken) het bericht met mijn eigen Private Key</li>
+            <li><strong>Resultaat:</strong> Iedereen kan het ontsleutelen met mijn Public Key. Omdat het werkt, moet het wel door mij geschreven zijn (want alleen ik heb de Private Key)</li>
+        </ul>
+    </article>
+
+    <article class="content-block">
+        <h3>3. SSH (Secure Shell) in de Praktijk</h3>
+        <p>SSH gebruikt asymmetrische encryptie om in te loggen op servers zonder wachtwoord.</p>
+
+        <h4>De Bestanden (Linux/Mac: ~/.ssh/)</h4>
+        <ul>
+            <li><code>id_rsa</code>: Je Private Key. Dit is je heilige graal. Geef dit nooit aan iemand!</li>
+            <li><code>id_rsa.pub</code>: Je Public Key. Deze mag je op elke server zetten waar je binnen wilt</li>
+            <li><code>authorized_keys</code>: Een bestand op de Server. Hierin staan de Public Keys van alle mensen die naar binnen mogen</li>
+            <li><code>known_hosts</code>: Een bestand op jouw Laptop. Hierin onthoudt jouw laptop de "vingerafdruk" van servers die je eerder hebt bezocht, om Man-in-the-Middle aanvallen te voorkomen</li>
+        </ul>
+
+        <h4>De Handshake (Hoe passwordless login werkt)</h4>
+        <ol>
+            <li>Jij zegt tegen de server: "Hoi, ik ben Gebruiker X, mag ik erin?"</li>
+            <li>De server kijkt in <code>authorized_keys</code>, vindt jouw Public Key, en maakt een random puzzel</li>
+            <li>De server versleutelt die puzzel met jouw Public Key</li>
+            <li>Jij ontvangt de puzzel en lost hem op met jouw Private Key</li>
+            <li>Je stuurt het antwoord terug. De server ziet dat het klopt en laat je binnen</li>
+        </ol>
+
+        <h4>Commando's</h4>
+        <ul>
+            <li><code>ssh-keygen</code>: Genereert een nieuw sleutelpaar</li>
+            <li><code>ssh-copy-id user@server</code>: Kopieert jouw Public Key automatisch naar de authorized_keys van de server</li>
+        </ul>
+    </article>
+
+    <article class="content-block">
+        <h3>4. Hashing en Digitale Handtekeningen</h3>
+        <p>Om zeker te weten dat data (bv. software of certificaten) niet is aangepast, gebruiken we Hashing.</p>
+        <ul>
+            <li><strong>Hash:</strong> Een wiskundige vingerafdruk (bv. SHA-256). Het is eenrichtingsverkeer (je kunt van de hash niet terug naar de tekst)</li>
+            <li><strong>Digital Signature:</strong> Je neemt de Hash van een document en versleutelt die met je Private Key. De ontvanger kan dit controleren met jouw Public Key</li>
+        </ul>
+    </article>
+
+    <article class="content-block">
+        <h3>5. HTTPS en Certificaten (PKI)</h3>
+        <p>Het web (HTTPS) gebruikt een combinatie van alles hierboven.</p>
+
+        <h4>Het Probleem</h4>
+        <p>Hoe weet ik zeker dat www.bank.be écht de bank is en niet een hacker? Ik heb de Public Key van de bank nodig, maar hoe weet ik dat die key echt van hen is?</p>
+
+        <h4>De Oplossing: Een Certificaat</h4>
+        <p>Dit is een digitaal paspoort.</p>
+        
+        <h4>Inhoud Certificaat (X.509):</h4>
+        <ul>
+            <li>De domeinnaam (www.google.com)</li>
+            <li>De Public Key van de server</li>
+            <li>De verloopdatum</li>
+            <li>De Handtekening van de CA</li>
+        </ul>
+
+        <h4>De Chain of Trust (Vertrouwensketen)</h4>
+        <ul>
+            <li><strong>Root CA (Certificate Authority):</strong> De "Grote Baas" (bv. DigiCert, Let's Encrypt). Hun certificaten zitten standaard ingebakken in jouw browser/OS</li>
+            <li><strong>Intermediate CA:</strong> De tussenlaag</li>
+            <li><strong>Server Certificaat:</strong> Het eindpunt (jouw website)</li>
+        </ul>
+        <p>De browser checkt de keten: "Is dit certificaat getekend door een CA die ik vertrouw?" Zo ja → Groen slotje.</p>
+    </article>
+
+    <article class="content-block">
+        <h3>6. De SSL/TLS Handshake (Hoe HTTPS werkt)</h3>
+        <p>Dit is een slim proces om snelheid en veiligheid te combineren:</p>
+        <ol>
+            <li><strong>Client Hello:</strong> Browser zegt hallo en stelt encryptie-algoritmes voor</li>
+            <li><strong>Server Hello:</strong> Server stuurt zijn Certificaat (met Public Key)</li>
+            <li><strong>Validatie:</strong> Browser checkt bij de CA of het certificaat geldig is</li>
+            <li><strong>Key Exchange:</strong> De browser maakt een tijdelijke Symmetrische Sleutel (Session Key), versleutelt die met de Public Key van de Server en stuurt hem op</li>
+            <li><strong>Secure Connection:</strong> Nu hebben beide partijen de snelle Symmetrische sleutel en gebruiken die voor de rest van het gesprek</li>
+        </ol>
+        <p><strong>Samenvatting:</strong> Asymmetrisch wordt gebruikt om de Symmetrische sleutel veilig over te dragen.</p>
+    </article>
+
+    <article class="content-block">
+        <h3>7. Troubleshooting en Foutmeldingen (Lab Context)</h3>
+        <p>In het labo speel je zelf voor CA. Dit levert specifieke fouten op die je moet herkennen:</p>
+
+        <h4>A. "Your connection is not private" (NET::ERR_CERT_AUTHORITY_INVALID)</h4>
+        <ul>
+            <li><strong>Oorzaak:</strong> Je bezoekt je eigen server via HTTPS, maar jouw browser kent de CA (jijzelf) niet. Het is een "Self-Signed Certificate"</li>
+            <li><strong>Oplossing:</strong> Je moet het Root Certificaat van je eigen CA importeren in de "Trusted Root Certification Authorities" van je browser/OS</li>
+        </ul>
+
+        <h4>B. "SSL_ERROR_RX_CERTIFICATE_REQUIRED_ALERT"</h4>
+        <ul>
+            <li><strong>Context:</strong> Dit gebeurt bij Mutual TLS (mTLS). Hierbij eist de server dat niet alleen hij, maar ook de cliënt (jij) zich identificeert met een certificaat</li>
+            <li><strong>Oorzaak:</strong> De serverinstelling <code>SSLVerifyClient require</code> staat aan, maar jouw browser heeft geen persoonlijk certificaat geladen</li>
+            <li><strong>Oplossing:</strong> Genereer een Client Certificaat (PKCS#12 / .p12 bestand) en importeer dit in je browser</li>
+        </ul>
+    </article>
+
+    <article class="content-block highlight">
+        <h3>Analogieën voor het Examen</h3>
+        <ul>
+            <li><strong>Symmetrisch:</strong> Een koffer met één cijferslot. Iedereen die de code heeft kan erin en hem op slot doen</li>
+            <li><strong>Asymmetrisch:</strong> Een brievenbus
+                <ul>
+                    <li><strong>Public Key:</strong> De gleuf. Iedereen kan er iets in gooien (Encrypten voor confidentiality)</li>
+                    <li><strong>Private Key:</strong> De sleutel van het deurtje. Alleen de eigenaar kan de post eruit halen (Decrypten)</li>
+                </ul>
+            </li>
+            <li><strong>Signing:</strong> Een wassen zegel met jouw familiewapen (Private Key). Iedereen kan zien dat het van jou komt, maar niemand kan het namaken</li>
+            <li><strong>CA (Certificate Authority):</strong> De overheid die paspoorten uitgeeft. Als het paspoort er echt uitziet maar niet door de overheid is gestempeld, laat de douane (Browser) je niet binnen</li>
+        </ul>
+    </article>
+</section>
