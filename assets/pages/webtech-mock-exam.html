@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Web Technology Mock Exam - Test je kennis (Lectures 1–7)">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: 'unsafe-inline'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self';">
+    <title>Web Technology Mock Exam | TI Eindexamens</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+
+<body>
+    <header role="banner">
+        <nav role="navigation" aria-label="Hoofdnavigatie">
+            <div class="container">
+                <h1>Web Technology Mock Exam</h1>
+                <p class="subtitle">Test Je Kennis - Lectures 1–7</p>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <a href="webtech.html" class="back-btn" aria-label="Terug naar Web Technology samenvatting">
+            ← Terug naar Samenvatting
+        </a>
+        <div id="quiz-container" class="quiz-container" role="region" aria-label="Quiz vragen">
+            <div class="quiz-header">
+                <h2>Web Technology - Lectures 1–7</h2>
+                <p>Beantwoord alle vragen en krijg direct uitleg bij elk antwoord.</p>
+            </div>
+
+            <div class="quiz-timer" role="status" aria-label="Quiz timer">
+                <span class="timer-label">⏱️ Tijd:</span>
+                <span id="timer" class="timer-display">00:00</span>
+            </div>
+
+            <div class="quiz-progress" role="status" aria-label="Quiz voortgang">
+                <span>Vraag <span id="question-number">1</span> van <span id="total-questions">0</span></span>
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span id="progress-percentage"></span>
+            </div>
+
+            <div class="question-card">
+                <h3 id="question-text" class="question-text">Loading...</h3>
+                <div id="answers-container" class="answers" role="radiogroup" aria-label="Antwoordopties"></div>
+                <div id="explanation" class="explanation" style="display: none;" role="alert" aria-live="polite"></div>
+            </div>
+
+            <div class="quiz-nav">
+                <button id="prev-btn" class="btn btn-secondary" disabled aria-label="Vorige vraag">
+                    ← Vorige
+                </button>
+                <button id="next-btn" class="btn btn-primary" disabled aria-label="Volgende vraag">
+                    Volgende Vraag →
+                </button>
+            </div>
+        </div>
+        <div id="results-container" class="quiz-results" style="display: none;" role="region"
+            aria-label="Quiz resultaten">
+            <h2>Quiz Voltooid! 🎉</h2>
+            <div id="score-percentage" class="results-score">0%</div>
+            <div id="score-message" class="results-message">Geweldig gedaan!</div>
+
+            <div class="results-time">
+                <span class="time-label">⏱️ Totale Tijd:</span>
+                <span id="total-time">00:00</span>
+            </div>
+
+            <div class="results-details">
+                <div class="result-stat">
+                    <div id="correct-count" class="result-stat-value">0</div>
+                    <div class="result-stat-label">Correct</div>
+                </div>
+                <div class="result-stat">
+                    <div id="incorrect-count" class="result-stat-value">0</div>
+                    <div class="result-stat-label">Fout</div>
+                </div>
+                <div class="result-stat">
+                    <div id="total-answered" class="result-stat-value">0</div>
+                    <div class="result-stat-label">Beantwoord</div>
+                </div>
+            </div>
+
+            <div id="lecture-breakdown" class="lecture-breakdown">
+                <h3>Resultaten per Lecture</h3>
+                <div id="lecture-scores"></div>
+            </div>
+
+            <div class="card-actions">
+                <button id="restart-btn" class="btn btn-primary" aria-label="Herstart quiz">
+                    🔄 Opnieuw Proberen
+                </button>
+                <a href="webtech.html" id="home-btn" class="btn btn-secondary" aria-label="Ga naar samenvatting">
+                    📚 Naar Samenvatting
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 TI Eindexamens | Gemaakt voor studievoorbereiding</p>
+        </div>
+    </footer>
+
+    <script src="../js/mock-exam-engine.js"></script>
+    <script src="../js/webtech-mock-exam.js"></script>
+    <script defer src="../js/top-button.js"></script>
+</body>
+
+</html>
