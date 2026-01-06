@@ -3694,6 +3694,34 @@ const oscQuizData = {
 
             explanationIncorrect: "IaaS Shared Responsibility: Provider regelt fysieke beveiliging (gebouw, hardware, netwerk). Jij regelt logische beveiliging (OS patches, firewall regels, sterke wachtwoorden). Beide zijn verantwoordelijk!"
 
+        },
+
+        {
+            lecture: "Lecture 2",
+            question: "Wat is POSIX?",
+            options: [
+                "Een set van standaarden die OS-interfaces (API's, shells, tools) voor UNIX-achtige systemen definieert om portabiliteit te garanderen",
+                "Een specifieke Linux-distributie",
+                "Een hypervisor voor virtualisatie",
+                "Een bestandssysteem voor verwisselbare media"
+            ],
+            correctAnswer: 0,
+            explanationCorrect: "POSIX (Portable Operating System Interface) is een IEEE-standaard die API's, shells en utilities specificeert zodat software portable is tussen UNIX-achtige systemen (Linux, BSD, macOS).",
+            explanationIncorrect: "POSIX is geen distributie, hypervisor of bestandssysteem; het is een standaard voor OS-interfaces die portabiliteit bevordert."
+        },
+
+        {
+            lecture: "Lecture 2",
+            question: "Waarvoor staat POSIX?",
+            options: [
+                "Portable Operating System Interface (met 'X' als verwijzing naar UNIX)",
+                "Portable Operating Software Interface (X = eXtended)",
+                "Portable Open Systems Integration eXtended",
+                "Process Operating System Interface (X = cross-platform)"
+            ],
+            correctAnswer: 0,
+            explanationCorrect: "POSIX staat voor Portable Operating System Interface; de 'X' wordt historisch gezien geassocieerd met UNIX. Het is de officiële IEEE-standaardnaam voor portabele OS-interfaces.",
+            explanationIncorrect: "POSIX is geen 'Operating Software' of 'Open Systems Integration'; het acroniem betekent Portable Operating System Interface (met een historische link naar UNIX)."
         }
 
     ]
