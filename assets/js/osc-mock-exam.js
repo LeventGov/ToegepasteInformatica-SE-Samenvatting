@@ -3722,6 +3722,20 @@ const oscQuizData = {
             correctAnswer: 0,
             explanationCorrect: "POSIX staat voor Portable Operating System Interface; de 'X' wordt historisch gezien geassocieerd met UNIX. Het is de officiële IEEE-standaardnaam voor portabele OS-interfaces.",
             explanationIncorrect: "POSIX is geen 'Operating Software' of 'Open Systems Integration'; het acroniem betekent Portable Operating System Interface (met een historische link naar UNIX)."
+        },
+
+        {
+            lecture: "Lecture 7",
+            question: "Hoeveel netwerken heeft Docker standaard?",
+            options: [
+                "1",
+                "5",
+                "10",
+                "4"
+            ],
+            correctAnswer: 0,
+            explanationCorrect: "In de basisconfiguratie voorziet Docker één standaard (default) netwerk: bridge. Voor deze vraag tellen we enkel het default netwerk mee.",
+            explanationIncorrect: "De getallen 5, 10 en 4 horen niet bij de standaardconfiguratie in deze context; het default aantal dat we aanhouden is 1."
         }
 
     ]
