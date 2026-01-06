@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Technology - Proefexamen</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .readme-main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .readme-header {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px var(--shadow);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .readme-header h1 {
+            color: var(--accent-primary);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .readme-header .subtitle {
+            color: var(--text-secondary);
+            margin: 0;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .files-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .files-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateX(3px);
+        }
+
+        .back-nav {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-nav:hover {
+            background: var(--accent-secondary);
+            transform: translateX(-5px);
+        }
+
+        .readme-content {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px var(--shadow);
+            line-height: 1.9;
+        }
+
+        .readme-content h1 {
+            color: var(--accent-primary);
+            font-size: 2.2rem;
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .readme-content h1:first-child {
+            margin-top: 0;
+        }
+
+        .readme-content h2 {
+            color: var(--accent-secondary);
+            font-size: 1.7rem;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-secondary);
+            letter-spacing: 0.3px;
+        }
+
+        .readme-content h3 {
+            color: var(--accent-primary);
+            font-size: 1.4rem;
+            margin: 1.75rem 0 0.75rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        .readme-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .readme-content ul, .readme-content ol {
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            padding-left: 2.5rem;
+        }
+
+        .readme-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .readme-content ul > li::marker {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .readme-content ol > li::marker {
+            color: var(--accent-secondary);
+            font-weight: bold;
+        }
+
+        .readme-content code {
+            background: var(--bg-primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            color: var(--accent-primary);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        .readme-content pre {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border-left: 5px solid var(--accent-primary);
+            margin: 1.5rem 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+    .readme-content .code-wrap {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+    }
+
+    .readme-content .line-numbers {
+      user-select: none;
+      text-align: right;
+      padding-right: 0.5rem;
+      border-right: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      min-width: 3rem;
+    }
+
+    .readme-content .line-numbers span { display: block; line-height: 1.7; }
+
+    .readme-content .copy-row { display: flex; justify-content: flex-end; margin-bottom: 0.5rem; }
+    .readme-content .copy-btn {
+      padding: 0.35rem 0.7rem;
+      background: var(--accent-primary);
+      color: var(--bg-primary);
+      border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: var(--transition);
+    }
+    .readme-content .copy-btn:hover { background: var(--accent-secondary); }
+
+        .readme-content pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            border: none;
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+            text-align: left;
+            display: block;
+        }
+
+        .readme-content pre::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .readme-content pre::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .readme-content pre::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 10px;
+        }
+
+        .readme-content strong {
+            color: var(--accent-secondary);
+            font-weight: 700;
+        }
+
+        .readme-content em {
+            color: var(--accent-primary);
+            font-style: italic;
+        }
+
+        .readme-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .readme-content table th {
+            background: var(--bg-primary);
+            color: var(--accent-primary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-primary);
+            font-size: 1rem;
+        }
+
+        .readme-content table td {
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .readme-content table tr:hover {
+            background: var(--bg-primary);
+        }
+
+        .readme-content a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+
+        .readme-content a:hover {
+            color: var(--accent-secondary);
+            border-bottom-color: var(--accent-secondary);
+        }
+
+        .readme-content hr {
+            border: none;
+            border-top: 2px dashed var(--border-color);
+            margin: 3rem 0;
+        }
+
+        .readme-content blockquote {
+            border-left: 5px solid var(--accent-primary);
+            padding-left: 1.5rem;
+            margin-left: 0;
+            margin-right: 0;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.05rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Syntax highlighting (same as viewer) */
+        .comment { color: #6a9e5e; font-style: italic; }
+        .string { color: #ce9178; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .function { color: #dcdcaa; }
+        .class-name { color: #4ec9b0; }
+        .number { color: #b5cea8; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Proefexamen Web Technology</h1>
+            <p class="subtitle">Volledige oefening en study guide</p>
+        </div>
+    </header>
+
+    <main class="readme-main">
+        <div class="container">
+            <a href="webtech.html" class="back-nav">← Terug naar Web Technology</a>
+
+            <div class="readme-header">
+                <div>
+                    <h1>📚 Study Guide</h1>
+                    <p class="subtitle">Lees alle uitleg en voorbeelden</p>
+                </div>
+                <a href="webtech-proefexam-files.html" class="files-btn">📁 Bekijk Bestanden</a>
+            </div>
+
+            <div class="readme-content">
+                <h1>📚 Mock Exam - Complete Study Guide</h1>
+                <p>Dit is een <strong>volledige oefening-examen</strong> voor Web Technology. Elke vraag test specifieke JavaScript/TypeScript concepten die je moet kennen.</p>
+                
+                <hr>
+                
+                <h2>📋 Inhoud van deze README</h2>
+                <ul>
+                    <li><a href="#vraag-1">Vraag 1: JavaScript Basics</a></li>
+                    <li><a href="#vraag-2">Vraag 2: Labyrinth Game (OOP)</a></li>
+                    <li><a href="#vraag-3">Vraag 3: Taylor Swift API (Async)</a></li>
+                    <li><a href="#vraag-4">Vraag 4: Super Mario (TypeScript)</a></li>
+                    <li><a href="#hoe-leren">Hoe te leren</a></li>
+                </ul>
+                
+                <hr>
+                
+                <h2 id="vraag-1">❓ Vraag 1: JavaScript Basics</h2>
+                <p><strong>Bestand:</strong> <a href="webtech-proefexam-files.html#file=files/question1.js">files/question1.js</a></p>
+                
+                <p><strong>Wat wordt getest:</strong></p>
+                <ul>
+                    <li>Object methods (<code>Object.values()</code>)</li>
+                    <li>Array methods (<code>.reduce()</code>, <code>.map()</code>)</li>
+                    <li>Math functions (<code>Math.min()</code>, <code>Math.max()</code>)</li>
+                    <li>Destructuring assignment</li>
+                    <li>Function parameters en return values</li>
+                </ul>
+                
+                <h3>📖 Stap 1: Bereken totale winkelmandje kosten</h3>
+                <pre><code>// PROBLEM: Je hebt een object met fruit en prijzen
+const shoppingBasket = {
+  Apples: 3.45,
+  Bananas: 4.05,
+  Lemons: 2.00
+};
+
+// OPLOSSING: Loop door alle waarden en tel ze op
+function calculateTotalCost(shoppingBasket) {
+  let total = 0;
+  
+  // Object.values() haalt alle prijzen uit het object
+  for (const price of Object.values(shoppingBasket)) {
+    total += price;
+  }
+  
+  return total; // 9.5
+}</code></pre>
+                
+                <p><strong>Waarom dit werkt:</strong></p>
+                <ul>
+                    <li><code>Object.values(shoppingBasket)</code> geeft: <code>[3.45, 4.05, 2.00]</code></li>
+                    <li>Loop telt alles op: <code>3.45 + 4.05 + 2.00 = 9.5</code></li>
+                </ul>
+                
+                <h3>📖 Stap 2: Bereken statistieken (Advanced)</h3>
+                <pre><code>// PROBLEM: Je hebt een array met getallen: [5, 3, 4]
+// Je wilt: minimum, maximum, gemiddelde, totaal
+
+function calculateStatistics(values) {
+  // SUM: alle getallen optellen
+  const sum = values.reduce((acc, value) => acc + value, 0);
+  // reduce start met 0, dan 0+5=5, 5+3=8, 8+4=12
+  
+  // AVERAGE: som gedeeld door aantal
+  const average = sum / values.length;
+  
+  // MIN: kleinste getal
+  const min = Math.min(...values);
+  // ... spreads [5,3,4] naar 5, 3, 4 als aparte argumenten
+  
+  // MAX: grootste getal
+  const max = Math.max(...values);
+  
+  // Return object met alle resultaten
+  return {
+    minimum: min,      // 3
+    maximum: max,      // 5
+    average: average,  // 4
+    total: sum        // 12
+  };
+}</code></pre>
+                
+                <p><strong>Destructuring gebruiken:</strong></p>
+                <pre><code>// Je hoeft niet het hele object op te vragen
+const result = calculateStatistics([5, 3, 4]);
+console.log(result.minimum, result.maximum, ...);
+
+// BETER: Pak wat je nodig hebt
+const { minimum, maximum, average, total } = calculateStatistics([5, 3, 4]);
+console.log(minimum, maximum, average, total);
+// Output: 3 5 4 12</code></pre>
+                
+                <blockquote><strong>Leerpunt:</strong> Destructuring maakt code leesbaar en korter!</blockquote>
+                
+                <hr>
+                
+                <h2 id="vraag-2">❓ Vraag 2: Labyrinth Game (OOP)</h2>
+                <p><strong>Bestanden:</strong></p>
+                <ul>
+                    <li><a href="webtech-proefexam-files.html#file=files/labyrinth/player.js">files/labyrinth/player.js</a></li>
+                    <li><a href="webtech-proefexam-files.html#file=files/labyrinth/tile.js">files/labyrinth/tile.js</a></li>
+                    <li><a href="webtech-proefexam-files.html#file=files/labyrinth/game.js">files/labyrinth/game.js</a></li>
+                </ul>
+                
+                <p><strong>Wat wordt getest:</strong></p>
+                <ul>
+                    <li>Classes en constructors</li>
+                    <li>Inheritance (<code>extends</code>)</li>
+                    <li>Private fields (<code>#</code>)</li>
+                    <li>Static methods</li>
+                    <li>Private methods</li>
+                    <li>Map datastructuur</li>
+                </ul>
+                
+                <h3>📖 Stap 1: Player Klasse</h3>
+                <pre><code>// PROBLEM: Je hebt spelers die een naam en kleur hebben
+
+class Player {
+  constructor(name, pawncolor) {
+    this.name = name;           // "Alice"
+    this.pawncolor = pawncolor; // "red"
+  }
+}
+
+// Zo gebruik je het:
+const player1 = new Player("Alice", "red");
+console.log(player1.name); // "Alice"</code></pre>
+                
+                <p><strong>Waarom classes:</strong></p>
+                <ul>
+                    <li>Beter dan objecten voor hergebruik</li>
+                    <li>Constructor organiseert initialisatie</li>
+                    <li>Makkelijker om aan uit te breiden</li>
+                </ul>
+                
+                <h3>📖 Stap 2: Tile Klasse (met random)</h3>
+                <pre><code>// PROBLEM: Doolhof bestaat uit tegels met:
+// - 4 muren (elke richting ja/nee)
+// - Optioneel een schat
+
+const treasures = ["Bag of Gold Coins", "Dragon", "Ghost"];
+
+class Tile {
+  constructor(walls, treasure) {
+    this.walls = walls;         // [top, right, bottom, left]
+    this.treasure = treasure;   // undefined of een schat
+  }
+
+  // STATIC METHOD = hoort bij klasse, niet bij instance
+  static randomTile() {
+    // Elk hokje heeft 20% kans op muur
+    const walls = [
+      Math.random() < 0.2,  // top
+      Math.random() < 0.2,  // right
+      Math.random() < 0.2,  // bottom
+      Math.random() < 0.2   // left
+    ];
+    
+    // 50% kans op schat
+    const treasure = Math.random() > 0.5 
+      ? undefined 
+      : treasures[Math.floor(Math.random() * treasures.length)];
+    
+    return new Tile(walls, treasure);
+  }
+}
+
+// Zo gebruik je het:
+const randomTile = Tile.randomTile(); // ← static method!</code></pre>
+                
+                <p><strong>Waarom static:</strong></p>
+                <ul>
+                    <li><code>Tile.randomTile()</code> - roepen op de klasse zelf</li>
+                    <li>Niet <code>new Tile().randomTile()</code> - dat zou dom zijn</li>
+                </ul>
+                
+                <h3>📖 Stap 3: TeleportationTile (Inheritance)</h3>
+                <pre><code>// PROBLEM: Sommige tegels teleporteren naar ander tegel
+
+class TeleportationTile extends Tile {
+  // extends = erft over van Tile
+  
+  constructor(walls, treasure, linkedTile) {
+    // super() roept Tile constructor aan
+    super(walls, treasure);
+    
+    // Voeg extra eigenschap toe
+    this.linkedTile = linkedTile;
+  }
+}
+
+// Voorbeeld:
+const tile1 = new TeleportationTile([false, false, false, false], undefined, null);
+tile1.linkedTile = tile2; // Setup teleportatie</code></pre>
+                
+                <p><strong>Inheritance voordeel:</strong></p>
+                <ul>
+                    <li><code>TeleportationTile</code> heeft alles van <code>Tile</code></li>
+                    <li>Plus extra <code>linkedTile</code> property</li>
+                    <li>Code hergebruik!</li>
+                </ul>
+                
+                <h3>📖 Stap 4: Game Klasse (Orchestrator)</h3>
+                <pre><code>// PROBLEM: Game moet:
+// - Doolhof genereren
+// - Spelers toevoegen
+// - Grootte beheren
+
+class Game {
+  // PRIVATE FIELDS: alleen in deze klasse zichtbaar
+  #rows;
+  #cols;
+
+  constructor(rows, cols) {
+    this.#rows = rows;
+    this.#cols = cols;
+    this.players = new Map();
+    this.#initializemaze(rows, cols);
+  }
+
+  // PRIVATE METHOD: niet van buiten af aanroepbaar
+  #initializemaze(rows, cols) {
+    this.maze = [];
+    for (let i = 0; i < rows; i++) {
+      const row = [];
+      for (let j = 0; j < cols; j++) {
+        // Vul grid met willekeurige tegels
+        row.push(Tile.randomTile());
+      }
+      this.maze.push(row);
+    }
+  }
+
+  // PUBLIC METHOD
+  addPlayer(name, color) {
+    const player = new Player(name, color);
+    this.players.set(player, [0, 0]); // Start positie [0, 0]
+  }
+
+  // GETTERS: als property aanroepen
+  get rows() {
+    return this.#rows;
+  }
+
+  get cols() {
+    return this.#cols;
+  }
+}
+
+// Gebruik:
+const game = new Game(10, 10);
+game.addPlayer("Alice", "red");
+console.log(game.rows); // 10 (als property!)</code></pre>
+                
+                <p><strong>Private fields (#) voordeel:</strong></p>
+                <ul>
+                    <li>Beschermt interne data</li>
+                    <li>Kan niet van buiten af aangepast worden</li>
+                    <li>Betere encapsulation</li>
+                </ul>
+                
+                <hr>
+                
+                <h2 id="vraag-3">❓ Vraag 3: Taylor Swift API (Async)</h2>
+                <p><strong>Bestanden:</strong></p>
+                <ul>
+                    <li><a href="webtech-proefexam-files.html#file=files/taylor-swift/question3a.js">files/taylor-swift/question3a.js</a> - Promise pattern</li>
+                    <li><a href="webtech-proefexam-files.html#file=files/taylor-swift/question3b.js">files/taylor-swift/question3b.js</a> - Async/Await pattern</li>
+                </ul>
+                
+                <p><strong>Wat wordt getest:</strong></p>
+                <ul>
+                    <li>Fetch API (HTTP requests)</li>
+                    <li>Promise chaining (<code>.then()</code>)</li>
+                    <li>Promise.all() (parallelle requests)</li>
+                    <li>Async/await syntax</li>
+                    <li>API data manipulatie</li>
+                </ul>
+                
+                <h3>📖 Vraag 3a: Promise Pattern</h3>
+                <pre><code>// PROBLEM: API geeft albums, elk album heeft tracks
+// Je wilt: alle tracks van een album fetchen
+
+function getFullAlbum(albumId) {
+  // STAP 1: Fetch album
+  return fetch(`http://localhost:3000/albums/${albumId}`)
+    // STAP 2: Convert response naar JSON
+    .then(res => res.json())
+    .then(album => {
+      // STAP 3: Get alle track IDs
+      const trackIds = album.tracks.map(track => track.id);
+      
+      // STAP 4: Fetch ALLE tracks TEGELIJKERTIJD (parallel!)
+      // Promise.all() wacht tot alles klaar is
+      return Promise.all(
+        trackIds.map(trackId => 
+          fetch(`http://localhost:3000/songs/${trackId}`)
+            .then(res => res.json())
+        )
+      );
+    });
+}
+
+// Gebruiken:
+getFullAlbum(9)
+  .then(tracks => console.log(tracks))
+  .catch(error => console.error(error));</code></pre>
+                
+                <p><strong>Promise chaining werking:</strong></p>
+                <pre><code>fetch() → Response
+  .then(res => res.json()) → Parse JSON
+    .then(album => {...}) → Werk met data
+      return Promise.all([...]) → Wacht op alles
+        .then(tracks => {...}) → Klaar!</code></pre>
+                
+                <h3>📖 Vraag 3b: Async/Await Pattern</h3>
+                <pre><code>// EXACT DEZELFDE FUNCTIONALITEIT, MAAR MODERNER
+
+async function getFullAlbum(albumId) {
+  // Await pauzeert tot promise klaar is
+  const request = await fetch(`http://localhost:3000/albums/${albumId}`);
+  const album = await request.json();
+
+  // Get track IDs
+  const trackIds = album.tracks.map(track => track.id);
+  
+  // Fetch alle tracks parallel
+  const trackRequests = await Promise.all(
+    trackIds.map(trackId => fetch(`http://localhost:3000/songs/${trackId}`))
+  );
+  
+  // Parse alle JSON responses
+  const tracks = await Promise.all(
+    trackRequests.map(trackRequest => trackRequest.json())
+  );
+  
+  return tracks;
+}
+
+// Gebruiken (ziet er hetzelfde uit):
+const tracks = await getFullAlbum(9);
+console.log(tracks);</code></pre>
+                
+                <p><strong>Verschil Promise vs Async/Await:</strong></p>
+                <table>
+                    <tr>
+                        <th>Promise</th>
+                        <th>Async/Await</th>
+                    </tr>
+                    <tr>
+                        <td><code>.then().then().then()</code></td>
+                        <td><code>await await await</code></td>
+                    </tr>
+                    <tr>
+                        <td>Moeilijker te lezen</td>
+                        <td>Ziet er normaal uit</td>
+                    </tr>
+                    <tr>
+                        <td>Callbacks nested</td>
+                        <td>Top-to-bottom</td>
+                    </tr>
+                    <tr>
+                        <td>Oud patroon</td>
+                        <td>Modern (ES2017+)</td>
+                    </tr>
+                </table>
+                
+                <blockquote><strong>Leerpunt:</strong> Async/Await is beter! Maar beide werken.</blockquote>
+                
+                <h3>📖 Complexe functie: Meest populaire album</h3>
+                <pre><code>// PROBLEM: Elk album heeft tracks met popularity scores
+// Je wilt het album met GEMIDDELD hoogste popularity
+
+async function getMostPopularAlbum() {
+  // STAP 1: Haal alle albums
+  const albums = await fetch(`http://localhost:3000/albums`)
+    .then(res => res.json());
+  
+  // STAP 2: Bereken popularity per album (PARALLEL!)
+  const averages = await Promise.all(
+    albums.map(album => getAveragePopularity(album.id))
+  );
+  
+  // STAP 3: Vind de MAXIMUM popularity
+  const maxAverage = Math.max(...averages);
+  
+  // STAP 4: Return het album met deze score
+  return albums[averages.indexOf(maxAverage)];
+}
+
+// Gebruiken:
+const topAlbum = await getMostPopularAlbum();
+console.log(topAlbum.title); // "The Tortured Poets Department"</code></pre>
+                
+                <hr>
+                
+                <h2 id="vraag-4">❓ Vraag 4: Super Mario (TypeScript)</h2>
+                <p><strong>Bestanden:</strong></p>
+                <ul>
+                    <li><a href="webtech-proefexam-files.html#file=files/super-mario/ts/index.ts">files/super-mario/ts/index.ts</a> - Main app</li>
+                    <li><a href="webtech-proefexam-files.html#file=files/super-mario/ts/api/responses/character.ts">files/super-mario/ts/api/responses/character.ts</a> - Interfaces</li>
+                    <li><a href="webtech-proefexam-files.html#file=files/super-mario/index.html">files/super-mario/index.html</a> - HTML</li>
+                </ul>
+                
+                <p><strong>Wat wordt getest:</strong></p>
+                <ul>
+                    <li>TypeScript interfaces</li>
+                    <li>Type annotations</li>
+                    <li>Type-safe querySelector</li>
+                    <li>Template cloning</li>
+                    <li>DOM manipulation</li>
+                    <li>Frontend architecture</li>
+                </ul>
+                
+                <h3>📖 Stap 1: TypeScript Interfaces definiëren</h3>
+                <pre><code>// PROBLEM: API geeft character data
+// Je wilt: type-checking zodat je zeker bent van data
+
+// Interface = contract dat object moet volgen
+interface Character {
+  name: string,      // Naam van karakter
+  image: string,     // URL naar afbeelding
+  summary: string,   // Korte beschrijving
+  text: string       // Lange beschrijving
+}
+
+// API response format
+interface CharacterResponse {
+  characters: Character[];  // Array van karakters
+}
+
+// Export zodat andere files het kunnen gebruiken
+export { Character, CharacterResponse };</code></pre>
+                
+                <p><strong>Type-safety voordeel:</strong></p>
+                <ul>
+                    <li>TypeScript checkt: "Is dit echt een Character?"</li>
+                    <li>Gaat fout als je <code>.namme</code> probeert (typo!)</li>
+                    <li>IDE autocomplete werkt perfect</li>
+                </ul>
+                
+                <h3>📖 Stap 2: Fetch met Types</h3>
+                <pre><code>import { Character, CharacterResponse } from "./api/responses/character.js"
+
+const BASEURL: string = "http://localhost:3000/supermario";
+
+async function fetchCharacters() : Promise<Character[]> {
+  // Fetch API
+  const response : Response = await fetch(`${BASEURL}/characters`);
+  
+  // Parse JSON met type
+  const result : CharacterResponse = await response.json();
+  
+  // Return characters array
+  return result.characters;
+}</code></pre>
+                
+                <p><strong>Type-annotations betekenis:</strong></p>
+                <ul>
+                    <li><code>const BASEURL: string</code> = "Dit moet een string zijn"</li>
+                    <li><code>Promise&lt;Character[]&gt;</code> = "Dit geeft Promise terug met Character array"</li>
+                    <li><code>: Response</code> = "Dit is een Response object"</li>
+                </ul>
+                
+                <h3>📖 Stap 3: Template Cloning (Efficient rendering)</h3>
+                <pre><code>// PROBLEM: Je hebt 7 karakters
+// Je wilt niet 7x dezelfde HTML schrijven
+
+// HTML:
+/*
+&lt;template id="character-template"&gt;
+  &lt;article&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;img src="#" alt=""&gt;
+    &lt;p class="summary"&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/template&gt;
+*/
+
+// JavaScript - Clone en vul
+function getCharacterElement(character: Character) : HTMLElement {
+  // STAP 1: Clone template
+  const $element: HTMLElement = 
+    document.querySelector&lt;HTMLTemplateElement&gt;("#character-template")!
+      .content.firstElementChild
+      ?.cloneNode(true) as HTMLElement;
+  
+  // STAP 2: Vul data in
+  $element.querySelector("h2")!.innerText = character.name;
+  $element.querySelector("img")!.src = character.image;
+  $element.querySelector(".summary")!.innerText = character.summary;
+  $element.querySelector("p:last-child")!.innerText = character.text;
+  
+  return $element;
+}</code></pre>
+                
+                <p><strong>Template voordelen:</strong></p>
+                <ul>
+                    <li>Schrijf HTML eenmalig</li>
+                    <li>Clone het voor elke character</li>
+                    <li>Veel efficiënter dan herhalen</li>
+                </ul>
+                
+                <h3>📖 Stap 4: Render op pagina</h3>
+                <pre><code>async function init() : Promise&lt;void&gt; {
+  // Fetch all characters
+  const characters: Character[] = await fetchCharacters();
+  
+  // Selecteer main element
+  const $main: HTMLElement = document.querySelector("main")!;
+  
+  // Loop en render
+  characters.forEach((character: Character) => {
+    const $element = getCharacterElement(character);
+    $main.insertAdjacentElement("beforeend", $element);
+  });
+}
+
+// Start app
+init();</code></pre>
+                
+                <p><strong>Cascade effect:</strong></p>
+                <ol>
+                    <li><code>init()</code> wordt aangeroepen</li>
+                    <li><code>fetchCharacters()</code> haalt data</li>
+                    <li>Voor elk karakter: <code>getCharacterElement()</code> + insert</li>
+                    <li>Pagina vol met karakters!</li>
+                </ol>
+                
+                <hr>
+                
+                <h2 id="hoe-leren">🎓 Hoe te leren</h2>
+                
+                <h3>Stap 1: Begrijp CONCEPT</h3>
+                <ul>
+                    <li>Lees comments in bestanden</li>
+                    <li>Zie welk probleem het oplost</li>
+                    <li>Begrijp WAAROM dit patroon gebruikt wordt</li>
+                </ul>
+                
+                <h3>Stap 2: Run de code</h3>
+                <pre><code># Vraag 1 (Node.js)
+node files/question1.js
+
+# Vraag 2 (Node.js)
+node files/labyrinth/game.js
+
+# Vraag 3 (met API server)
+node files/taylor-swift/question3a.js
+
+# Vraag 4 (browser)
+# Open files/super-mario/index.html in browser</code></pre>
+                
+                <h3>Stap 3: Verander de code</h3>
+                <ul>
+                    <li>Probeer waarden aan te passen</li>
+                    <li>Voeg console.log() toe om waarden te zien</li>
+                    <li>Break het expres en fix het</li>
+                </ul>
+                
+                <h3>Stap 4: Schrijf zelf</h3>
+                <ul>
+                    <li>Sluit bestanden</li>
+                    <li>Schrijf dezelfde code zelf</li>
+                    <li>Controleer met origineel</li>
+                </ul>
+                
+                <hr>
+                
+                <h2>💡 Kernconcepten per Vraag</h2>
+                <table>
+                    <tr>
+                        <th>Vraag</th>
+                        <th>Concept</th>
+                        <th>Niveau</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Array/Object methods, destructuring</td>
+                        <td>🟢 Basis</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Classes, inheritance, private fields</td>
+                        <td>🟡 Gemiddeld</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Async/Promise, parallelle requests</td>
+                        <td>🟡 Gemiddeld</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>TypeScript, DOM, templates</td>
+                        <td>🟠 Geavanceerd</td>
+                    </tr>
+                </table>
+                
+                <hr>
+                
+                <h2>🚀 Aanvullende Topics</h2>
+                <p>Na deze oefening kan je kijken naar:</p>
+                <ul>
+                    <li>Error handling (try/catch)</li>
+                    <li>Testing (Jest)</li>
+                    <li>Module systems (import/export)</li>
+                    <li>Advanced TypeScript (generics, unions)</li>
+                    <li>DOM events (click handlers, etc.)</li>
+                </ul>
+                
+                <hr>
+                
+                <p style="text-align: center; font-size: 1.2rem; margin-top: 3rem;">
+                    <strong>Veel succes! 💪</strong><br>
+                    <em>Deze study guide helpt je voorbereiding op het eindexamen.</em>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/top-button.js"></script>
+    <script src="../js/syntax-highlight.js"></script>
+    <script>
+      // Highlight README code blocks with auto language detection (no gutter/copy)
+      document.addEventListener('DOMContentLoaded', function(){
+        function detectLang(src){
+          var s = src || '';
+          if (/^\s*<[^\s]/.test(s) || /<\/.+?>/.test(s)) return 'html';
+          if (/\binterface\s+/.test(s) || /:\s*[A-Za-z][A-Za-z0-9_<>?,\s]*/.test(s) || /Promise<.+>/.test(s)) return 'ts';
+          return 'js';
+        }
+        document.querySelectorAll('.readme-content pre code').forEach(function(codeEl){
+          var raw = codeEl.textContent || '';
+          var lang = detectLang(raw);
+          var highlighted = window.highlightCode(raw, lang);
+          codeEl.innerHTML = highlighted;
+        });
+      });
+    </script>
+</body>
+</html>

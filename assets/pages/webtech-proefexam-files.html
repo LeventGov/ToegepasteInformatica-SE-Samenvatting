@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Technology - Proefexamen Bestanden</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .files-main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .files-header {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px var(--shadow);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .files-header h1 {
+            color: var(--accent-primary);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .files-header .subtitle {
+            color: var(--text-secondary);
+            margin: 0;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .back-nav {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-nav:hover {
+            background: var(--accent-secondary);
+            transform: translateX(-5px);
+        }
+
+        .files-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .files-sidebar {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px var(--shadow);
+            height: fit-content;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .files-sidebar h2 {
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            margin: 0 0 1rem 0;
+        }
+
+        .file-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .file-tree li {
+            margin-bottom: 0.5rem;
+        }
+
+        .file-item {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: var(--transition);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .file-item:hover {
+            background: var(--bg-primary);
+            color: var(--accent-primary);
+        }
+
+        .file-item.active {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .file-item.folder {
+            font-weight: 500;
+            color: var(--accent-secondary);
+            padding-left: 0;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-item.folder::before {
+            content: "📁 ";
+            margin-right: 0.5rem;
+        }
+
+        .file-item.file::before {
+            content: "📄 ";
+            margin-right: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .files-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .file-header h2 {
+            color: var(--accent-primary);
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .file-path {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .file-viewer {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            text-align: left;
+        }
+
+        .file-viewer .code-wrap {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+        }
+
+        .file-viewer .line-numbers {
+            user-select: none;
+            text-align: right;
+            padding-right: 0.5rem;
+            border-right: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            min-width: 3rem;
+        }
+
+        .file-viewer .line-numbers span {
+            display: block;
+            line-height: 1.6;
+        }
+
+        .file-viewer pre {
+            margin: 0;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            text-align: left;
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border-left: 5px solid var(--accent-primary);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .file-viewer code {
+            text-align: left;
+            white-space: pre;
+            display: block;
+            background: none;
+            padding: 0;
+            border: none;
+            letter-spacing: 0.3px;
+        }
+
+        .file-viewer pre::-webkit-scrollbar { height: 8px; }
+        .file-viewer pre::-webkit-scrollbar-track { background: var(--border-color); border-radius: 10px; }
+        .file-viewer pre::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 10px; }
+
+        /* Syntax highlighting */
+        .comment {
+            color: #6a9e5e !important;
+            font-style: italic;
+        }
+
+        .string {
+            color: #ce9178 !important;
+        }
+
+        .keyword {
+            color: #569cd6 !important;
+            font-weight: bold;
+        }
+
+        .function {
+            color: #dcdcaa !important;
+        }
+
+        .class-name {
+            color: #4ec9b0 !important;
+        }
+
+        .number {
+            color: #b5cea8 !important;
+        }
+
+        .copy-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.5rem;
+        }
+
+        .copy-btn {
+            padding: 0.4rem 0.8rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-secondary);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 3rem 2rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 1024px) {
+            .files-container {
+                grid-template-columns: 1fr;
+            }
+
+            .files-sidebar {
+                max-height: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Proefexamen Web Technology</h1>
+            <p class="subtitle">Bekijk alle bestanden</p>
+        </div>
+    </header>
+
+    <main class="files-main">
+        <div class="container">
+            <a href="webtech-proefexam.html" class="back-nav">← Terug naar Study Guide</a>
+
+            <div class="files-header">
+                <div>
+                    <h1>📁 Bestanden</h1>
+                    <p class="subtitle">Bekijk volledige code en content</p>
+                </div>
+            </div>
+
+            <div class="files-container">
+                <aside class="files-sidebar">
+                    <h2>Bestanden</h2>
+                    <ul class="file-tree" id="file-tree"></ul>
+                </aside>
+
+                <div class="files-content">
+                    <div id="file-display" class="empty-state">
+                        <p>👈 Klik op een bestand om het te openen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/top-button.js"></script>
+    <script src="../js/syntax-highlight.js"></script>
+    <script src="../js/file-browser.js"></script>
+</body>
+</html>
