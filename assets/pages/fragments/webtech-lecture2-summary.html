@@ -1,0 +1,126 @@
+<div class="summary-body">
+
+    <h3>1. Functies in JavaScript</h3>
+
+    <h4>Functie Definitie Manieren</h4>
+    <p>Er zijn verschillende manieren om functies te definiëren:</p>
+    <ul>
+        <li><strong>Functiedeclaratie:</strong> Een traditionele manier die gebruikmaakt van het function keyword en wordt gehost.</li>
+        <li><strong>Functie-expressie:</strong> Een functie die aan een variabele wordt toegewezen en niet wordt gehost.</li>
+        <li><strong>Arrow notation:</strong> Een compact alternatief voor de functie-expressie.</li>
+    </ul>
+
+    <h4>Arrow Functions (Pijlnotatie)</h4>
+    <p>Arrow functions hebben specifieke regels voor syntax:</p>
+    <ul>
+        <li><strong>Parameters:</strong> Bij één parameter zijn haakjes optioneel; bij meerdere parameters zijn ze verplicht.</li>
+        <li><strong>Body:</strong> Bij een simpele expressie is een return niet nodig. Voor meerdere regels zijn accolades {} en een expliciete return vereist.</li>
+        <li><strong>Object literals:</strong> Om een object literal direct terug te geven, moeten er haakjes om het object staan: <code>(params) => ({ foo: "a" })</code></li>
+        <li><strong>Features:</strong> Ze ondersteunen rest parameters, default parameters en destructuring binnen de parameters.</li>
+    </ul>
+
+    <h4>IIFE (Immediately Invoked Function Expression)</h4>
+    <ul>
+        <li>Een IIFE is een functie die onmiddellijk wordt uitgevoerd zodra deze is gedefinieerd.</li>
+        <li>Ze worden vaak gebruikt om de globale scope niet te vervuilen en voor eenmalige initialisatiecode.</li>
+    </ul>
+
+    <h3>2. Higher Order Functions (HOF)</h3>
+
+    <h4>First-Class Functions</h4>
+    <p>JavaScript behandelt functies als First-class Functions, wat betekent dat ze kunnen worden:</p>
+    <ul>
+        <li>Toegewezen aan variabelen</li>
+        <li>Als argumenten kunnen worden doorgegeven</li>
+        <li>Door andere functies kunnen worden geretourneerd</li>
+    </ul>
+
+    <h4>Higher-Order Functions</h4>
+    <p>Een Higher-order function doet minstens één van de volgende zaken:</p>
+    <ul>
+        <li>Neemt één of meer functies als argumenten.</li>
+        <li>Retourneert een functie als resultaat.</li>
+    </ul>
+
+    <h4>Bekende HOF Voorbeelden</h4>
+    <ul>
+        <li><strong>.forEach:</strong> Voert een functie uit voor elk element.</li>
+        <li><strong>.map:</strong> Maakt een nieuwe array op basis van de resultaten van een functie.</li>
+        <li><strong>.filter:</strong> Maakt een kopie van een array gefilterd op elementen die een test doorstaan.</li>
+        <li><strong>.reduce:</strong> Voert een "reducer" callback uit op elk element om tot één waarde te komen.</li>
+        <li><strong>.addEventListener:</strong> Stelt een functie in die wordt aangeroepen bij een specifiek event.</li>
+    </ul>
+
+    <h3>3. Lexical Scope & Closures</h3>
+
+    <h4>Lexical Scope</h4>
+    <ul>
+        <li>Lexical scoping bepaalt de beschikbaarheid van variabelen op basis van hun locatie in de broncode.</li>
+        <li>Geneste functies hebben altijd toegang tot variabelen die in hun buitenste scope (outer scope) zijn gedeclareerd.</li>
+    </ul>
+
+    <h4>Variable Shadowing</h4>
+    <ul>
+        <li>Shadowing treedt op wanneer een variabele in een binnenste scope dezelfde naam heeft als een variabele in een buitenste scope.</li>
+        <li>JavaScript kijkt altijd eerst in de meest binnenste scope voor de declaratie van een variabele.</li>
+    </ul>
+
+    <h4>Closure</h4>
+    <ul>
+        <li>Een closure is de combinatie van een functie met referenties naar de omringende status (de lexical environment).</li>
+        <li>Het geeft een binnenste functie toegang tot de scope van een buitenste functie, zelfs nadat de buitenste functie is uitgevoerd.</li>
+        <li>Closures worden gecreëerd telkens wanneer een functie wordt aangemaakt.</li>
+    </ul>
+
+    <h3>4. Object-Oriented Programming (OOP)</h3>
+
+    <h4>Het this Keyword</h4>
+    <ul>
+        <li><strong>Methodes:</strong> this verwijst naar het object zelf.</li>
+        <li><strong>Globale ruimte:</strong> Verwijst naar het window object (browser) of global (Node.js).</li>
+        <li><strong>Strict mode / ESM Node:</strong> this is undefined.</li>
+        <li><strong>Arrow functions:</strong> Behouden de this waarde van de omringende lexical context.</li>
+    </ul>
+
+    <h4>Call, Apply & Bind</h4>
+    <p>Dit zijn methodes om expliciet de waarde van this in te stellen:</p>
+    <ul>
+        <li><strong>call():</strong> Roept een functie aan met een opgegeven this en individuele argumenten.</li>
+        <li><strong>apply():</strong> Werkt hetzelfde als call, maar de argumenten worden als een array doorgegeven.</li>
+        <li><strong>bind():</strong> Creëert een nieuwe functie met een permanent ingestelde this waarde.</li>
+    </ul>
+
+    <h4>Klassen en Objecten (ES6)</h4>
+    <p>Klassen in ES6 bieden een overzichtelijke syntax voor OOP:</p>
+    <ul>
+        <li><strong>Constructor:</strong> Een speciale methode die wordt aangeroepen bij het maken van een nieuw object met het new keyword.</li>
+        <li><strong>Getters:</strong> Gebruik get voor berekende eigenschappen; deze worden aangeroepen als een gewone eigenschap op het object.</li>
+        <li><strong>Private fields:</strong> Variabelen die beginnen met een # zijn privé en alleen toegankelijk binnen de klasse.</li>
+    </ul>
+
+    <h4>Overerving (Inheritance)</h4>
+    <ul>
+        <li><strong>extends:</strong> Gebruikt om een subklasse te maken van een basisklasse.</li>
+        <li><strong>super:</strong> Gebruikt om de constructor of methodes van de basisklasse (superclass) aan te roepen.</li>
+    </ul>
+
+    <h3>5. Sets, Maps & Symbols</h3>
+
+    <h4>Sets</h4>
+    <ul>
+        <li><strong>Set:</strong> Slaat unieke waarden van elk type op.</li>
+        <li><strong>Methodes:</strong> <code>.add()</code>, <code>.has()</code>, <code>.clear()</code>, <code>.forEach()</code></li>
+    </ul>
+
+    <h4>Maps</h4>
+    <ul>
+        <li><strong>Map:</strong> Houdt key-value paren bij en onthoudt de volgorde van invoeging.</li>
+        <li>Sleutels en waarden kunnen elk type zijn (objecten of primitieven).</li>
+    </ul>
+
+    <h4>Symbol & Object.freeze</h4>
+    <ul>
+        <li><strong>Symbol:</strong> Een unieke, onveranderlijke primitieve waarde, vaak gebruikt voor unieke keys.</li>
+        <li><strong>Object.freeze():</strong> Bevriest een object zodat het niet meer aangepast kan worden. Dit is de basis voor het maken van Enums in JavaScript.</li>
+    </ul>
+</div>

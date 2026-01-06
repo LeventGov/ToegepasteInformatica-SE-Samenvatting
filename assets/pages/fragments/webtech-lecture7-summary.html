@@ -1,0 +1,55 @@
+<div class="summary-body">
+
+    <h3>1. Introductie en Geschiedenis</h3>
+    <p>JavaScript werd in 1995 in tien dagen gemaakt door Brendan Eich voor Netscape als lichte scripttaal voor browsers. Naarmate webapps groeiden, werden beperkingen zichtbaar zoals het ontbreken van sterke typering, waardoor runtime-fouten laat opdoken.</p>
+    <p>TypeScript is een superset van JavaScript, ontwikkeld door Microsoft. Het voegt optionele statische types toe en wordt getranspileerd naar gewone JavaScript zodat elke browser het kan draaien.</p>
+
+    <h3>2. Basis Types in TypeScript</h3>
+    <p>TypeScript laat je expliciet definiëren welke data een variabele mag bevatten:</p>
+    <ul>
+        <li><strong>Primitieve types:</strong> <code>string</code>, <code>number</code>, <code>boolean</code>.</li>
+        <li><strong>Arrays:</strong> <code>type[]</code> (bijv. <code>string[]</code>) of <code>Array&lt;type&gt;</code>.</li>
+        <li><strong>any:</strong> Omzeilt typering; gebruik wordt afgeraden omdat je de voordelen verliest.</li>
+        <li><strong>Union types:</strong> Meerdere toegestane types via <code>|</code>, bijv. <code>string | number</code>.</li>
+    </ul>
+
+    <h3>3. Interfaces en Type Aliases</h3>
+    <p>Gebruik interfaces of type aliases om de vorm van objecten te beschrijven.</p>
+    <ul>
+        <li><strong>Interfaces:</strong> Beschrijven objectstructuren, uitbreidbaar en ideaal voor data-entiteiten.</li>
+        <li><strong>Voorbeeld:</strong> <code>interface Album { id: number; title: string; }</code></li>
+        <li><strong>Optional properties:</strong> Met <code>?</code> markeer je velden die niet verplicht zijn, bijv. <code>description?: string</code>.</li>
+    </ul>
+
+    <h3>4. Functies in TypeScript</h3>
+    <p>Type zowel parameters als returnwaardes om intentie en veiligheid te verhogen.</p>
+    <ul>
+        <li><strong>Parameters:</strong> <code>function add(a: number, b: number)</code>.</li>
+        <li><strong>Return type:</strong> <code>function add(...): number</code> voor een numeriek resultaat.</li>
+        <li><strong>Void:</strong> Gebruik <code>void</code> als een functie niets teruggeeft.</li>
+    </ul>
+
+    <h3>5. TypeScript en de DOM</h3>
+    <p>HTML-elementen vereisen specifieke types om de juiste properties te krijgen.</p>
+    <ul>
+        <li><strong>Type assertions:</strong> <code>document.querySelector(...) as HTMLTemplateElement</code> of met hoekhaak-notatie.</li>
+        <li><strong>Non-null assertion (!):</strong> Gebruik <code>!</code> als je zeker weet dat een element niet <code>null</code> is.</li>
+        <li><strong>Generics bij querySelector:</strong> <code>document.querySelector&lt;HTMLInputElement&gt;("#myInput")</code> voor directe typing.</li>
+    </ul>
+
+    <h3>6. Events en Fetch</h3>
+    <p>TypeScript heeft ingebouwde event-interfaces (zoals <code>MouseEvent</code>, <code>KeyboardEvent</code>) zodat je binnen listeners weet welke properties beschikbaar zijn.</p>
+    <p>Bij data ophalen via <code>fetch</code> is het best practice een interface te maken voor de JSON-structuur:</p>
+    <pre><code>interface Album { id: number; title: string; }
+fetch(url)
+  .then(res =&gt; res.json() as Promise&lt;Album[]&gt;)</code></pre>
+    <p>Zo weet de rest van je code dat de resultaten aan de interface voldoen.</p>
+
+    <h3>7. Configuration (tsconfig.json)</h3>
+    <p>Het <code>tsconfig.json</code> bestand stuurt de TypeScript compiler aan:</p>
+    <ul>
+        <li><strong>Target:</strong> Naar welke JavaScript-versie er wordt omgezet (bijv. ES6).</li>
+        <li><strong>Strictness:</strong> Hoe streng de controles zijn (<code>strict: true</code>).</li>
+        <li><strong>Include/Exclude:</strong> Welke mappen of bestanden meegenomen of genegeerd worden bij compilatie.</li>
+    </ul>
+</div>

@@ -1,0 +1,42 @@
+<div class="summary-body">
+
+    <h3>1. Recap: Asynchroon JavaScript & de Event Loop</h3>
+    <p>Veel JavaScript-functies draaien asynchroon: je krijgt niet onmiddellijk het resultaat, JS gaat door en wordt pas later onderbroken om de callback uit te voeren.</p>
+    <ul>
+        <li><strong>Callback functie:</strong> geef je mee; wordt aangeroepen zodra de taak klaar is.</li>
+        <li><strong>Event Loop:</strong> verplaatst callbacks uit de queue naar de call stack zodra die leeg is.</li>
+        <li><strong>Voorbeelden:</strong> <code>setTimeout(callback, ms)</code> na de opgegeven tijd; <code>addEventListener('click', callback)</code> bij een klik.</li>
+    </ul>
+
+    <h3>2. Werken met Promises</h3>
+    <p>Een Promise bevat de huidige staat van een asynchrone aanroep.</p>
+    <ul>
+        <li><strong>Staten:</strong> Pending → Fulfilled → Rejected.</li>
+        <li><strong>.then(success, fail):</strong> twee callbacks; retourneert direct een nieuwe Promise voor chaining.</li>
+        <li><strong>.catch(callback):</strong> sugar om alleen fouten af te handelen.</li>
+        <li><strong>JSON:</strong> <code>res.json()</code> geeft zelf ook een Promise met geparsete data.</li>
+    </ul>
+
+    <h3>3. Async en Await</h3>
+    <ul>
+        <li><strong>async functie:</strong> retourneert altijd een Promise; een gewone return wordt automatisch <code>Promise.resolve(value)</code>.</li>
+        <li><strong>await:</strong> wacht tot een Promise voltooit en geeft de waarde terug; alleen binnen async of top-level module.</li>
+        <li><strong>Rejection:</strong> gooit een exception; afhandelen met <code>try/catch</code>.</li>
+        <li><strong>try/catch:</strong> centraal fouten opvangen in async functies i.p.v. overal <code>.catch()</code>.</li>
+    </ul>
+
+    <h3>4. Loops en Parallelle Uitvoering</h3>
+    <ul>
+        <li><strong>for...of + await:</strong> sequentieel; wacht per iteratie.</li>
+        <li><strong>forEach:</strong> wacht niet op Promises; start alles tegelijk → kan lege resultaten of race issues geven.</li>
+        <li><strong>Parallel:</strong> gebruik <code>Promise.all(array.map(asyncFn))</code> om meerdere API-calls tegelijk te doen.</li>
+        <li><strong>Order:</strong> bij handmatig pushen is volgorde niet gegarandeerd; <code>Promise.all</code> behoudt indexvolgorde.</li>
+        <li><strong>Filter-pitfall:</strong> <code>filter</code> werkt niet met async callbacks; een async callback retourneert een Promise (truthy).</li>
+    </ul>
+
+    <h3>5. Top Level Await</h3>
+    <ul>
+        <li><strong>Top-level:</strong> <code>await</code> mag nu op het hoogste module-niveau.</li>
+        <li><strong>Gebruik:</strong> handig voor data-import of loading voordat de rest van het script draait.</li>
+    </ul>
+</div>

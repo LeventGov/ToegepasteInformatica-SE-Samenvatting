@@ -1,0 +1,98 @@
+<div class="summary-body">
+
+    <h3>1. Wat is Responsive Design?</h3>
+    <p>Responsive design is geen simpelweg verkleinen van elementen; het is een benadering waarbij ontwerp en ontwikkeling inspelen op gedrag en omgeving van de gebruiker (schermgrootte, platform, oriëntatie) om overal een goede UX te leveren.</p>
+    <ul>
+        <li><strong>Doel:</strong> Consistente, bruikbare ervaring onder alle omstandigheden.</li>
+        <li><strong>Filosofie:</strong> "Be the browser's mentor, not its micromanager" — geef regels en hints, laat de browser beslissen op basis van het apparaat.</li>
+    </ul>
+
+    <h4>Responsive vs. Adaptive Design</h4>
+    <ul>
+        <li><strong>Responsive Design:</strong> Eén codebase die vloeiend meebeweegt en reflowt over schermen.</li>
+        <li><strong>Adaptive Design:</strong> Verschillende, op apparaatklassen geoptimaliseerde sjablonen.</li>
+    </ul>
+
+    <h3>2. Assen en Logical Properties</h3>
+    <p>Moderne CSS gebruikt de inline- en blok-as voor richting: inline loopt met de tekststroom mee; block staat er haaks op.</p>
+    <ul>
+        <li><strong>Inline:</strong> Parallel aan de tekststroom (horizontaal voor Nederlands).</li>
+        <li><strong>Block:</strong> Loodrecht op de tekststroom (verticaal voor Nederlands).</li>
+    </ul>
+    <p>Gebruik logical properties in plaats van fysieke richtingen om te werken met verschillende schrijfrichtingen:</p>
+    <ul>
+        <li>Top → block-start</li>
+        <li>Bottom → block-end</li>
+        <li>Left → inline-start</li>
+        <li>Right → inline-end</li>
+        <li>Width → inline-size</li>
+        <li>Height → block-size</li>
+    </ul>
+
+    <h3>3. De Viewport</h3>
+    <p>De viewport is het zichtbare deel van het document.</p>
+    <h4>Viewport Units</h4>
+    <ul>
+        <li><strong>vw / vh:</strong> 1% van de breedte / hoogte van de viewport.</li>
+        <li><strong>vmin / vmax:</strong> 1% van de kleinste / grootste dimensie.</li>
+    </ul>
+    <h4>Mobiele Viewports</h4>
+    <p>Mobiele browsers hebben UI-elementen die in- en uitklappen; gebruik de specifieke eenheden om hierop te reageren.</p>
+    <ul>
+        <li><strong>svh / svw:</strong> Uitgeklapte UI.</li>
+        <li><strong>lvh / lvw:</strong> Ingeklapte UI.</li>
+        <li><strong>dvh / dvw:</strong> Dynamisch, past zich aan de huidige status aan.</li>
+    </ul>
+    <h4>De Viewport Meta Tag</h4>
+    <p>Voeg altijd deze tag toe om kunstmatige verkleining op mobiel te voorkomen:</p>
+    <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+    <h3>4. Eenheden en Typografie</h3>
+    <h4>Absolute vs. Relatieve eenheden</h4>
+    <ul>
+        <li><strong>Absolute:</strong> px, cm, mm — altijd dezelfde grootte.</li>
+        <li><strong>Relatieve:</strong> em, rem, ch, % — afhankelijk van font of viewport.</li>
+        <li><strong>Advies:</strong> Gebruik geen pixels voor lettertypes om gebruikersinstellingen voor leesbaarheid te respecteren.</li>
+    </ul>
+    <h4>Rem vs. Em</h4>
+    <ul>
+        <li><strong>rem:</strong> Relatief aan het root-element (&lt;html&gt;); handig voor blok-dimensies.</li>
+        <li><strong>em:</strong> Relatief aan de font-size van het element of de parent; ideaal voor inline elementen en padding die met tekst moet meeschalen.</li>
+    </ul>
+    <h4>Fluid Typography</h4>
+    <ul>
+        <li>Gebruik <code>calc()</code> en <code>clamp(min, preferred, max)</code> om tekst vloeiend te laten groeien binnen grenzen.</li>
+        <li><strong>Modular Scale:</strong> Een harmonische reeks (bijv. gulden snede) voor consistente koppen en spacing.</li>
+    </ul>
+
+    <h3>5. Intrinsic Sizing</h3>
+    <p>Laat elementen zichzelf dimensioneren op basis van hun inhoud.</p>
+    <ul>
+        <li><strong>min-content:</strong> Kleinst mogelijke breedte zonder overflow (vaak lengte van langste woord).</li>
+        <li><strong>max-content:</strong> Breedte van de inhoud zonder tekstterugloop.</li>
+        <li><strong>fit-content:</strong> Gebruikt beschikbare ruimte, maar nooit meer dan max-content.</li>
+    </ul>
+
+    <h3>6. Layout Technieken (Flexbox &amp; Grid)</h3>
+    <h4>Flexbox</h4>
+    <ul>
+        <li>Eendimensionale layout (rij of kolom).</li>
+        <li>Items kunnen groeien (<code>flex-grow</code>) of krimpen (<code>flex-shrink</code>) om ruimte te vullen.</li>
+        <li><code>flex-basis</code> bepaalt de initiële grootte van een item.</li>
+    </ul>
+    <h4>CSS Grid</h4>
+    <ul>
+        <li>Tweedimensionale layout (rijen en kolommen tegelijk).</li>
+        <li>Gebruik <code>fr</code> voor flexibele kolommen als fractie van resterende ruimte.</li>
+        <li><code>repeat(auto-fill, minmax(min, 1fr))</code> voor krachtige responsive grids zonder media queries; voegt kolommen toe zodra er ruimte is.</li>
+    </ul>
+
+    <h3>7. Media Queries</h3>
+    <p>Media queries passen CSS toe in specifieke situaties.</p>
+    <ul>
+        <li><strong>Types:</strong> all, print, screen.</li>
+        <li><strong>Features:</strong> width, height, orientation.</li>
+        <li><strong>Breakpoints:</strong> Gebruik relatieve eenheden (rem) i.p.v. pixels; kies een breakpoint waar het ontwerp breekt, niet per apparaat.</li>
+        <li><strong>Gebruik:</strong> Zie media queries als bijsturing; leun zoveel mogelijk op standaard responsive gedrag.</li>
+    </ul>
+</div>

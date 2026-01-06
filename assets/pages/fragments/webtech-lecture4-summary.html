@@ -1,0 +1,81 @@
+<div class="summary-body">
+
+    <h3>1. Basisconcepten en de Event Loop</h3>
+
+    <h4>De Call Stack</h4>
+    <p>JavaScript is een single-threaded programmeertaal, wat betekent dat de JavaScript-engine slechts één ding tegelijk kan doen.</p>
+    <ul>
+        <li><strong>Call Stack:</strong> Een stapel-datastructuur die informatie opslaat over actieve functies. Wanneer een functie wordt aangeroepen, wordt deze op de stack gepusht; wanneer de functie klaar is, wordt deze eraf gehaald (pop).</li>
+        <li><strong>Blocking Functions:</strong> Functies die lang duren om uit te voeren (bijv. complexe berekeningen) blokkeren de stack. Hierdoor kan de browser niet reageren op andere events zoals klikken, en "hangt" de pagina.</li>
+    </ul>
+
+    <h4>Asynchroon Programmeren</h4>
+    <p>Dit is een techniek waarmee een programma een taak die lang kan duren kan starten en ondertussen responsief blijft voor andere gebeurtenissen. Zodra de taak klaar is, krijgt het programma het resultaat.</p>
+    <ul>
+        <li><strong>Web API's:</strong> Functies zoals <code>fetch()</code>, <code>setTimeout()</code> en DOM-events worden afgehandeld door de browser (Web API's) buiten de hoofdstack.</li>
+        <li><strong>Callback Queue:</strong> Zodra een asynchrone taak klaar is, wordt de bijbehorende callback-functie in deze wachtrij geplaatst.</li>
+        <li><strong>Event Loop:</strong> Wanneer de call stack leeg is, verplaatst de event loop de eerste functie uit de callback queue naar de call stack om uitgevoerd te worden.</li>
+    </ul>
+
+    <h3>2. Callback Functies</h3>
+
+    <h4>Wat is een Callback?</h4>
+    <ul>
+        <li>Een callback is een functie die als argument aan een andere functie wordt doorgegeven en later wordt aangeroepen om een actie te voltooien.</li>
+    </ul>
+
+    <h4>Problemen met Callbacks</h4>
+    <ul>
+        <li><strong>Callback Hell / Pyramid of Doom:</strong> Bij het achter elkaar uitvoeren van meerdere asynchrone taken ontstaat diep geneste code die onleesbaar en moeilijk te onderhouden is.</li>
+        <li><strong>Inconsistentie:</strong> Er is geen standaard voor de volgorde van parameters of voor foutafhandeling.</li>
+        <li><strong>Foutafhandeling:</strong> Het is lastig om fouten centraal op te vangen omdat de logica verspreid is over verschillende lagen.</li>
+    </ul>
+
+    <h3>3. Promises</h3>
+
+    <h4>Wat is een Promise?</h4>
+    <ul>
+        <li>Een Promise is een object dat de uiteindelijke voltooiing (of mislukking) van een asynchrone operatie vertegenwoordigt.</li>
+    </ul>
+
+    <h4>States van een Promise</h4>
+    <ul>
+        <li><strong>Pending:</strong> Initiële status, de operatie is nog bezig.</li>
+        <li><strong>Fulfilled:</strong> De operatie is succesvol voltooid.</li>
+        <li><strong>Rejected:</strong> De operatie is mislukt.</li>
+        <li><strong>Settled:</strong> De Promise is ofwel fulfilled of rejected (klaar).</li>
+    </ul>
+
+    <h4>Werken met Promises</h4>
+    <ul>
+        <li><strong>.then():</strong> Voegt callback-functies toe voor het geval de Promise wordt vervuld (fulfilled). Het retourneert onmiddellijk een nieuwe Promise, wat chaining mogelijk maakt.</li>
+        <li><strong>.catch():</strong> Wordt gebruikt om fouten (rejections) af te handelen. Het gedraagt zich als een <code>.then(undefined, onRejected)</code></li>
+    </ul>
+
+    <h4>Eigen Promises Schrijven</h4>
+    <ul>
+        <li>Je kunt een Promise maken met de <code>new Promise((resolve, reject) => { ... })</code> constructor.</li>
+        <li><strong>resolve(waarde):</strong> Zet de status op fulfilled.</li>
+        <li><strong>reject(reden):</strong> Zet de status op rejected.</li>
+        <li><code>Promise.resolve()</code> en <code>Promise.reject()</code> kunnen worden gebruikt om direct een gesettelde Promise te retourneren.</li>
+    </ul>
+
+    <h3>4. Compositie van Promises</h3>
+
+    <h4>Methoden voor Meerdere Promises</h4>
+    <p>JavaScript biedt methoden om met meerdere Promises tegelijk te werken:</p>
+    <ul>
+        <li><strong>Promise.all(iterable):</strong> Wacht tot alle Promises vervuld zijn en geeft een array van resultaten terug. Als er één faalt, faalt de hele operatie onmiddellijk.</li>
+        <li><strong>Promise.allSettled(iterable):</strong> Wacht tot alle Promises klaar zijn, ongeacht of ze geslaagd of mislukt zijn.</li>
+        <li><strong>Promise.race(iterable):</strong> Keert terug zodra de eerste Promise uit de lijst klaar is (fulfilled of rejected).</li>
+        <li><strong>Promise.any(iterable):</strong> Wacht tot de eerste Promise succesvol is. Het faalt pas als alle Promises in de lijst falen.</li>
+    </ul>
+
+    <h3>5. Fetch API</h3>
+
+    <h4>fetch() Functie</h4>
+    <ul>
+        <li><strong>Basisgebruik:</strong> De <code>fetch()</code> functie wordt gebruikt om HTTP-verzoeken te doen en retourneert een Promise.</li>
+        <li><strong>Response verwerking:</strong> Het resultaat van een fetch moet vaak nog verwerkt worden (bijv. naar JSON), wat ook weer een asynchrone operatie is: <code>response.json()</code> retourneert eveneens een Promise.</li>
+    </ul>
+</div>

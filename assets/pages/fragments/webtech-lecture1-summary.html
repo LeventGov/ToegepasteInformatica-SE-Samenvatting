@@ -1,0 +1,157 @@
+<div class="summary-body">
+
+    <h3>1. De Werkomgeving en Script-beheer</h3>
+
+    <h4>Script Loading in HTML</h4>
+    <p>Hoe een script wordt geladen, heeft grote invloed op de prestaties en het gedrag van een webpagina:</p>
+    <ul>
+        <li><strong>Standaard &lt;script&gt;:</strong> Wanneer de browser een gewone script-tag tegenkomt, wordt het parseren van de HTML gepauzeerd. Het script wordt gedownload en direct uitgevoerd, waarna de browser pas verdergaat met de rest van de HTML.</li>
+        <li><strong>defer attribuut:</strong> Het script wordt parallel aan het parseren van de HTML gedownload. De uitvoering vindt pas plaats nadat de volledige HTML-pagina is geparseerd. Dit is de aanbevolen methode omdat het de parser niet blokkeert.</li>
+        <li><strong>async attribuut:</strong> Voor klassieke scripts zorgt dit ervoor dat het script parallel wordt gedownload en uitgevoerd zodra het beschikbaar is, wat het parseren van de HTML tijdelijk kan onderbreken.</li>
+        <li><strong>Modules:</strong> Scripts met type="module" zijn standaard deferred.</li>
+    </ul>
+
+    <h4>Node.js en Package Management</h4>
+    <ul>
+        <li><strong>Node.js:</strong> Een open-source JavaScript-runtime die het mogelijk maakt om JavaScript buiten de browser te draaien, bijvoorbeeld voor servers of command-line tools.</li>
+        <li><strong>NPM (Node Package Manager):</strong> Hiermee kun je bibliotheken van derden installeren en beheren.</li>
+        <li><strong>Project Initialisatie:</strong> Met npm init -y maak je een package.json aan, waarin alle instellingen en afhankelijkheden van je project worden opgeslagen.</li>
+    </ul>
+
+    <h4>Module Systemen</h4>
+    <ul>
+        <li><strong>CommonJS (CJS):</strong> Maakt gebruik van require() en module.exports.</li>
+        <li><strong>ES Modules (ESM):</strong> De moderne standaard die gebruikmaakt van import en export.</li>
+        <li><strong>Best Practice:</strong> Gebruik altijd ES Modules door "type": "module" in je package.json te zetten.</li>
+    </ul>
+
+    <h3>2. Variabelen, Scope en Hoisting</h3>
+
+    <h4>Declaratie Keywords</h4>
+    <ul>
+        <li><strong>var:</strong> Verouderd en moet vermeden worden. Het heeft "function scope", wat betekent dat het buiten codeblokken (zoals if of for) nog steeds toegankelijk kan zijn zolang het binnen dezelfde functie staat.</li>
+        <li><strong>let:</strong> Voor variabelen waarvan de waarde kan veranderen. Het heeft "block scope" (alleen tussen { }).</li>
+        <li><strong>const:</strong> Voor variabelen die na initialisatie niet meer veranderen. Heeft ook "block scope".</li>
+    </ul>
+
+    <h4>Scope en Hoisting</h4>
+    <ul>
+        <li><strong>Global vs Local:</strong> Variabelen in de global scope zijn overal toegankelijk. Een nieuwe local scope wordt aangemaakt bij elke functie-aanroep.</li>
+        <li><strong>Hoisting:</strong> Dit is het gedrag waarbij declaraties naar de "top" van hun scope worden getild tijdens de compile-fase.
+            <ul>
+                <li><strong>Functies:</strong> Volledig gehost; je kunt een functie aanroepen voordat deze in de code gedefinieerd is.</li>
+                <li><strong>var:</strong> Alleen de declaratie wordt gehost, niet de toewijzing. Dit resulteert vaak in undefined.</li>
+                <li><strong>let / const:</strong> Worden niet gehost; ze aanroepen voor declaratie geeft een ReferenceError.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3. JavaScript "Weirdness" en Type Coercion</h3>
+
+    <h4>Automatische Conversie (Coercion)</h4>
+    <p>JavaScript probeert vaak types automatisch om te zetten op basis van de gebruikte operator.</p>
+    <ul>
+        <li><strong>De + operator:</strong> Werkt zowel voor optellen als voor string-concatenatie.
+            <ul>
+                <li><code>{} + {}</code> → "[object Object] [object Object]"</li>
+                <li><code>[] + []</code> → "" (lege string)</li>
+                <li><code>[] + {}</code> → "[object Object]"</li>
+            </ul>
+        </li>
+        <li><strong>Vreemde resultaten:</strong>
+            <ul>
+                <li><code>Array(16).join('wat' + 1)</code> resulteert in 15 keer "wat1" achter elkaar.</li>
+                <li><code>Array(16).join('wat' - 1)</code> resulteert in "NaNNaN..." omdat 'wat' - 1 niet berekend kan worden.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Gelijkheid en Vergelijking</h4>
+    <ul>
+        <li><strong>Gebruik altijd === (strikt gelijk).</strong>
+            <ul>
+                <li><code>2 == '2'</code> is true (doet type conversie).</li>
+                <li><code>2 === '2'</code> is false (controleert ook het type).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>De parseInt Valkuil</h4>
+    <ul>
+        <li><code>parseInt(waarde, radix)</code> accepteert een grondtal (radix).</li>
+        <li>Bij <code>['1', '7', '11'].map(parseInt)</code> geeft .map drie argumenten door: de waarde, de index en de array.</li>
+        <li>Dit zorgt ervoor dat parseInt de index als radix gebruikt:
+            <ul>
+                <li><code>parseInt('1', 0)</code> → 1 (0 wordt standaard 10).</li>
+                <li><code>parseInt('7', 1)</code> → NaN (basis 1 bestaat niet).</li>
+                <li><code>parseInt('11', 2)</code> → 3 (11 in binair is 3).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Geavanceerde Functie- en Object-syntax</h3>
+
+    <h4>Functie Parameters</h4>
+    <ul>
+        <li><strong>Default Parameters:</strong> Je kunt een standaardwaarde meegeven aan een parameter: function multiply(a, b = 2).</li>
+        <li><strong>Rest Parameters:</strong> Met ...namen kun je een onbepaald aantal argumenten opvangen in een array.</li>
+        <li><strong>Arguments Object:</strong> Oudere manier om alle meegegeven argumenten te zien; dit is een array-achtig object.</li>
+    </ul>
+
+    <h4>Spread en Destructuring</h4>
+    <ul>
+        <li><strong>Spread Syntax (...):</strong> Expandert een iterable in losse elementen.
+            <ul>
+                <li><strong>Arrays:</strong> const combo = [...arr1, ...arr2].</li>
+                <li><strong>Objecten:</strong> const combined = { ...obj1, ...obj2 }.</li>
+            </ul>
+        </li>
+        <li><strong>Destructuring:</strong> Snel waarden uitpakken.
+            <ul>
+                <li><code>const [a, b] = ['een', 'twee'].</code></li>
+                <li><code>const { name, age } = person.</code></li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Kopiëren van Objecten</h4>
+    <ul>
+        <li><strong>Reference vs Value:</strong> Primitieve types (Number, String) worden gekopieerd bij toewijzing. Objecten en arrays worden via referentie doorgegeven; wijzig je de kopie, dan wijzigt het origineel.</li>
+        <li><strong>Shallow Copy:</strong> Met de spread operator {...obj} kopieer je de eigenschappen, maar geneste objecten blijven dezelfde referentie houden.</li>
+        <li><strong>Deep Copy:</strong>
+            <ul>
+                <li><code>JSON.parse(JSON.stringify(obj)):</code> Simpel, maar verliest Date-objecten en functies.</li>
+                <li><code>structuredClone(obj):</code> De moderne, aanbevolen manier voor een volledige diepe kopie.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Object Inspectie en Loops</h4>
+    <ul>
+        <li><strong>Object Methods:</strong>
+            <ul>
+                <li><code>Object.keys(obj):</code> Geeft een array van alle eigenschap-namen.</li>
+                <li><code>Object.values(obj):</code> Geeft een array van alle waarden.</li>
+                <li><code>Object.entries(obj):</code> Geeft een array van [key, value] paren.</li>
+            </ul>
+        </li>
+        <li><strong>Property Checks:</strong>
+            <ul>
+                <li><code>'prop' in obj:</code> Controleert of een eigenschap bestaat (ook geërfde).</li>
+                <li><code>Object.hasOwn(obj, 'prop'):</code> Controleert alleen of de eigenschap van het object zelf is.</li>
+            </ul>
+        </li>
+        <li><strong>Itereren:</strong>
+            <ul>
+                <li><strong>for...of:</strong> De beste manier voor arrays en iterables.</li>
+                <li><strong>for...in:</strong> Itereert over alle enumerable eigenschappen, inclusief geërfde. Dit wordt meestal afgeraden voor arrays.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Optional Chaining (?.)</h4>
+    <ul>
+        <li>Voorkomt crashes wanneer je een eigenschap van een mogelijk null of undefined object probeert te lezen.</li>
+        <li><strong>Voorbeeld:</strong> person.cat?.name geeft undefined terug als cat niet bestaat, in plaats van een foutmelding te geven.</li>
+    </ul>
+</div>

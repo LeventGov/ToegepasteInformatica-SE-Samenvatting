@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Web Technology - Samenvatting en studiemateriaal">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: blob:; img-src 'self' data:; style-src 'self'; script-src 'self' 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; font-src 'self' data:; connect-src 'self'; frame-src 'self' data: blob:; object-src 'self' data: blob:;">
+    <title>Web Technology | TI Eindexamens</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/osc-page.css">
+</head>
+
+<body>
+    <!-- Web Technology course page -->
+    <header role="banner">
+        <nav role="navigation" aria-label="Hoofdnavigatie">
+            <div class="container">
+                <h1>Web Technology</h1>
+                <p class="subtitle">Volledige Samenvatting & Studiemateriaal</p>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <a href="../../index.html" class="back-btn" aria-label="Terug naar homepage">
+            ← Terug naar alle vakken
+        </a>
+
+        <section class="content-section" aria-labelledby="actions-heading">
+            <h2 id="actions-heading">Acties</h2>
+            <div class="card-actions">
+                <a href="webtech-mock-exam.html" class="btn btn-primary" aria-label="Start de Web Technology mock exam">
+                    📝 Start Mock Exam
+                </a>
+                <a href="#lecture1-summary" class="btn btn-secondary" aria-label="Bekijk samenvatting Web Technology">
+                    📚 Bekijk Samenvatting
+                </a>
+                <a href="webtech-study-guide.html" class="btn btn-study-tips" aria-label="Bekijk Web Technology study tips">
+                    💡 Study Tips
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section collapsible expanded" aria-labelledby="lectures-heading" id="lectures-section">
+            <div class="section-header">
+                <h2 id="lectures-heading">📚 Lectures</h2>
+                <button class="expand-btn" aria-label="Toggle lectures">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="lectures-list">
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📗</span>
+                            <div>
+                                <h3>Lecture 1: Declaring Variables</h3>
+                                <p>Variabelen aanmaken met let/const/var, naming en scope-basics.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture1-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture1webtech.pdf" class="btn-icon"
+                                target="_blank" rel="noopener" aria-label="Open Lecture 1 PDF in nieuw tabblad"
+                                title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📙</span>
+                            <div>
+                                <h3>Lecture 2: Functies, Closures & OOP</h3>
+                                <p>Functie-definities, arrow functions, closures, lexical scope en object-oriented programming.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture2-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture2webtech.pdf" class="btn-icon"
+                                target="_blank" rel="noopener" aria-label="Open Lecture 2 PDF in nieuw tabblad"
+                                title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📕</span>
+                            <div>
+                                <h3>Lecture 3: Advanced CSS</h3>
+                                <p>Pseudo-classes, pseudo-elementen, box-sizing, CSS variabelen, nesting, calc() en kleurmodellen.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture3-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture3webtech.pdf" class="btn-icon" target="_blank"
+                                rel="noopener" aria-label="Open Lecture 3 PDF in nieuw tabblad" title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📗</span>
+                            <div>
+                                <h3>Lecture 4: Asynchroon Programmeren</h3>
+                                <p>Event loop, callbacks, promises, promise compositie en fetch API.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture4-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture4webtech.pdf" class="btn-icon" target="_blank"
+                                rel="noopener" aria-label="Open Lecture 4 PDF in nieuw tabblad" title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📘</span>
+                            <div>
+                                <h3>Lecture 5: Async / Await</h3>
+                                <p>Async/await, promise afhandeling, loops, parallel uitvoeren en top-level await.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture5-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture5webtech.pdf" class="btn-icon" target="_blank"
+                                rel="noopener" aria-label="Open Lecture 5 PDF in nieuw tabblad" title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📙</span>
+                            <div>
+                                <h3>Lecture 6: Responsive (by) Design</h3>
+                                <p>Responsive principes: logical properties, viewport units, fluid type, grids en media queries.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture6-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture6webtech.pdf" class="btn-icon" target="_blank"
+                                rel="noopener" aria-label="Open Lecture 6 PDF in nieuw tabblad" title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lecture-card">
+                    <div class="lecture-header-simple">
+                        <div class="lecture-title-section">
+                            <span class="lecture-icon">📗</span>
+                            <div>
+                                <h3>Lecture 7: TypeScript</h3>
+                                <p>Intro TypeScript, types, interfaces, DOM typing, events en tsconfig.</p>
+                            </div>
+                        </div>
+                        <div class="lecture-actions">
+                            <a href="#lecture7-summary" class="btn-icon" aria-label="Ga naar samenvatting"
+                                title="Bekijk Samenvatting">
+                                📖
+                            </a>
+                            <a href="../../courses/webtech/cursus/lecture7webtech.pdf" class="btn-icon" target="_blank"
+                                rel="noopener" aria-label="Open Lecture 7 PDF in nieuw tabblad" title="Open PDF">
+                                📄
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="lecture1-summary" class="content-section summary-section" aria-labelledby="lecture1-heading">
+            <div class="summary-header">
+                <h2 id="lecture1-heading">📚 Lecture 1: Geavanceerde JavaScript Basis - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture1-summary.html"></div>
+        </section>
+
+        <section id="lecture2-summary" class="content-section summary-section" aria-labelledby="lecture2-heading">
+            <div class="summary-header">
+                <h2 id="lecture2-heading">📚 Lecture 2: Functies, Closures & OOP - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture2-summary.html"></div>
+        </section>
+
+        <section id="lecture3-summary" class="content-section summary-section" aria-labelledby="lecture3-heading">
+            <div class="summary-header">
+                <h2 id="lecture3-heading">📚 Lecture 3: Advanced CSS - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture3-summary.html"></div>
+        </section>
+
+        <section id="lecture4-summary" class="content-section summary-section" aria-labelledby="lecture4-heading">
+            <div class="summary-header">
+                <h2 id="lecture4-heading">📚 Lecture 4: Asynchroon Programmeren - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture4-summary.html"></div>
+        </section>
+
+        <section id="lecture5-summary" class="content-section summary-section" aria-labelledby="lecture5-heading">
+            <div class="summary-header">
+                <h2 id="lecture5-heading">📚 Lecture 5: Async / Await - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture5-summary.html"></div>
+        </section>
+
+        <section id="lecture6-summary" class="content-section summary-section" aria-labelledby="lecture6-heading">
+            <div class="summary-header">
+                <h2 id="lecture6-heading">📚 Lecture 6: Responsive (by) Design - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture6-summary.html"></div>
+        </section>
+
+        <section id="lecture7-summary" class="content-section summary-section" aria-labelledby="lecture7-heading">
+            <div class="summary-header">
+                <h2 id="lecture7-heading">📚 Lecture 7: TypeScript - Samenvatting</h2>
+                <button class="expand-btn" aria-label="Toggle samenvatting">
+                    <span class="expand-icon">▼</span>
+                </button>
+            </div>
+            <div class="summary-content" data-fragment="fragments/webtech-lecture7-summary.html"></div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 TI Eindexamens | Gemaakt voor studievoorbereiding</p>
+        </div>
+    </footer>
+
+    <script defer src="../js/osc-page.js"></script>
+    <script defer src="../js/top-button.js"></script>
+    <script defer src="../js/load-summaries.js"></script>
+</body>
+
+</html>

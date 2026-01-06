@@ -1,0 +1,183 @@
+<div class="summary-body">
+
+    <h3>1. Basisconcepten en de Event Loop</h3>
+
+    <h4>De Call Stack</h4>
+    <p>JavaScript is een single-threaded programmeertaal, wat betekent dat de JavaScript-engine slechts één ding tegelijk kan doen.</p>
+    <ul>
+        <li><strong>Call Stack:</strong> Een stapel-datastructuur die informatie opslaat over actieve functies. Wanneer een functie wordt aangeroepen, wordt deze op de stack gepusht; wanneer de functie klaar is, wordt deze eraf gehaald (pop).</li>
+        <li><strong>Blocking Functions:</strong> Functies die lang duren om uit te voeren (bijv. complexe berekeningen) blokkeren de stack. Hierdoor kan de browser niet reageren op andere events zoals klikken, en "hangt" de pagina.</li>
+    </ul>
+
+    <h4>Asynchroon Programmeren</h4>
+    <p>Dit is een techniek waarmee een programma een taak die lang kan duren kan starten en ondertussen responsief blijft voor andere gebeurtenissen. Zodra de taak klaar is, krijgt het programma het resultaat.</p>
+    <ul>
+        <li><strong>Web API's:</strong> Functies zoals <code>fetch()</code>, <code>setTimeout()</code> en DOM-events worden afgehandeld door de browser (Web API's) buiten de hoofdstack.</li>
+        <li><strong>Callback Queue:</strong> Zodra een asynchrone taak klaar is, wordt de bijbehorende callback-functie in deze wachtrij geplaatst.</li>
+        <li><strong>Event Loop:</strong> Wanneer de call stack leeg is, verplaatst de event loop de eerste functie uit de callback queue naar de call stack om uitgevoerd te worden.</li>
+    </ul>
+
+    <h3>2. Callback Functies</h3>
+
+    <h4>Wat is een Callback?</h4>
+    <ul>
+        <li>Een callback is een functie die als argument aan een andere functie wordt doorgegeven en later wordt aangeroepen om een actie te voltooien.</li>
+    </ul>
+
+    <h4>Problemen met Callbacks</h4>
+    <ul>
+        <li><strong>Callback Hell / Pyramid of Doom:</strong> Bij het achter elkaar uitvoeren van meerdere asynchrone taken ontstaat diep geneste code die onleesbaar en moeilijk te onderhouden is.</li>
+        <li><strong>Inconsistentie:</strong> Er is geen standaard voor de volgorde van parameters of voor foutafhandeling.</li>
+        <li><strong>Foutafhandeling:</strong> Het is lastig om fouten centraal op te vangen omdat de logica verspreid is over verschillende lagen.</li>
+    </ul>
+
+    <h3>3. Promises</h3>
+
+    <h4>Wat is een Promise?</h4>
+    <ul>
+        <li>Een Promise is een object dat de uiteindelijke voltooiing (of mislukking) van een asynchrone operatie vertegenwoordigt.</li>
+    </ul>
+
+    <h4>States van een Promise</h4>
+    <ul>
+        <li><strong>Pending:</strong> Initiële status, de operatie is nog bezig.</li>
+        <li><strong>Fulfilled:</strong> De operatie is succesvol voltooid.</li>
+        <li><strong>Rejected:</strong> De operatie is mislukt.</li>
+        <li><strong>Settled:</strong> De Promise is ofwel fulfilled of rejected (klaar).</li>
+    </ul>
+
+    <h4>Werken met Promises</h4>
+    <ul>
+        <li><strong>.then():</strong> Voegt callback-functies toe voor het geval de Promise wordt vervuld (fulfilled). Het retourneert onmiddellijk een nieuwe Promise, wat chaining mogelijk maakt.</li>
+        <li><strong>.catch():</strong> Wordt gebruikt om fouten (rejections) af te handelen. Het gedraagt zich als een <code>.then(undefined, onRejected)</code></li>
+    </ul>
+
+    <h4>Eigen Promises Schrijven</h4>
+    <ul>
+        <li>Je kunt een Promise maken met de <code>new Promise((resolve, reject) => { ... })</code> constructor.</li>
+        <li><strong>resolve(waarde):</strong> Zet de status op fulfilled.</li>
+        <li><strong>reject(reden):</strong> Zet de status op rejected.</li>
+        <li><code>Promise.resolve()</code> en <code>Promise.reject()</code> kunnen worden gebruikt om direct een gesettelde Promise te retourneren.</li>
+    </ul>
+
+    <h3>4. Compositie van Promises</h3>
+
+    <h4>Methoden voor Meerdere Promises</h4>
+    <p>JavaScript biedt methoden om met meerdere Promises tegelijk te werken:</p>
+    <ul>
+        <li><strong>Promise.all(iterable):</strong> Wacht tot alle Promises vervuld zijn en geeft een array van resultaten terug. Als er één faalt, faalt de hele operatie onmiddellijk.</li>
+        <li><strong>Promise.allSettled(iterable):</strong> Wacht tot alle Promises klaar zijn, ongeacht of ze geslaagd of mislukt zijn.</li>
+        <li><strong>Promise.race(iterable):</strong> Keert terug zodra de eerste Promise uit de lijst klaar is (fulfilled of rejected).</li>
+        <li><strong>Promise.any(iterable):</strong> Wacht tot de eerste Promise succesvol is. Het faalt pas als alle Promises in de lijst falen.</li>
+    </ul>
+
+    <h3>5. Fetch API</h3>
+
+    <h4>fetch() Functie</h4>
+    <ul>
+        <li><strong>Basisgebruik:</strong> De <code>fetch()</code> functie wordt gebruikt om HTTP-verzoeken te doen en retourneert een Promise.</li>
+        <li><strong>Response verwerking:</strong> Het resultaat van een fetch moet vaak nog verwerkt worden (bijv. naar JSON), wat ook weer een asynchrone operatie is: <code>response.json()</code> retourneert eveneens een Promise.</li>
+    </ul>
+</div>
+
+    <h4>Wat zijn Pseudo-classes?</h4>
+    <p>Een pseudo-class is een trefwoord dat aan een selector wordt toegevoegd om een specifieke staat van het geselecteerde element aan te geven.</p>
+
+    <h4>Interactie en Staat</h4>
+    <ul>
+        <li><strong>:hover:</strong> Wordt geactiveerd wanneer de gebruiker met een aanwijsapparaat (zoals een muis) over een element gaat.</li>
+        <li><strong>:focus:</strong> Geldt wanneer een element de focus krijgt (bijv. via toetsenbord of klik).</li>
+        <li><strong>:checked:</strong> Specifiek voor elementen zoals checkboxes en radiobuttons die zijn ingeschakeld.</li>
+        <li><strong>:invalid:</strong> Selecteert elementen met ongeldige inhoud, wat essentieel is voor formulier-validatie.</li>
+    </ul>
+
+    <h4>Voorbeeld: Formulier-validatie</h4>
+    <ul>
+        <li>Een invoerveld met <code>required</code> en <code>minlength="5"</code> krijgt de status <code>:invalid</code> als het leeg is of te kort.</li>
+        <li>Je kunt hiermee foutmeldingen tonen door een sibling selector te gebruiken: <code>input:invalid + .invalid-message { display: block; }</code></li>
+    </ul>
+
+    <h4>Tree-structural Pseudo-classes</h4>
+    <p>Deze selecteren elementen op basis van hun positie in de documentboom:</p>
+    <ul>
+        <li><strong>::root:</strong> Vertegenwoordigt de wortel van het document (meestal het &lt;html&gt; element).</li>
+        <li><strong>:nth-child(An+B):</strong> Selecteert elementen op basis van een wiskundige formule binnen een lijst van broers/zussen.</li>
+        <li><strong>:first-child en :last-child:</strong> Selecteren respectievelijk het eerste of laatste kind van een parent.</li>
+        <li><strong>:empty:</strong> Selecteert elementen die geen kinderen hebben (zelfs geen tekst, behalve witruimte).</li>
+    </ul>
+
+    <h4>Functionele Pseudo-classes</h4>
+    <ul>
+        <li><strong>:not():</strong> De negatie-pseudo-class; selecteert elementen die niet overeenkomen met de opgegeven selector(en).</li>
+        <li><strong>:is() en :where():</strong> Gebruikt voor het groeperen van selectors. Het verschil is dat <code>:is()</code> de specificiteit van de meest specifieke selector in de lijst overneemt, terwijl <code>:where()</code> altijd een specificiteit van 0 heeft.</li>
+        <li><strong>:has():</strong> De "relational" pseudo-class (vaak de parent selector genoemd). Het selecteert een element als het bepaalde kinderen of nakomelingen bevat die aan de selector voldoen.</li>
+    </ul>
+
+    <h3>2. Pseudo-elementen</h3>
+
+    <h4>Wat zijn Pseudo-elementen?</h4>
+    <p>Pseudo-elementen worden gebruikt om specifieke onderdelen van een element te stijlen en worden aangeduid met twee dubbele punten (::).</p>
+
+    <h4>Veelgebruikte Pseudo-elementen</h4>
+    <ul>
+        <li><strong>::first-letter:</strong> Stijlt de eerste letter van de eerste regel van een blok-element.</li>
+        <li><strong>::first-line:</strong> Stijlt de volledige eerste regel van een tekstblok.</li>
+        <li><strong>::before en ::after:</strong> Creëren een pseudo-element dat respectievelijk het eerste of laatste kind van het geselecteerde element is. De property <code>content</code> is hierbij verplicht.</li>
+    </ul>
+
+    <h4>Belangrijk: Universele Selector</h4>
+    <ul>
+        <li>De universele selector (*) selecteert standaard geen ::before en ::after.</li>
+        <li>Om alles te selecteren gebruik je <code>*, *::before, *::after</code></li>
+    </ul>
+
+    <h3>3. Box-sizing en Layout</h3>
+
+    <h4>Box-sizing Property</h4>
+    <p>De property box-sizing bepaalt hoe de totale breedte en hoogte van een element wordt berekend:</p>
+    <ul>
+        <li><strong>content-box (standaard):</strong> Breedte = inhoud. Padding en border worden bovenop de breedte geteld.</li>
+        <li><strong>border-box:</strong> De opgegeven breedte is inclusief padding en border. Dit maakt lay-outs voorspelbaarder.</li>
+    </ul>
+
+    <h3>4. CSS Variabelen (Custom Properties)</h3>
+
+    <h4>Variabelen Definiëren</h4>
+    <ul>
+        <li>Variabelen worden gedefinieerd met de <code>--</code> syntax en aangeroepen met de <code>var()</code> functie.</li>
+        <li><strong>Definitie:</strong> Meestal binnen <code>:root</code> voor een globaal bereik: <code>--primary-color: #ff0000;</code></li>
+        <li><strong>Inheritance:</strong> Variabelen worden overgeërfd door alle kind-elementen.</li>
+    </ul>
+
+    <h4>Geavanceerde Features</h4>
+    <ul>
+        <li><strong>Media Features:</strong> Je kunt variabelen gebruiken om kleurenschema's te wisselen met <code>@media (prefers-color-scheme: dark)</code> voor ondersteuning van Dark Mode.</li>
+        <li><strong>@property:</strong> Maakt het mogelijk om het type, de standaardwaarde en de overervingsregels van een variabele expliciet te definiëren.</li>
+    </ul>
+
+    <h3>5. CSS Nesting</h3>
+
+    <h4>Wat is CSS Nesting?</h4>
+    <p>Met CSS nesting kun je stijlregels binnen elkaar schrijven, vergelijkbaar met SASS/SCSS:</p>
+    <ul>
+        <li><strong>Descendant:</strong> <code>label { input { ... } }</code> stijlt alle inputs binnen een label.</li>
+        <li><strong>& nesting selector:</strong> Wordt gebruikt om de relatie met de parent expliciet te maken, vooral bij compound selectors zoals <code>a { &#selected { ... } }</code>, wat resulteert in <code>a#selected</code></li>
+    </ul>
+
+    <h3>6. Berekeningen met calc()</h3>
+
+    <h4>calc() Functie</h4>
+    <ul>
+        <li>Met <code>calc()</code> kunnen berekeningen worden uitgevoerd binnen CSS (bijv. <code>width: calc(100% - 40px);</code>)</li>
+        <li><strong>Belangrijk:</strong> Gebruik altijd witruimte rond de operatoren + en - om verwarring met negatieve getallen te voorkomen.</li>
+    </ul>
+
+    <h3>7. Kleuren en Kleurmodellen</h3>
+
+    <h4>CSS Kleurmogelijkheden</h4>
+    <p>CSS ondersteunt diverse kleurmodellen en kleurruimtes:</p>
+    <ul>
+        <li><strong>Modellen:</strong> Naast <code>rgb()</code> en <code>hsl()</code> zijn er modernere modellen zoals OKLAB en OKLCH, die beter aansluiten bij de menselijke perceptie van kleur.</li>
+        <li><strong>Relative Color Syntax:</strong> Maakt het mogelijk om een nieuwe kleur te definiëren op basis van een bestaande kleur: <code>rgb(from var(--primary) r g b / 70%)</code> creëert een transparante variant van de hoofdkleur.</li>
+    </ul>
+</div>
