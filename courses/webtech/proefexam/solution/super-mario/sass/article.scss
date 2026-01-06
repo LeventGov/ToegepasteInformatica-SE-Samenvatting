@@ -1,0 +1,43 @@
+@use "constants";
+
+article {
+
+
+  flex: 1 0 30rem;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+    color: constants.$secondary-color;
+    text-align: center;
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    line-height: 120%;
+
+    &.summary {
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 32rem) {
+
+  article {
+    flex-shrink: 1;
+    text-align: center;
+  }
+  
+  article p:not(.summary) {
+    display: none;
+  }
+}

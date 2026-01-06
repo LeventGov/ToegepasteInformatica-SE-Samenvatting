@@ -1,0 +1,16 @@
+@use "constants.scss";
+@use "article.scss";
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+h1 {
+  color: constants.$primary-color;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+  font-size: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.95rem);
+}

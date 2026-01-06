@@ -1,0 +1,17 @@
+{
+  "name": "taylor-swift",
+  "version": "1.0.0",
+  "main": "question3a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module",
+  "devDependencies": {},
+  "description": "Taylor Swift API - Question 3a (Promise) and 3b (Async/Await)"
+}

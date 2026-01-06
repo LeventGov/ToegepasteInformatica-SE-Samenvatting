@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Mario Characters</title>
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/index.js" type="module"></script>
+
+  <style>
+    h1 {
+        font-weight: bold;
+        text-align: center;
+        margin: 1rem 0 2rem 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin: 0.5rem 0 1rem 0;
+    }
+
+    p {
+        margin-bottom: 0.5rem;
+        line-height: 120%;
+    }
+
+    article {
+        width: 20rem;
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    article img {
+        display: block;
+        margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+      <h1>Super Mario Characters</h1>
+
+      <main>
+        <!-- 
+        OPMERKING: Hier waren eerst hardcoded <article> elementen
+        We gebruiken nu een <template> i.p.v. hardcoded HTML
+        Dit is beter omdat:
+        1. DRY (Don't Repeat Yourself) - schrijf HTML maar 1 keer
+        2. We clonen het template met JavaScript
+        3. Efficiënter en makkelijker te onderhouden
+        -->
+
+        <!-- STAP 1: Template element -->
+        <!-- Dit is een HTML element dat NIET getoond wordt in de pagina -->
+        <!-- We clonen dit en vullen het met data uit de API -->
+        <template id="character-template">
+            <article>
+                <!-- Karakter naam -->
+                <h2></h2>
+                
+                <!-- Karakter afbeelding -->
+                <img src="#" alt="" title="">
+                
+                <!-- Korte samenvatting -->
+                <p class="summary"></p>
+                
+                <!-- Lange beschrijving -->
+                <p></p>
+            </article>
+        </template>
+    </main>
+</body>
+</html>
