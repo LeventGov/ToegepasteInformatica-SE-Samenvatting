@@ -1,0 +1,112 @@
+<div class="summary-fragment">
+    <h3>8a API</h3>
+    <p>Basisprincipes van HTTP API's en vertaling van een ERD naar een OpenAPI Specificatie (OAS).</p>
+
+    <h4>1. HTTP basics</h4>
+    <h5>HTTP verbs (CRUD)</h5>
+    <ul>
+        <li><strong>GET:</strong> read; responses: 200 (OK), 404 (Not Found).</li>
+        <li><strong>POST:</strong> create; responses: 201 (Created), 404, 409 (Conflict).</li>
+        <li><strong>PUT:</strong> update/replace (volledige resource); responses: 200, 204 (No Content), 404, 405.</li>
+        <li><strong>PATCH:</strong> modify (partieel); responses: variabel.</li>
+        <li><strong>DELETE:</strong> delete.</li>
+    </ul>
+    <h5>HTTP status codes</h5>
+    <ul>
+        <li>200-299: succes (bijv. 200 OK, 201 Created).</li>
+        <li>400-499: client errors (bijv. 400 Bad Request, 401 Unauthorized, 404 Not Found).</li>
+        <li>500-599: server errors (bijv. 500 Internal Server Error).</li>
+    </ul>
+
+    <h4>2. Semantic URLs & parameters</h4>
+    <ul>
+        <li><strong>Meervoud:</strong> gebruik altijd meervoud voor collecties (bijv. <code>/games</code>).</li>
+        <li><strong>Hierarchie:</strong> nesting voor relaties (bijv. <code>/games/{id}/users</code>).</li>
+        <li><strong>Path parameter:</strong> voor identificatie (verplicht), bijv. <code>/posts/{id}</code>.</li>
+        <li><strong>Query parameter:</strong> voor filteren/sorteren/zoeken, bijv. <code>?sort=desc</code>.</li>
+        <li><strong>Header parameter:</strong> metadata/authenticatie.</li>
+        <li><strong>Request body:</strong> data bij POST/PUT/PATCH.</li>
+    </ul>
+
+    <h4>3. OpenAPI Specificatie (OAS)</h4>
+    <ul>
+        <li>Standaard om API's te beschrijven in YAML of JSON.</li>
+        <li><strong>Info:</strong> titel en versie.</li>
+        <li><strong>Paths:</strong> endpoints (bijv. <code>/board</code>).</li>
+        <li><strong>Components:</strong> herbruikbare definities (schemas).</li>
+    </ul>
+
+    <h4>4. Mapping: van ERD naar API</h4>
+    <h5>A. Entiteiten</h5>
+    <ul>
+        <li>Worden schema-objects in <code>components/schemas</code>.</li>
+        <li><code>type: object</code>, <code>properties:</code> de attributen.</li>
+    </ul>
+    <pre>
+components:
+  schemas:
+    Member:
+      type: object
+      properties:
+        firstName:
+          type: string
+    </pre>
+    <h5>B. Entity sets (lijsten)</h5>
+    <ul>
+        <li><code>type: array</code> met <code>items: $ref</code> naar het enkelvoudige schema.</li>
+    </ul>
+    <pre>
+MemberSet:
+  type: array
+  items:
+    $ref: '#/components/schemas/Member'
+    </pre>
+    <h5>C. Attributen</h5>
+    <ul>
+        <li><strong>Verplicht:</strong> opgelijst onder <code>required</code>.</li>
+        <li><strong>Optioneel:</strong> standaard optioneel tenzij in <code>required</code>.</li>
+        <li><strong>Datatypes:</strong> integer, string, boolean, number.</li>
+        <li><strong>Derived:</strong> niet als berekend veld gedefinieerd; API toont berekende waarde als output property.</li>
+        <li><strong>Multivalued:</strong> array van simpele types.</li>
+        <li><strong>Composite:</strong> plat slaan of aparte object/entiteit.</li>
+        <li><strong>Key:</strong> gebruikt in path (bijv. <code>/members/{membershipNo}</code>), niet expliciet gemarkeerd in schema.</li>
+    </ul>
+
+    <h4>5. Mapping: relaties</h4>
+    <ul>
+        <li><strong>1:1:</strong> property met <code>$ref</code> naar ander object.</li>
+        <li><strong>1:N:</strong> parent heeft <code>array</code> met items <code>$ref</code>.</li>
+        <li><strong>Zwakke entiteiten:</strong> genest in URL (bijv. <code>/members/{id}/subscriptions/{date}</code>).</li>
+        <li><strong>M:N:</strong> geneste endpoints (bijv. <code>/boardgames/{name}/members</code>).</li>
+    </ul>
+
+    <h4>6. Mapping: overerving</h4>
+    <h5>A. Attributen overerven (composition)</h5>
+    <ul>
+        <li>Gebruik <code>allOf</code> om supertype-eigenschappen te combineren met eigen properties.</li>
+    </ul>
+    <pre>
+Riddle:
+  allOf:
+    - $ref: '#/components/schemas/BoardGame'
+    - type: object
+      properties:
+        complexityLevel:
+          type: integer
+    </pre>
+    <h5>B. Output (polymorphism)</h5>
+    <ul>
+        <li>Gebruik <code>oneOf</code> als endpoint verschillende subtypes kan teruggeven.</li>
+    </ul>
+    <pre>
+responses:
+  '200':
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '#/components/schemas/Riddle'
+            - $ref: '#/components/schemas/Puzzle'
+            - $ref: '#/components/schemas/FamilyGame'
+    </pre>
+</div>

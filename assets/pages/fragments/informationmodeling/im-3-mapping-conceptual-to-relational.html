@@ -1,0 +1,87 @@
+<div class="summary-fragment">
+    <h3>3 Mapping conceptual model to relational model</h3>
+    <p>Van Conceptueel (ERD) naar Logisch (tabellen/kolommen/sleutels) en uiteindelijk Fysiek (DB implementatie).</p>
+
+    <h4>1. Drie ontwerplagen</h4>
+    <ul>
+        <li><strong>Conceptueel (ERD):</strong> entiteiten, attributen, relaties; technologie-onafhankelijk.</li>
+        <li><strong>Logisch (logical design):</strong> relaties (tabellen), kolommen, PK/FK; nog zonder DB-specifieks.</li>
+        <li><strong>Fysiek (physical design):</strong> concrete datatypes, indexen, naamgevingsconventies.</li>
+    </ul>
+
+    <h4>2. Basis: entiteit → relatie (tabel)</h4>
+    <ul>
+        <li>Naamgeving: tabelnaam volgt de entiteitsnaam.</li>
+        <li>Attributen: eenvoudige attributen worden kolommen; optionele kolommen tussen haakjes in notatie.</li>
+        <li>Eerste kolom (notatie): label PK/FK/UC voor constraints.</li>
+    </ul>
+    <pre>
+Member
+------------------------------------
+PK    memberNo
+      firstName
+      lastName
+      (dateOfBirth)   <-- optioneel
+    </pre>
+    <ul>
+        <li><strong>PK-keuze (sterke entiteit):</strong> bij voorkeur 1 surrogaatsleutel; alternatieve keys als <em>UC</em>.</li>
+    </ul>
+
+    <h4>3. Speciale attributen</h4>
+    <h5>A. Derived (afgeleid)</h5>
+    <ul>
+        <li>Niet opslaan: berekenen in code/query/view (als performance niet kritisch is).</li>
+        <li>Wel opslaan: up-to-date via DB trigger (bij insert/update/delete) voor consistentie.</li>
+    </ul>
+    <h5>B. Composite (samengesteld)</h5>
+    <ul>
+        <li>Optie 1: splitsen in losse kolommen (standaard).</li>
+        <li>Optie 2: maak aparte tabel met 1..N relatie als het concept belangrijk is.</li>
+        <li>Optie 3: als onderdelen niet belangrijk zijn, als 1 geheel opslaan (string/JSON).</li>
+    </ul>
+    <h5>C. Multivalued (meervoudig)</h5>
+    <ul>
+        <li>Nooit in 1 kolom.</li>
+        <li>Actie: nieuwe tabel met FK naar de bron-entiteit en kolom voor de waarde.</li>
+        <li>PK = combinatie (bron PK, waarde) of eigen surrogate + unieke constraint op combinatie.</li>
+    </ul>
+
+    <h4>4. Relaties mappen</h4>
+    <h5>A. One-to-Many (1:N)</h5>
+    <ul>
+        <li>Parent = kant van 1; Child = kant van N.</li>
+        <li>Actie: voeg PK van Parent toe als FK in Child.</li>
+    </ul>
+    <h5>B. One-to-One (1:1)</h5>
+    <ul>
+        <li>Beide mandatory (1..1 - 1..1): samenvoegen in 1 tabel of FK aan 1 kant.</li>
+        <li>Mandatory/Optional (1..1 - 0..1): mandatory = Parent, optional = Child; PK Parent als FK in Child.</li>
+    </ul>
+    <h5>C. Many-to-Many (M:N)</h5>
+    <ul>
+        <li>Altijd koppel/junction-tabel maken.</li>
+        <li>Kolommen: beide FKs; PK = combinatie van die FKs.</li>
+        <li>Relatie-attributen komen ook in de koppel-tabel.</li>
+    </ul>
+
+    <h4>5. Zwakke entiteiten</h4>
+    <ul>
+        <li>Geen eigen unieke PK.</li>
+        <li>PK = owner PK + partial key van de weak entity (compositie).</li>
+    </ul>
+
+    <h4>6. Overerving mappen</h4>
+    <ul>
+        <li><strong>Voorkeur: SP + #SB</strong> (supertype + aparte subtype-tabellen):
+            supertype-tabel met algemene attributen; per subtype een tabel met dezelfde PK (die ook FK naar supertype is).</li>
+        <li><strong>Alternatieven:</strong> SP (alles in 1 tabel met veel NULLs), SP+SB (1 supertype + 1 verzamel-subtype), #SB (alleen subtypes met duplicatie van algemene data).</li>
+        <li><strong>Overlapping (non-disjoint):</strong> extra mechanisme nodig (categorie-tabel of boolean flags, bijv. isPuzzle, isFamilyGame).</li>
+    </ul>
+
+    <h4>7. Fysiek model</h4>
+    <ul>
+        <li>Tabellen vaak meervoud (bijv. <em>members</em>).</li>
+        <li>Stijl: vaak snake_case voor kolom- en tabelnamen.</li>
+        <li>Voeg DB-specifieke datatypes en indexen toe in deze fase.</li>
+    </ul>
+</div>

@@ -1,0 +1,31 @@
+<div class="summary-fragment">
+    <h3>7 Change of UoD</h3>
+    <p>Wat gebeurt er met je informatiemodel wanneer de grenzen/regles van het systeem (Universe of Discourse) wijzigen.
+       UoD-wijzigingen beinvloeden vaak entiteiten, sleutels en relaties.</p>
+
+    <h4>1. Casus: Facturatie (impact op sleutels)</h4>
+    <p>Schaalvergroting kan unieke identificatie veranderen.</p>
+    <ul>
+        <li><strong>Situatie A (1 bedrijf - Wonka Industries):</strong> factuurnummer is uniek binnen het bedrijf &rarr; PK = invoiceNumber.</li>
+        <li><strong>Situatie B (meerdere bedrijven - accountantskantoor):</strong> zelfde nummer kan bij verschillende bedrijven voorkomen &rarr; invoiceNumber alleen is niet uniek.</li>
+        <li><strong>Oplossing:</strong> sleutel uitbreiden naar <em>companyId + invoiceNumber</em>.</li>
+    </ul>
+
+    <h4>2. Casus: Spelotheek VGC (impact op structuur)</h4>
+    <p>Functionele uitbreiding naar meerdere locaties (bijv. Gent, Antwerpen, Brussel).</p>
+    <ul>
+        <li><strong>Nieuwe entiteit:</strong> <em>Location</em> om vestigingen te beheren.</li>
+        <li><strong>Nieuwe relatie:</strong> <em>GameCopy</em> bevindt zich op een <em>Location</em> (koppeling vereist).</li>
+        <li><strong>Nieuwe business rules (te beslissen):</strong>
+            <ul>
+                <li>Geldt een <em>Subscription</em> per locatie of voor de hele keten?</li>
+                <li>Mag een spel in Gent ontleend en in Brussel teruggebracht worden?</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>Conclusie</h4>
+    <ul>
+        <li>Een UoD-wijziging vereist vrijwel altijd herziening van identifiers (sleutels), entiteitenstructuur en/of constraints.</li>
+    </ul>
+</div>

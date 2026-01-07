@@ -1,0 +1,57 @@
+<div class="summary-fragment">
+    <h3>1.1 Description of a system</h3>
+    <p>Basis van Information Modelling: fases, gekozen modelleertaal en afspraken over notatie binnen deze cursus.</p>
+
+    <h4>1. Wat is Information Modelling?</h4>
+    <p>Information Modelling beschrijft het universum (Universe of Discourse, UoD) van het systeem.</p>
+    <ul>
+        <li><strong>Definitie UoD:</strong> de grenzen van het systeem; bepaalt wat in scope en out of scope is.</li>
+        <li>UoD is geen onderdeel van het informatiemodel zelf maar vormt de context.</li>
+    </ul>
+
+    <h4>2. Ontwerpfases</h4>
+    <p>Twee gescheiden fases die niet door elkaar mogen lopen:</p>
+    <h5>A. Conceptueel modelleren</h5>
+    <ul>
+        <li>Doel: begrip van het domein/business op hoog niveau.</li>
+        <li>Geen technische keuzes of implementatiedetails.</li>
+        <li>Regels: geen PK/FK, geen lijsten van gelinkte entiteiten (geen OO-stijl lijstjes).</li>
+    </ul>
+    <h5>B. Logisch modelleren</h5>
+    <ul>
+        <li>Doel: voorbereiden op implementatie (database/code).</li>
+        <li>Technische details worden toegevoegd.</li>
+        <li>Inclusief PK, FK en lijsten waar nodig.</li>
+    </ul>
+
+    <h4>3. Keuze van modelleertaal</h4>
+    <p>Opties: ERD, ORM, FCO-IM (fact based). In deze cursus: ERD omdat het compact, bekend en veelgebruikt is.</p>
+    <ul>
+        <li><strong>ERD:</strong> toont relaties tussen entiteitstypes.</li>
+        <li><strong>Entiteitstype:</strong> concept/groep gelijksoortige instanties (bijv. Student).</li>
+        <li><strong>Attributen:</strong> eigenschappen van instanties (bijv. Naam, Adres).</li>
+    </ul>
+
+    <h4>4. ERD dialecten en cursusstandaard</h4>
+    <p>Veel dialecten bestaan (Chen, IDEF1X, Bachman, Martin/Crow's Foot, Min-Max, UML). We volgen een vaste mix:</p>
+    <h5>Stap 1: Chen notatie (start)</h5>
+    <ul>
+        <li>Meer beschrijvend voor attributen.</li>
+        <li>Tekstueel: entiteit = rechthoek [ KLANT ], relatie = ruit < KOOPT >, attribuut = ovaal ( Naam ).</li>
+        <li>Kardinaliteit met 1 / N labels op de lijnen (bijv. 1 klant koopt N producten).</li>
+    </ul>
+    <h5>Stap 2: Crow's Foot (relaties)</h5>
+    <ul>
+        <li>Compacte, populaire syntax zodra relaties complexer worden.</li>
+        <li>Tekstueel: 1 zijde = -|, veel zijde = -<.</li>
+        <li>Voorbeeld: [ DOKTER ] -||----------0<- [ PATIENT ] (een dokter heeft patienten).</li>
+    </ul>
+
+    <h4>5. Waarom modelleren?</h4>
+    <p>Goed ontworpen data is cruciaal voor bedrijfsapplicaties. Het maakt de applicatie:</p>
+    <ul>
+        <li>Nuttiger (more useful).</li>
+        <li>Beter uitbreidbaar (more extendable).</li>
+        <li>Beter begrijpbaar (more understandable).</li>
+    </ul>
+</div>

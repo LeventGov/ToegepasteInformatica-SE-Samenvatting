@@ -1,0 +1,53 @@
+<div class="summary-fragment">
+    <h3>Mapping to an OO model</h3>
+    <p>Deze module legt de link tussen het conceptuele datamodel (ERD) en de implementatie in code, specifiek in een Object Georiënteerde (OO) taal zoals C#.</p>
+
+    <h4>1. Van Entiteit naar Klasse</h4>
+    <p>De basisregel is eenvoudig: een Entity Type in je model wordt een Class in je code.</p>
+    <ul>
+        <li><strong>Entiteit:</strong> Een concept dat uniek geïdentificeerd kan worden (bv. Member).</li>
+        <li><strong>Klasse:</strong> De blauwdruk in code (<code>public class Member</code>).</li>
+        <li><strong>Attributen:</strong> De eigenschappen van de entiteit worden velden of properties in de klasse.</li>
+    </ul>
+    <p><strong>Voorbeeld (C#):</strong></p>
+    <pre>
+public class Member(int memberNo, string name, string firstName)
+{
+    // Hier komen methodes en verdere logica
+}
+    </pre>
+
+    <h4>2. Attributen Mappen</h4>
+    <p>Niet alle attributen zijn simpele getallen of teksten.</p>
+    <ul>
+        <li><strong>Simple Attributes:</strong> Worden direct vertaald naar types als <code>int</code>, <code>string</code>, <code>DateOnly</code>, etc.</li>
+        <li><strong>Multivalued Attributes:</strong> Worden een lijst of collectie (bv. <code>List&lt;string&gt; emailAddresses</code>).</li>
+        <li><strong>Composite Attributes:</strong> Worden ofwel "platgeslagen" (meerdere velden in de klasse) of gemapt naar een apart object/type (bv. een <code>Address</code> klasse).</li>
+    </ul>
+
+    <h4>3. Relaties Mappen</h4>
+    <p>In een database werk je met Foreign Keys, maar in OO-code werk je met referenties naar objecten.</p>
+    
+    <h5>A. One-to-Many (1:N)</h5>
+    <ul>
+        <li><strong>De '1'-kant (Parent):</strong> Houdt een lijst bij van kinderen.</li>
+        <li>Voorbeeld: Een Member heeft een lijst van Subscription objecten.</li>
+        <li>Code: <code>private readonly IList&lt;Subscription&gt; _subscriptions;</code></li>
+        <li><strong>De 'N'-kant (Child):</strong> Houdt een referentie bij naar de ouder.</li>
+        <li>Voorbeeld: Een Subscription heeft één Member eigenschap.</li>
+    </ul>
+
+    <h5>B. Many-to-Many (M:N)</h5>
+    <ul>
+        <li>In een database heb je een koppeltabel nodig. In code kan je dit directer oplossen met lijsten aan beide kanten, maar vaak wil je de logica centraliseren.</li>
+        <li><strong>Facade Pattern:</strong> Soms wordt een tussenklasse gebruikt of methodes die de relatie aan beide kanten synchroon houden (AddReservation voegt het toe bij het lid én bij het spel).</li>
+    </ul>
+
+    <h4>4. Overerving (Inheritance)</h4>
+    <p>OO-talen ondersteunen overerving direct, wat goed aansluit bij Supertype/Subtype relaties in een ERD.</p>
+    <ul>
+        <li><strong>Implementatie:</strong> De subklasse erft van de superklasse.</li>
+        <li>Voorbeeld: <code>public class FamilyGame : BoardGame</code></li>
+        <li><strong>Gevolg:</strong> De subklasse krijgt automatisch alle eigenschappen (<code>name</code>, <code>publisher</code>) van de superklasse en voegt er eigen eigenschappen aan toe (<code>expectedGameDuration</code>).</li>
+    </ul>
+</div>

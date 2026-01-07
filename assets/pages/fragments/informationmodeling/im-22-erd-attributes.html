@@ -1,0 +1,76 @@
+<div class="summary-fragment">
+    <h3>2.2 - ERD Attributes</h3>
+    <p>Eigenschappen van entiteiten in een ERD: definitie, notatie en attributensoorten.</p>
+
+    <h4>1. Wat is een attribuut?</h4>
+    <ul>
+        <li><strong>Definitie:</strong> een attribuut is een functie die een entiteitsset mapt naar een waardeset.</li>
+        <li><strong>Attribute-value pair:</strong> info over entiteit/relatie als attribuut-waarde paar.</li>
+        <li><strong>Voorbeeld:</strong> voor Member: firstName, age, gender met waarden "Rob", "42", "male".</li>
+        <li><strong>Datatypes:</strong> elk attribuut heeft een type, bijv. &lt;string&gt;, &lt;integer&gt;, &lt;enum&gt;.</li>
+    </ul>
+
+    <h4>2. Attribuut tekenen (Chen)</h4>
+    <ul>
+        <li><strong>Symbool:</strong> ovaal/ellips met een lijn naar de entiteit.</li>
+        <li><strong>Naamgeving:</strong> lowerCamelCase.</li>
+    </ul>
+    <pre>
+       ( firstName )
+             |
+    +-----------------+
+    |     Member      |
+    +-----------------+
+    </pre>
+    <ul>
+        <li><strong>Belangrijk:</strong> een attribuut verbindt aan precies een entiteit; gelijknamige attributen op
+            verschillende entiteiten zijn conceptueel verschillend.</li>
+    </ul>
+
+    <h4>3. Soorten attributen</h4>
+    <h5>A. Optional attribute</h5>
+    <ul>
+        <li>Geen verplichte waarde (nullable); tegenhanger: required.</li>
+        <li>Voorbeeld: middleName.</li>
+    </ul>
+    <h5>B. Derived attribute</h5>
+    <ul>
+        <li>Waarde afgeleid/berekend uit andere attributen (soms andere entiteiten).</li>
+        <li>Voorbeeld: age uit birthday; totalItemPrice = quantity * unitPrice; totalAmount = som van items.</li>
+    </ul>
+    <h5>C. Multivalued attribute</h5>
+    <ul>
+        <li>Kan meerdere waarden per entiteit bevatten.</li>
+        <li>Voorbeeld: telephoneNumber (vast + mobiel).</li>
+        <li><strong>Best practice:</strong> in normalisatie liever atomaire waarden; multivalued is vaak hint voor aparte
+            entiteit (bijv. InvoiceItem).</li>
+    </ul>
+    <h5>D. Composite attribute</h5>
+    <ul>
+        <li>Kan opgesplitst worden in betekenisvolle delen.</li>
+        <li>Voorbeeld: address = street, city, postalCode, country.</li>
+        <li>Visueel (Chen): hoofd-attribuut aan entiteit; sub-attributen aan hoofd-attribuut.</li>
+    </ul>
+    <pre>
+                  ( City )
+                     |
+       ( Address )---+---( Street )
+             |
+    +-----------------+
+    |     Member      |
+    +-----------------+
+    </pre>
+    <h5>E. Key attribute</h5>
+    <ul>
+        <li>Zorgt voor unieke identificatie (uitgewerkt in latere module).</li>
+    </ul>
+
+    <h4>4. Crow's Foot syntax (tekstueel) voor attributen</h4>
+    <ul>
+        <li>Optional: attribute (soms O of ?).</li>
+        <li>Derived: [attribute].</li>
+        <li>Multivalued: {attribute}.</li>
+        <li>Composite: (attribute1, attribute2).</li>
+        <li>Key: *attribute of #attribute.</li>
+    </ul>
+</div>

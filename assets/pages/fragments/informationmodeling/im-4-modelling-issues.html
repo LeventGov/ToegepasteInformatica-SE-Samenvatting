@@ -1,0 +1,68 @@
+<div class="summary-fragment">
+    <h3>4 Modelling issues</h3>
+    <p>Veelvoorkomende ontwerpuitdagingen en normalisatieregels om redundantie en inconsistentie te voorkomen.</p>
+
+    <h4>1. Relaties met enkel identificerende attributen</h4>
+    <ul>
+        <li><strong>Behouden:</strong> als je een vaste lijst van mogelijke waarden nodig hebt (keuzelijst), houd de tabel.</li>
+        <li><strong>Verwijderen:</strong> als de tabel enkel waarden bevat die elders toch al voorkomen (zoals gebruikte datums), is ze overbodig.</li>
+        <li><strong>Best practice:</strong> gebruik een nietszeggende PK (bijv. <em>countryId</em>) en maak <em>countryName</em> uniek met een UC, i.p.v. de naam als PK.</li>
+    </ul>
+
+    <h4>2. Standaardwaarden en uitzonderingen</h4>
+    <p>Modelleer de regel als standaard en leg enkel afwijkingen vast.</p>
+    <ul>
+        <li><strong>Voorbeeld:</strong> standaard <em>deliveryDate</em> op <em>ORDER</em>; optionele <em>deliveryDate</em> op <em>ORDER_DETAIL</em> alleen invullen bij afwijking (anders geldt de hoofdorder).</li>
+    </ul>
+
+    <h4>3. Tijdsafhankelijke attributen</h4>
+    <ul>
+        <li><strong>Leeftijd:</strong> sla <em>birthday</em> op, niet <em>age</em> (afgeleid).</li>
+        <li><strong>Prijs:</strong> twee opties:
+            <ul>
+                <li><em>Duplicatie bij order</em>: kopieer prijs naar <em>ORDER_DETAIL</em> (verplicht bij onderhandelbare prijzen).</li>
+                <li><em>Historiek</em>: tabel met <em>startDate</em>/<em>endDate</em>; functie haalt prijs die geldig was op besteldatum.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h4>4. Fixed number of attributes</h4>
+    <ul>
+        <li>Vermijd kolommen zoals <em>phone1</em>, <em>phone2</em>, <em>phone3</em>.</li>
+        <li><strong>Oplossing:</strong> maak een aparte relatie met een <em>role</em>-attribuut (bijv. Home/Work/Mobile), dat onderdeel van de sleutel kan zijn.</li>
+    </ul>
+
+    <h4>5. Normalisatie</h4>
+    <h5>1NF</h5>
+    <ul>
+        <li><strong>Regel:</strong> alle attributen atomair.</li>
+        <li><strong>Actie:</strong> geen composite of multivalued attributen in 1 kolom; splits naar aparte kolommen/entiteiten.</li>
+    </ul>
+    <h5>2NF</h5>
+    <ul>
+        <li><strong>Regel:</strong> 1NF + geen partiele afhankelijkheden van een composite PK.</li>
+        <li><strong>Voorbeeld:</strong> in <em>GameCopy</em> (PK: <em>gameId</em> + <em>copyNr</em>) hangt <em>gameName</em> enkel af van <em>gameId</em> &rarr; splitsen.</li>
+    </ul>
+    <h5>3NF</h5>
+    <ul>
+        <li><strong>Regel:</strong> 2NF + geen transitieve afhankelijkheden.</li>
+        <li><strong>Voorbeeld:</strong> via <em>gameId</em> afgeleide <em>publisher</em> hoort niet in <em>GameCopy</em> &rarr; verplaatsen.</li>
+    </ul>
+    <h5>BCNF</h5>
+    <ul>
+        <li><strong>Regel:</strong> 3NF + elke determinant is een sleutel.</li>
+        <li><strong>Situatie:</strong> overlappende kandidaat-sleutels; als een deel van de sleutel afhangt van een niet-sleutel attribuut, is dat een schending.</li>
+        <li><strong>Oplossing:</strong> splitsen; verlies van UC eventueel opvangen met triggers.</li>
+    </ul>
+    <h5>4NF</h5>
+    <ul>
+        <li><strong>Regel:</strong> BCNF + geen multivalued dependencies.</li>
+        <li><strong>Situatie:</strong> twee onafhankelijke 1:N relaties in 1 tabel veroorzaakt cartesiaanse redundantie (bijv. Course-Teachers en Course-Materials).</li>
+        <li><strong>Oplossing:</strong> splits in <em>CourseTeacher</em> en <em>CourseMaterial</em>.</li>
+    </ul>
+    <h5>5NF</h5>
+    <ul>
+        <li><strong>Regel:</strong> 4NF + correct omgaan met join dependencies.</li>
+        <li><strong>Test:</strong> bij splitsen en weer joinen mag geen extra (foute) data ontstaan (lossless decomposition).</li>
+    </ul>
+</div>

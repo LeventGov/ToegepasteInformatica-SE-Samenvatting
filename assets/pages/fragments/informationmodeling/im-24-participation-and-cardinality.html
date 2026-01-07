@@ -1,0 +1,79 @@
+<div class="summary-fragment">
+    <h3>2.4 - participation and cardinality</h3>
+    <p>Kwantitatieve regels van relaties: hoeveel entiteiten aan elkaar gekoppeld (moeten) worden, uitgedrukt in
+        cardinaliteit en participatie.</p>
+
+    <h4>1. Mapping constraints (connectiviteit)</h4>
+    <p>Het aantal entiteiten waaraan een entiteit geassocieerd kan worden via een relatieset. Drie basistypes:</p>
+    <h5>A. One-to-One (1:1)</h5>
+    <ul>
+        <li>Elke entiteit in A is aan hoogstens 1 entiteit in B gekoppeld en omgekeerd.</li>
+        <li>Voorbeeld: 1 departement heeft 1 manager; 1 manager leidt 1 departement.</li>
+    </ul>
+    <h5>B. One-to-Many (1:N)</h5>
+    <ul>
+        <li>Een entiteit in A kan aan veel entiteiten in B gekoppeld worden; in B hoogstens 1 in A.</li>
+        <li>Voorbeeld: een Member leent meerdere Games; een Game-exemplaar is tegelijk door max 1 Member geleend.</li>
+    </ul>
+    <h5>C. Many-to-Many (M:N)</h5>
+    <ul>
+        <li>Entiteiten in A en B kunnen aan veel entiteiten aan de overkant gekoppeld worden.</li>
+        <li>Voorbeeld: een Student volgt meerdere Courses; een Course heeft meerdere Students.</li>
+    </ul>
+
+    <h4>2. Cardinaliteitsbeperkingen (min..max)</h4>
+    <ul>
+        <li><strong>Maximum (max):</strong> komt overeen met connectiviteit (max 1 of N).</li>
+        <li><strong>Minimum (min):</strong> komt overeen met participatie (min 0 of 1).</li>
+        <li>Voorbeelden: 0..1, 1..N.</li>
+    </ul>
+
+    <h4>3. Participatie</h4>
+    <p>Geeft aan of het bestaan van een entiteit afhankelijk is van deelname aan de relatie.</p>
+    <h5>A. Total participation (verplicht)</h5>
+    <ul>
+        <li>Elke entiteit in de set moet deelnemen; minimale cardinaliteit = 1 (of hoger).</li>
+        <li><strong>Chen:</strong> dubbele lijn tussen entiteit en relatie.</li>
+        <li>Voorbeeld: een Game moet uitgeleend zijn door een Member (in de context van een actieve lening).</li>
+    </ul>
+    <h5>B. Partial participation (optioneel)</h5>
+    <ul>
+        <li>Deelname is niet verplicht; minimale cardinaliteit = 0.</li>
+        <li><strong>Chen:</strong> enkele lijn tussen entiteit en relatie.</li>
+        <li>Voorbeeld: een Member hoeft niet per se nu een Game te lenen.</li>
+    </ul>
+
+    <h4>4. Notatiesystemen</h4>
+    <h5>Chen notatie</h5>
+    <ul>
+        <li><strong>Connectiviteit:</strong> 1, N, M bij de ruit (relatie).</li>
+        <li><strong>Participatie:</strong> dubbele (totaal) of enkele (partieel) lijnen.</li>
+    </ul>
+    <h5>Crow's Foot (standaard)</h5>
+    <p>Combineert min en max in lijn-eind-symbolen per entiteit. Lezen als: minimaal ..., maximaal ...</p>
+    <ul>
+        <li><strong>Mandatory One (1,1):</strong> symbool = ||, visueel: <code>----|| [ENTITY]</code></li>
+        <li><strong>Mandatory Many (1,N):</strong> symbool = |&lt;, visueel: <code>----|&lt; [ENTITY]</code></li>
+        <li><strong>Optional One (0,1):</strong> symbool = 0|, visueel: <code>----0| [ENTITY]</code></li>
+        <li><strong>Optional Many (0,N):</strong> symbool = 0&lt;, visueel: <code>----0&lt; [ENTITY]</code></li>
+    </ul>
+
+    <h4>5. Existence dependence (bestaansafhankelijkheid)</h4>
+    <h5>A. Strong entity (sterk)</h5>
+    <ul>
+        <li>Kan zelfstandig bestaan; eigen unieke identificatie (primary key).</li>
+        <li>Notatie: enkele rechthoek.</li>
+    </ul>
+    <h5>B. Weak entity (zwak)</h5>
+    <ul>
+        <li>Bestaan hangt af van een strong entity (owner).</li>
+        <li>Heeft een partial key (discriminator); volledige identificatie = partial key + key van owner.</li>
+        <li>Notatie: dubbele rechthoek.</li>
+    </ul>
+    <h5>C. Identifying relationship</h5>
+    <ul>
+        <li>Verbindt de weak entity met de strong entity.</li>
+        <li>Notatie: dubbele ruit.</li>
+        <li>Voorbeeld: Room in Hotel; Room 101 is alleen uniek binnen zijn Hotel.</li>
+    </ul>
+</div>

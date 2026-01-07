@@ -1,0 +1,51 @@
+<div class="summary-fragment">
+    <h3>2.1 - ERD Entity Types</h3>
+    <p>Deze module behandelt de bouwstenen van een ERD: entiteiten, entiteitssets en entiteitstypes.</p>
+
+    <h4>1. Wat is een entiteit?</h4>
+    <ul>
+        <li><strong>Definitie (Chen, 1976):</strong> een entiteit is een ding dat duidelijk geidentificeerd kan worden.</li>
+        <li><strong>Voorbeelden:</strong> een specifiek persoon, bedrijf of evenement.</li>
+        <li><strong>Taalkundig:</strong> in gesproken taal is een entiteit een zelfstandig naamwoord.</li>
+        <li><strong>Casus:</strong> in een spelvereniging (VGC) zijn Rob, Ann en Astrid voorbeelden van leden; Mastermind
+            en Stratego zijn voorbeelden van spellen.</li>
+    </ul>
+
+    <h4>2. Entity set (entiteitsverzameling)</h4>
+    <ul>
+        <li><strong>Definitie:</strong> een verzameling entiteiten/instanties met gedeelde eigenschappen.</li>
+        <li><strong>Gevolg:</strong> lid van set MEMBER betekent dat de entiteit de gemeenschappelijke attributen van leden heeft.</li>
+        <li><strong>Verzamelingenleer (tekstueel):</strong></li>
+    </ul>
+    <pre>
+(  Entity Set: MEMBER  )       (   Entity Set: GAME    )
+/                        \\     /                         \\
+|   Rob, Ann, Astrid       |   |  Mastermind, Stratego,    |
+\\                        /     \\  Monopoly, Puzzle       /
+ ------------------------       -------------------------
+    </pre>
+
+    <h4>3. Entity type vs entiteit (instantie)</h4>
+    <ul>
+        <li><strong>Entity type:</strong> het concept dat entiteiten met dezelfde eigenschappen definieert.</li>
+        <li><strong>Entity instance:</strong> de concrete data/voorbeelden.</li>
+        <li><strong>Voorbeeld:</strong> Rob, Ann en Astrid zijn instanties van het type Member; Mastermind en Monopoly zijn
+            instanties van het type Game.</li>
+    </ul>
+
+    <h4>4. Hoe teken je een entity type?</h4>
+    <ul>
+        <li><strong>Symbool:</strong> een rechthoek stelt het entiteitstype voor (niet de losse instanties).</li>
+    </ul>
+    <pre>
+----------------------+
+|        Member        |
+----------------------+
+    </pre>
+    <ul>
+        <li><strong>Naamgevingsconventie:</strong> UpperCamelCase, geen spaties of koppeltekens.</li>
+        <li><strong>Regels:</strong> start met hoofdletter; elk nieuw woord ook hoofdletter; geen underscores.</li>
+        <li><strong>Correct:</strong> Member, Game, SpecialMember.</li>
+        <li><strong>Fout:</strong> member, GAME, special_member.</li>
+    </ul>
+</div>

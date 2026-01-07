@@ -1,0 +1,45 @@
+<div class="summary-fragment">
+    <h3>2.7 - inheritance</h3>
+    <p>Overerving (generalisatie/specialisatie) wanneer een entiteitset subgroepen heeft met specifieke eigenschappen
+       die niet voor alle entiteiten gelden.</p>
+
+    <h4>1. Entity subsets</h4>
+    <ul>
+        <li>Een entiteitset kan subsets hebben met extra, specifieke attributen.</li>
+        <li><strong>Voorbeeld (Games):</strong> FamilyGame met <em>expectedGameDuration</em>; Puzzle met <em>numberOfPieces</em>.
+            Beide erven algemene eigenschappen van <em>Game</em> (bijv. <em>id</em>, <em>name</em>).</li>
+        <li><strong>Voorbeeld (Leden):</strong> Male/Female alleen modelleren als de UoD echte, subtype-specifieke data vereist.
+            Anders geen subtypes aanmaken.</li>
+    </ul>
+
+    <h4>2. Types van overerving</h4>
+    <ul>
+        <li><strong>Single:</strong> subtype heeft 1 supertype (B erft van A).</li>
+        <li><strong>Hierarchical:</strong> supertype met meerdere subtypes (B en C erven van A).</li>
+        <li><strong>Multilevel:</strong> keten (C erft van B, B erft van A).</li>
+        <li><strong>Multiple:</strong> subtype met meerdere supertypes (C erft van A en B).</li>
+    </ul>
+
+    <h4>3. Constraints</h4>
+    <p>Twee kernvragen: (1) moet elke supertype-entiteit in een subtype zitten? (2) mag een entiteit in meerdere subtypes tegelijk zitten?</p>
+    <h5>A. Completeness (mandatory vs optional)</h5>
+    <ul>
+        <li><strong>Mandatory (total):</strong> elke entiteit in het supertype behoort tot een subtype.
+            Voorbeeld: Member is Male of Female (volledige dekking).</li>
+        <li><strong>Optional (partial):</strong> niet elke supertype-entiteit zit in een subtype.
+            Voorbeeld: Game kan FamilyGame, Puzzle of iets anders zijn (restgroep bestaat).</li>
+    </ul>
+    <h5>B. Disjointness (OR vs AND)</h5>
+    <ul>
+        <li><strong>OR (disjoint):</strong> maximaal 1 subtype tegelijk (bijv. Male vs Female).</li>
+        <li><strong>AND (overlap):</strong> meerdere subtypes tegelijk toegestaan (bijv. Person is Student en Teacher).</li>
+    </ul>
+
+    <h4>Samenvatting constraints</h4>
+    <ul>
+        <li><strong>Mandatory:</strong> volledige dekking (100%).</li>
+        <li><strong>Optional:</strong> partiele dekking (restgroep).</li>
+        <li><strong>OR (disjoint):</strong> geen overlap (max 1 subtype).</li>
+        <li><strong>AND (overlap):</strong> wel overlap (meerdere subtypes mogelijk).</li>
+    </ul>
+</div>

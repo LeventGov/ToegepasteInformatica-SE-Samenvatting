@@ -1,0 +1,48 @@
+<div class="summary-fragment">
+    <h3>2.6 - weak entities</h3>
+    <p>Speciaal entiteitstype dat niet zelfstandig (uni)geidentificeerd kan worden en afhankelijk is van een owner (strong entity).</p>
+
+    <h4>1. Wat is een weak entity?</h4>
+    <ul>
+        <li>Kan niet uniek geidentificeerd worden door eigen attributen alleen.</li>
+        <li><strong>Identifying owner:</strong> heeft relatie met een strong entity nodig om uniek te zijn.</li>
+        <li><strong>Existence dependent:</strong> kan niet bestaan zonder de owner; verwijderen van de owner verwijdert ook de weak entity.</li>
+    </ul>
+
+    <h4>2. Voorbeeld: Hotel en Room</h4>
+    <ul>
+        <li><strong>Probleem:</strong> roomNumber ("101") is niet uniek wereldwijd; elk hotel kan een kamer 101 hebben.</li>
+        <li><strong>Oplossing:</strong> identificatie vereist de sleutel van het Hotel + roomNumber.</li>
+        <li><strong>Owner:</strong> Hotel (strong entity). <strong>Weak:</strong> Room.</li>
+    </ul>
+
+    <h4>3. Partial key (discriminator)</h4>
+    <ul>
+        <li>Attribuut van de weak entity dat instanties binnen dezelfde owner onderscheidt.</li>
+        <li>Voorbeeld: bij Room is <em>roomNumber</em> de partial key (onderscheidt binnen 1 hotel, niet wereldwijd).</li>
+    </ul>
+
+    <h4>4. Identifying relationship</h4>
+    <ul>
+        <li>De relatie die de weak entity met de strong entity verbindt.</li>
+        <li>Altijd <strong>total participation</strong> aan weak-kant: de weak entity moet aan de owner gekoppeld zijn.</li>
+    </ul>
+
+    <h4>5. Notatie in ERD (Chen)</h4>
+    <ul>
+        <li><strong>Weak entity:</strong> dubbele rechthoek.</li>
+        <li><strong>Identifying relationship:</strong> dubbele ruit.</li>
+        <li><strong>Partial key:</strong> attribuut met stippel-onderstreping (dashed underline).</li>
+    </ul>
+    <p>Visueel (tekst):</p>
+    <pre>
+  [Strong Entity]                     [[ Weak Entity ]]
+  +-------------+                     +---------------+
+  |    HOTEL    |===< belongs to >====|     ROOM      |
+  +-------------+                     +---------------+
+         |                                    |
+      ( _ID_ )                         ( . Number . )
+    (volle lijn)                      (stippellijn)
+    </pre>
+    <p>Noot: dubbele lijnen (relatie/entiteit) geven identifying relationship en weak entity aan.</p>
+</div>

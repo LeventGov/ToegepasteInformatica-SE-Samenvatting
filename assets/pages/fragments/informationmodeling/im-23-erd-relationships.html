@@ -1,0 +1,45 @@
+<div class="summary-fragment">
+    <h3>2.3 - ERD relationships</h3>
+    <p>Hoe entiteiten verbonden zijn via relaties, inclusief naamgeving, rollen en graad.</p>
+
+    <h4>1. Wat is een relatie?</h4>
+    <ul>
+        <li>Een relatie is een associatie tussen twee of meer entiteiten.</li>
+        <li><strong>Doel:</strong> documenteert interactie tussen entiteiten.</li>
+        <li><strong>Taalkundig:</strong> relaties zijn meestal werkwoorden.</li>
+        <li><strong>Voorbeeld:</strong> een lid leent een spel ("lenen" is de relatie).</li>
+        <li><strong>Naamgeving:</strong> kies een beschrijvend werkwoord, vermijd dubbelzinnigheid.</li>
+    </ul>
+
+    <h4>2. Relationship role (de rol)</h4>
+    <ul>
+        <li>Rollen benoemen het doel van een entiteit in een relatie.</li>
+        <li><strong>Impliciet:</strong> vaak gelijk aan entiteitsnaam, niet apart genoteerd.</li>
+        <li><strong>Expliciet:</strong> nodig bij relaties tussen entiteiten van hetzelfde type (unary) of bij verwarring.</li>
+        <li><strong>Voorbeeld:</strong> huwelijk tussen Person en Person, rollen: Husband en Wife.</li>
+        <li>Meerdere relaties tussen dezelfde entiteiten: label duidelijk (bijv. lives in vs. is born in).</li>
+    </ul>
+
+    <h4>3. Relationship degree (graad)</h4>
+    <ul>
+        <li><strong>Unary:</strong> relatie met zichzelf (bijv. werknemer rapporteert aan manager).</li>
+        <li><strong>Binary:</strong> twee entiteiten (meest voorkomend, bijv. Member checks out Game).</li>
+        <li><strong>Ternary:</strong> drie entiteiten (bijv. Teacher geeft Course in Classroom).</li>
+        <li><strong>N-ary:</strong> graad >3 wordt afgeraden (complex, kans op redundantie).</li>
+    </ul>
+
+    <h4>4. Notatie in ERD</h4>
+    <ul>
+        <li><strong>Chen:</strong> relatie = ruit (diamond) tussen entiteiten, werkwoord in de ruit.</li>
+    </ul>
+    <pre>
+[ MEMBER ] ---< checks out >--- [ GAME ]
+    </pre>
+    <ul>
+        <li><strong>Crow's Foot:</strong> relatie = lijn tussen entiteiten, label op/boven de lijn.</li>
+    </ul>
+    <pre>
+[ MEMBER ] -------------------- [ GAME ]
+              checks out
+    </pre>
+</div>

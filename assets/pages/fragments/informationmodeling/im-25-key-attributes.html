@@ -1,0 +1,54 @@
+<div class="summary-fragment">
+    <p>Samenvatting voor <strong>2.5 - key attributes</strong>. Werk uit welke attributen als sleutel dienen en waarom.</p>
+    <ul>
+        <li>Candidate keys, primary key, alternate keys.</li>
+        <li>Criteria: uniekheid, stabiliteit, eenvoud.</li>
+        <li>Impact op relaties en referentiële integriteit.</li>
+    </ul>
+</div>
+<div class="summary-fragment">
+    <h3>2.5 - key attributes</h3>
+    <p>Unieke identificatie binnen een entiteitsset: wat is een sleutel, waarom is context (UoD) belangrijk, en hoe noteer je sleutels.</p>
+
+    <h4>1. Wat is een key attribute?</h4>
+    <ul>
+        <li><strong>Definitie:</strong> een attribuut waarvan de waarden constant en uniek (distinct) zijn per entiteit in de set.</li>
+        <li><strong>Doel:</strong> elke entiteit heeft een logische set attributen nodig om uniek te identificeren.</li>
+        <li><strong>Voorbeeld:</strong> bij <em>Car</em> is <em>VIN</em> uniek; kleur of aantal deuren niet.</li>
+    </ul>
+
+    <h4>2. Belang van de Universe of Discourse (UoD)</h4>
+    <ul>
+        <li>Uniciteit hangt af van de context.</li>
+        <li><strong>Scenario A (1 bedrijf):</strong> bij Wonka Industries is <em>invoiceNumber</em> uniek &rarr; sleutel = <em>invoiceNumber</em>.</li>
+        <li><strong>Scenario B (accountantskantoor, meerdere bedrijven):</strong> <em>invoiceNumber</em> alleen is niet uniek.
+            Nodig: combinatie <em>invoiceNumber + company</em>.</li>
+    </ul>
+
+    <h4>3. Composite key (samengestelde sleutel)</h4>
+    <ul>
+        <li><strong>Definitie:</strong> combinatie van attributen die samen uniek zijn.</li>
+        <li><strong>Minimaliteit:</strong> geen attribuut in de combinatie mag overbodig zijn.</li>
+        <li><strong>Partial key:</strong> individueel attribuut dat deel uitmaakt van de samengestelde sleutel.</li>
+        <li><strong>Voorbeeld (adres):</strong> straat + nummer + zipCode + countryCode kan samen uniek zijn.</li>
+    </ul>
+
+    <h4>4. Notatie (Chen)</h4>
+    <p>Key attributen worden visueel onderstreept.</p>
+    <p><strong>Voorbeeld (single key):</strong></p>
+    <pre>
+      ( _VIN_ )  <--- key attribute (onderstreept)
+          |
+    +-----------+
+    |    Car    |
+    +-----------+
+    </pre>
+    <p><strong>Voorbeeld (composite key):</strong> alle deelnemende attributen (partial keys) onderstrepen.</p>
+    <pre>
+    ( _street_ )    ( _number_ )
+          \          /
+           ( Address )
+          /          \
+   ( _zip_code_ )  ( _country_code_ )
+    </pre>
+</div>
