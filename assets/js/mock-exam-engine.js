@@ -166,11 +166,13 @@ function showResults(){
         if(score_data.total > 0){
             var lecturePercentage = Math.round((score_data.correct / score_data.total) * 100);
             lectureScoresHtml += '<div class="lecture-score-item">' +
-                '<div class="lecture-name">' + lecture + '</div>' +
-                '<div class="lecture-bar-container">' +
-                    '<div class="lecture-bar-fill" style="width: ' + lecturePercentage + '%"></div>' +
+                '<div class="lecture-title">' + lecture + '</div>' +
+                '<div class="lecture-bar-row">' +
+                    '<div class="lecture-bar-container">' +
+                        '<div class="lecture-bar-fill" style="width: ' + lecturePercentage + '%"></div>' +
+                    '</div>' +
+                    '<div class="lecture-score-meta">' + score_data.correct + '/' + score_data.total + ' · ' + lecturePercentage + '%</div>' +
                 '</div>' +
-                '<div class="lecture-score-text">' + score_data.correct + '/' + score_data.total + '</div>' +
             '</div>';
         }
     });
